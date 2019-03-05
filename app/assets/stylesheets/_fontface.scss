@@ -1,0 +1,25 @@
+/* font reset */
+@font-face {
+    font-family: 'NotoSans-Regular';
+    src: asset_url('NotoSans-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'NotoSans-Bold';
+    src: asset_url('NotoSans-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'NotoSans-Thin';
+    src: asset_url('NotoSans-Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: asset_url('Montserrat-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: asset_url('Montserrat-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: asset_url('Montserrat-SemiBold.woff') format('woff');
+}
