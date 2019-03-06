@@ -122,6 +122,21 @@ div.wrapper {
 				&.actv {
 					background: #df022f;
 				}
+				// 임시보정 *-
+			  &.after-angle:after {
+			    content: '';
+			    display: inline-block;
+			    width: 12px;
+			    height: 12px;
+			    border-width: 2px 0 0 2px;
+			    border-color: white;
+			    border-style: solid;
+			    transform: rotate(135deg);
+			    box-sizing: border-box;
+			    margin-left: 10px;
+			    vertical-align: 2px;
+			  }
+			  // 임시보정 -*
 			}
 		}
 	}
@@ -567,7 +582,9 @@ footer {
 .tit-wrap {
 	width: 1170px;
 	margin: 0 auto;
-	padding: 40px 0 0 40px;
+	// 임시보정
+	// padding: 40px 0 0 40px;
+	padding: 100px 0 0 40px;
 	box-sizing: border-box;
 	h2 {
 		color: #fff;
@@ -576,6 +593,25 @@ footer {
 		span {
 			display: block;
 			font-size: 30px;
+			color: #fff;
+			// 임시보정 *-
+		  &:before {
+		    content: '';
+		    display: inline-block;
+		    width: 12px;
+		    height: 12px;
+		    border-width: 2px 0 0 2px;
+		    border-color: white;
+		    border-style: solid;
+		    transform: rotate(315deg);
+		    box-sizing: border-box;
+		    margin-left: 10px;
+		    vertical-align: 6px;
+		    @include respond-to(subTablet) {
+		    	vertical-align: 3px;
+				}
+		  }
+		  // 임시보정 -*
 		}
 	}
 	@include respond-to(tablet) {
