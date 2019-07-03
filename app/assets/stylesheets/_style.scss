@@ -251,6 +251,9 @@ div.wrapper {
             display: block;
             position: absolute;
             top: 80px;
+            @include respond-to(sTablet) {
+              top: 60px;
+            }
             left: -1px;
             width: 100%;
             height: 9px;
@@ -699,16 +702,22 @@ div.tab {
       position: absolute;
       top: 47px;
       width: 100% !important;
-      padding: 20px;
+      padding: 0;
       background: #fff;
+      z-index: 1;
       box-shadow: 0px 3px 5px 0 rgba(0, 0, 0, 0.27), inset 0px -1px 0 0 #d2d2d2;
       li {
-        display: block;
+        display: table;
+        padding: 0;
+        width: 100%;
         a {
           display: block;
           height: 35px;
           font-size: 17px;
           line-height: 35px;
+          padding: 10px 20px;
+          display: inline-block;
+          width: 100%;
         }
         &.selected,
         &:hover {
@@ -877,7 +886,8 @@ div.tab {
   .top-wrap {
     //min-width: 1200px;
     header {
-      button {
+      button,
+      button > span {
         display: none;
       }
       nav {
@@ -1237,24 +1247,26 @@ div.tab {
         position: static;
         width: 100%;
         padding-bottom: 15px;
-        border-bottom: 1px solid #fff;
+        // border-bottom: 1px solid #fff;
       }
       ol {
-        margin-left: 0;
+        // margin-left: 0;
+        border-left: solid 1px #fff;
+        margin: 0;
         li {
           width: 32%;
           height: 230px;
           box-sizing: border-box;
-          &:before {
-            right: auto;
-            left: 0;
-          }
+          // &:before {
+          //   right: auto;
+          //   left: 0;
+          // }
           &:after {
             content: '';
             display: block;
             position: absolute;
             left: 0;
-            top: 83px;
+            top: 60px;
             width: 100%;
             height: 1px;
             background: #fff;
@@ -1276,6 +1288,38 @@ div.tab {
           height: 56px;
           margin-right: 1px;
           line-height: 52px;
+        }
+      }
+    }
+  }
+  .top-wrap {
+    .schedule {
+      margin-top: 30px;
+      ol {
+        li {
+          display: block;
+          float: none;
+          width: 100%;
+          height: auto;
+          p {
+            font-size: 14px;
+            padding-top: 8px;
+            br {
+              display: none;
+            }
+          }
+          p + p {
+            padding-top: 4px;
+          }
+          &:before {
+            content: none;
+          }
+          &.selected p {
+            padding-top: 16px;
+          }
+          &.selected p + p {
+            padding-top: 4px;
+          }
         }
       }
     }
@@ -1442,12 +1486,10 @@ div.tab {
         p {
           font-size: 15px;
         }
-        @include respond-to(sTablet) {
-          border-left: 4px solid #df022f;
-          padding-top: 0;
-          margin-top: 20px;
-          padding-left: 10px;
-        }
+        border-left: 4px solid #df022f;
+        padding-top: 0;
+        margin-top: 20px;
+        padding-left: 10px;
       }
       .btn {
         margin-top: 30px;
@@ -1456,17 +1498,6 @@ div.tab {
           height: 46px;
           font-size: 14px;
           line-height: 42px;
-        }
-      }
-    }
-    .schedule {
-      margin-top: 30px;
-      ol {
-        li {
-          width: 50%;
-          p {
-            font-size: 14px;
-          }
         }
       }
     }
@@ -1517,10 +1548,6 @@ div.tab {
    word-break: keep-all;
 }
 // 백엔드보정 -*
-
-
-
-
 
 .sub-cnts .introduce > ol.schedule {
   padding-left: 50px;

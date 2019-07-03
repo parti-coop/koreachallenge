@@ -1,4 +1,4 @@
-#skipNav
+#skipNav.js-hamburger-open-invisible.js-hamburger-close-visible
   %ul
     %li
       %a(href="#snContent") 본문바로가기
@@ -6,7 +6,7 @@
 .wrapper
   .top-wrap
     = render 'application/toolbar', selected: :home
-    .top-cnts
+    .top-cnts.js-hamburger-open-invisible.js-hamburger-close-visible
       %h1 코리아챌린지
       %strong
         %span.text-inline-block-nowrap 국민과 함께 그리는 
@@ -103,5 +103,5 @@
         -#     본선 경연
         -#     %span 수도권
 
-  %hr
+  %hr.js-hamburger-open-invisible.js-hamburger-close-visible
   = render 'pages/footer'

@@ -6,15 +6,14 @@
 .wrapper
   .top-wrap.sub
     = render 'application/toolbar', selected: :about
-    .tit-wrap
+    .tit-wrap.js-hamburger-open-invisible.js-hamburger-close-visible
       %h2
         = link_to root_path do
           %span 코리아챌린지
         공모요강
-  %hr/
-  %main#snContent(style="padding-bottom: 0")
-    .tab
-      %button(type="button") 대회 소개
+  %main#snContent.js-hamburger-open-invisible.js-hamburger-close-visible(style="padding-bottom: 0")
+    .tab.js-menu-header
+      %button.js-menu-toggle(type="button") 대회 소개
       %ul
         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/about')), 'data-url': about_path }
           %a(href=about_path) 소개
@@ -28,5 +27,5 @@
         -#   %a(href="#") 오시는 길
     .sub-cnts
       = main_content
-  %hr
+
   = render 'pages/footer'
