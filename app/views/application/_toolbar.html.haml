@@ -1,0 +1,30 @@
+%header
+  %nav#snMenu
+    %button(type="button")
+      %span 메뉴열기
+    %div
+      %ul
+        %li{ class: ('selected' if local_assigns[:selected] == :home)}
+          %a(href=root_path) 코리아챌린지 홈
+        %li{ class: ('selected' if local_assigns[:selected] == :about)}
+          %a(href=about_path) 공모요강
+
+        -# %li.selected
+        -#   %a(href="#") 챌린지 하이라이트
+        -#   %ul
+        -#     %li
+        -#       %a(href="#") 행사 뉴스
+        -#     %li
+        -#       %a(href="#") 예선 경연
+        -#     %li
+        -#       %a(href="#") 본선 경연
+        -#     %li
+        -#       %a(href="#") 수상 결과
+        -# %li
+        -#   %a(href="#") 아이디어 제출
+        -# %li
+        -#   %a(href="#") 공지/FAQ
+        -# %li
+        -#   %a(href="#") 경연 결과
+      %button(type="button")
+        %span 메뉴닫기

@@ -1,0 +1,32 @@
+#skipNav
+  %ul
+    %li
+      %a(href="#snContent") 본문바로가기
+    / <li><a href="#snMenu">주메뉴 바로가기</a></li>
+.wrapper
+  .top-wrap.sub
+    = render 'application/toolbar', selected: :about
+    .tit-wrap
+      %h2
+        = link_to root_path do
+          %span 코리아챌린지
+        공모요강
+  %hr/
+  %main#snContent(style="padding-bottom: 0")
+    .tab
+      %button(type="button") 대회 소개
+      %ul
+        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/about')), 'data-url': about_path }
+          %a(href=about_path) 소개
+        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/schedule')), 'data-url': schedule_path }
+          %a(href=schedule_path) 대회 일정
+        -# %li
+        -#   %a(href="#") 심사 기준
+        -# %li
+        -#   %a(href="#") 유의 사항
+        -# %li
+        -#   %a(href="#") 오시는 길
+    .sub-cnts
+      = main_content
+  %hr
+  = render 'pages/footer'

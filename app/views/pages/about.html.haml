@@ -1,0 +1,54 @@
+- main_content = capture do
+  %strong
+    코리아 챌린지
+    %br/
+    = succeed "," do
+      %span.text-inline-block-nowrap 국민과 함께 그리는
+    %span.text-inline-block-nowrap
+      대한민국 미래
+      %b 100년
+  %p.keep-all
+    새로운 대한민국 100년의 미래, 국민의 아이디어로 만들어집니다.
+    %br
+    더 나은 미래를 위한 아이디어를 들려주세요. 여러분이 대한민국 미래의 주인공입니다.
+  .introduce
+    %img(alt="" src="#{asset_url('introduce_img.png')}")
+    %h3 코리아 챌린지는?
+    %p
+      국민이 제안한 아이디어를 국민 판정단, 정책 전문가, 국민의 투표를 통해 선정하고 국 정책에 반영합니다.
+      %br
+      국민의, 국민에 의한, 국민을 위한 정책으로 새로운 대한민국 100년을 만들 가는데 함께해주세요!
+      -# %h3 절차
+      -# %ol
+      -#   %li
+      -#     %span 아이디어 신청
+      -#   %li
+      -#     %span 서류심사
+      -#   %li
+      -#     %span 지역예선
+      -#   %li
+      -#     %span 멘토링
+      -#   %li
+      -#     %span 본선
+      -#   %li
+      -#     %span 우승자 선발
+    %h3 공모 주제
+    %ul
+      %li 대한민국 국가경쟁력 강화와 미래 사회를 선도할 기술적 정책 아이디어
+      %li 대한민국의 역사와 뿌리를 강화시킬 사회적 정책 (예 : 출산장려정책 등)
+      %li 대한민국 국민 모두가 평안하고, 삶의 질 개선을 위한 경제, 문화 정책
+      %li 대한민국 국민 모두가 차별 없이 행복한 나라를 만들기 위한 국민 통합 정책(예 : 지역갈등 해소 및 다문화 정책 등)
+      %li 기타 대한민국 미래 발전을 위한 국민 제안 모두
+    %h3 신청 기간
+    %p 공고일 ~ 9월 16일(월)
+    %h3 신청 대상
+    %p 대한민국 국민이면 누구나 (개인 또는 팀)
+    %h3 신청 방법
+    %p
+      하단 신청서 양식 다운로드 후 이메일
+      %a(href='mailto:koreachallenge@gmail.com') koreachallenge@gmail.com
+      로 제출
+  .m-btn{ style: 'padding-bottom: 50px'}
+    %a(href="/코리아챌린지_신청양식.zip") 신청서 양식 다운로드
+
+= render 'pages/about_layout', main_content: main_content

@@ -1,0 +1,107 @@
+#skipNav
+  %ul
+    %li
+      %a(href="#snContent") 본문바로가기
+    / <li><a href="#snMenu">주메뉴 바로가기</a></li>
+.wrapper
+  .top-wrap
+    = render 'application/toolbar', selected: :home
+    .top-cnts
+      %h1 코리아챌린지
+      %strong
+        %span.text-inline-block-nowrap 국민과 함께 그리는 
+        %span.text-inline-block-nowrap 대한민국 미래 100년
+        %span.big 아이디어
+      %p.keep-all
+        새로운 대한민국 100년의 미래, 국민의 아이디어로
+        %br
+        만들어집니다.
+      %p.keep-all
+        더 나은 미래를 위한 아이디어를 들려주세요.
+        %br
+        여러분이 대한민국 미래의 주인공입니다.
+      .desc
+        %em 코리아 챌린지는?
+        %p
+          국민이 제안한 아이디어를 국민 판정단, 정책 전문가, 국민의 투표를 통해 선정하고 국 정책에 반영합니다.
+          %br
+          국민의, 국민에 의한, 국민을 위한 정책으로 새로운 대한민국 100년을 만들 가는데 함께해주세요!
+      .btn
+        %a.actv.after-angle(href=about_path) 공모요강 보기
+    .schedule
+      %h2
+        코리아챌린지
+        %br
+        일정
+      %ol
+        %li.selected
+          %span ~ 9.16.
+          %p
+            코리아챌린지
+            %br
+            아이디어 제출
+          %p
+            국민 판정단
+            %br
+            신청
+          %a(href=about_path) 신청중
+        %li
+          %span 9.17 ~ 9.20
+          %p
+            1차 서류
+            %br
+            심사
+        %li
+          %span 9.30 ~ 10.4
+          %p
+            온라인 국민
+            %br
+            투표
+        %li
+          %span 10.3 ~ 10.4
+          %p
+            2차 현장
+            %br
+            심사
+        %li
+          %span 10.11 ~ 11.1
+          %p
+            자문단 멘토링
+            %br
+            실현 회의
+        %li
+          %span 10.13 ~ 11.9
+          %p
+            온&middot오프라인
+            %br
+            1:1 멘토링
+        %li
+          %span 11.9
+          %p
+            본선 및
+            %br
+            시상식
+        -# %li
+        -#   %span 8.21.
+        -#   %i LIVE
+        -#   %p
+        -#     예선 경연
+        -#     %span
+        -#       광주.  부산
+        -#       %br
+        -#       대전.  수원
+        -# %li
+        -#   %span 10.21.
+        -#   %p
+        -#     아이디어 내용
+        -#     %br
+        -#     심화
+        -# %li
+        -#   %span 11.21.
+        -#   %i LIVE
+        -#   %p
+        -#     본선 경연
+        -#     %span 수도권
+
+  %hr
+  = render 'pages/footer'
