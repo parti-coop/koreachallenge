@@ -8,7 +8,14 @@
           %a(href=root_path) 코리아챌린지 홈
         %li{ class: ('selected' if local_assigns[:selected] == :about)}
           %a(href=about_path) 공모요강
-
+        - if user_signed_in?
+          %li
+            = link_to "#{current_user.name} 로그아웃", destroy_user_session_path, method: :delete
+          %li
+            = link_to "탈퇴", cancel_current_user_path, method: :delete
+        - else
+          %li
+            = link_to '로그인/가입', new_user_session_path
         -# %li.selected
         -#   %a(href="#") 챌린지 하이라이트
         -#   %ul

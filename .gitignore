@@ -29,5 +29,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials.yml.enc
 
+.powenv
 local_env.yml
+/public/uploads/*
+!/public/uploads/.keep
+
+_DS_Store

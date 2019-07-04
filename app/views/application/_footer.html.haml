@@ -20,3 +20,9 @@
         %a(href=terms_path) 이용약관
       %li
         %a(href=privacy_path) 개인정보취급방침
+      %li
+        - if user_signed_in?
+          - if current_user.admin?
+            = link_to '관리', admin_home_path
+        - else
+          = link_to '관리', new_user_session_path

@@ -1,14 +1,28 @@
 !!!
-%html(lang="ko")
+%html{lang: I18n.locale}
   %head
-    %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")/
-    %meta(charset="utf-8")/
-    %title 코리아챌린지
-    = csrf_meta_tags
-    = csp_meta_tag
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    = display_meta_tags
     = render 'application/favicons'
-    %meta(content="initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, target-densitydpi=medium-dpi" name="viewport")/
-    = stylesheet_link_tag    'application', media: 'all'
+    %meta{content: "initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, target-densitydpi=medium-dpi", name: "viewport"}/
+    - if content_for? :stylesheets
+      = yield :stylesheets
+    - else
+      = stylesheet_link_tag 'application', media: 'all'
+    %link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel: "stylesheet"}
+    %script{:src => "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"}
+    %script{:src => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"}
+    = csrf_meta_tags
+
+  %body.index{ class: body_class }
+    %section.unobtrusive-flash-section
+      .container
+        .unobtrusive-flash-container
+    - if content_for? :main
+      = yield :main
+    - else
+      = yield
+
     = javascript_include_tag 'application'
-  %body
-    = yield
+    = yield :script if content_for?(:script)

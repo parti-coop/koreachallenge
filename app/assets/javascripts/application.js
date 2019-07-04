@@ -1,14 +1,67 @@
 //= require rails-ujs
 //= require jquery
+//= require bootstrap
 //= require activestorage
 //= require masonry.min
 //= require imagesloaded.min
+//= require unobtrusive_flash
 
 $(document).imagesLoaded(function() {
   $(".posts").masonry();
 });
 
 $(document).ready(function(){
+  // unobtrusive_flash
+  (function() {
+    window.UnobtrusiveFlash.flashOptions = {
+      type: 'notice',
+      timeout: 0,
+      mapping: {
+        notice: 'info',
+        alert: 'warning',
+        error: 'danger'
+      }
+    };
+
+    flashHandler = function(e, params) {
+      var message = params.message
+      var options = { type: params.type }
+
+      options = $.extend(UnobtrusiveFlash.flashOptions, options);
+
+      // Workaround for common Rails flash type to match common Bootstrap alert type
+      switch (options.type) {
+        case 'notice':
+        case 'alert':
+        case 'error':
+          options.type = options.mapping[options.type]
+      }
+
+      // Bootstrap class for showing alert
+      var showClass = 'in';
+      // If we have Bootstrap 4 use the show class instead
+      if ( parseInt($.fn.alert.Constructor.VERSION.split('.')[0]) == 4 ) {
+        showClass = 'show';
+      }
+
+      var $flash = $('<div class="alert alert-'+options.type+' alert-flash fade '+showClass+'"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+
+      var $flashContainer = $($('.unobtrusive-flash-container')[0] || $('.container')[0] || $('.container-fluid')[0] || $('body')[0]);
+      $flashContainer.prepend($flash);
+
+      $flash.hide().delay(300).slideDown(100);
+
+      $flash.alert();
+
+      if (options.timeout>0) {
+        setTimeout(function() {
+          $flash.alert('close');
+        },options.timeout);
+      }
+    };
+    $(window).bind('rails:flash', flashHandler);
+  })();
+
   $('nav > button').click(function() {
     $('header').addClass('selected');
   });

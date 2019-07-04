@@ -4,15 +4,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # ruby '~> 2.4.3'
 
 gem 'rails', '~> 5.2.2'
-gem 'sqlite3'
 gem 'unicorn'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'bundler', '= 2.0.1'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
+gem 'mini_racer'
 
-
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 # model
@@ -24,11 +23,12 @@ gem 'roo'
 
 # auth
 gem 'devise', '~> 4.5'
+gem 'devise-bootstrap-views'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', '~> 0.6.0'
-# gem 'omniauth-kakao', git: 'git://github.com/johnnyshields/omniauth-kakao'
-# gem 'omniauth-naver', git: 'git://github.com/parti-coop/omniauth-naver'
+gem 'omniauth-kakao', git: 'git://github.com/johnnyshields/omniauth-kakao'
+gem 'omniauth-naver', git: 'git://github.com/parti-coop/omniauth-naver'
 gem 'omniauth-twitter'
 gem 'pundit'
 
@@ -44,6 +44,7 @@ gem 'd3-rails'
 gem 'd3-cloud-rails'
 
 # view
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'haml-rails', '~> 1.0'
 gem 'unobtrusive_flash'

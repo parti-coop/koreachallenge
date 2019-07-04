@@ -1,0 +1,36 @@
+= render 'admin/navbar'
+
+%section.section-admin-page
+  .container
+    .clearfix
+      %h3.float-left 회원목록
+
+      .float-right
+        = form_with url: admin_users_path, method: :get, local: true do |f|
+          - if params[:q].present?
+            = link_to admin_users_path do
+              전체 보기
+            &nbsp;
+            \/
+            &nbsp;
+          = f.text_field :q, value: params[:q], placeholder: '이름이나 이메일', style: 'height: 30px'
+          = f.submit '찾기', style: 'height: 30px; border: 1px solid black; padding: 0 10px;'
+
+    %table.table.table-striped#users
+      %thead
+        %tr
+          %th{width: '5%'} #
+          %th{width: '20%'} 닉네임
+          %th{width: '20%'} 이메일
+          %th{width: '20%'} SNS
+          %th{width: '20%'} 가입일
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.id
+            %td= user.name
+            %td= (user.email.present? ? link_to("#{user.email} →", "mailto:#{user.email}") : '')
+            %td= user.provider
+            %td= human_datetime_f(user.created_at)
+
+    = paginate @users

@@ -1,0 +1,9 @@
+// unobtrusive_flash
+.unobtrusive-flash-section {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  .alert-flash {
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,8 @@
+%nav.navbar.navbar-light.bg-light
+  %section.section-admin-nav
+    .container
+      %nav.navbar.navbar-light.bg-light
+        %a.navbar-brand{:href => admin_home_path} 운영홈
+        %ul.nav.nav-pills
+          %li.nav-item
+            = link_to '회원관리', admin_users_path, class: 'nav-link'
