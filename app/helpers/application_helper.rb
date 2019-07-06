@@ -2,6 +2,7 @@ module ApplicationHelper
   def bootstrap_style?
     !current_page?('/') and
     !current_page?('/about') and
+    !current_page?('/intro') and
     !current_page?('/schedule') and
     !current_page?('/privacy') and
     !current_page?('/terms')

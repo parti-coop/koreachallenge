@@ -32,7 +32,7 @@ body {
 } */
 div.wrapper {
   position: relative;
-  border-left: 20px solid #df022f;
+  border-left: 15px solid #df022f;
   &:before {
     content: '';
     display: block;
@@ -779,7 +779,7 @@ div.tab {
     }
     h3 {
       margin-top: 70px;
-      padding: 60px 0 0 50px;
+      padding: 60px 65px 0 50px;
       border-top: 1px solid #e3e3e3;
       color: #ff2f60;
       font: {
@@ -790,8 +790,14 @@ div.tab {
         margin-top: 0;
       }
     }
+    &:first-child {
+      margin-top: 0;
+      h3:first-child {
+        border-top: 0;
+      }
+    }
     > p {
-      padding: 10px 0 0 50px;
+      padding: 10px 65px 0 50px;
       color: #666;
       font-size: 20px;
     }

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'terms', to: 'pages#terms'
   get 'privacy', to: 'pages#privacy'
   get 'about', to: 'pages#about'
+  get 'intro', to: 'pages#intro'
   get 'schedule', to: 'pages#schedule'
 
   delete :cancel_current_user, to: 'users#cancel'

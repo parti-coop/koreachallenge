@@ -10,13 +10,15 @@
       %h2
         = link_to root_path do
           %span 코리아챌린지
-        공모요강
+        = page_title
   %main#snContent.js-hamburger-open-invisible.js-hamburger-close-visible(style="padding-bottom: 0")
     .tab.js-menu-header
       %button.js-menu-toggle(type="button") 대회 소개
       %ul
         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/about')), 'data-url': about_path }
-          %a(href=about_path) 소개
+          %a(href=about_path) 아이디어 제안 안내
+        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/intro')), 'data-url': about_path }
+          %a(href=intro_path) 공모요강
         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/schedule')), 'data-url': schedule_path }
           %a(href=schedule_path) 대회 일정
         -# %li
