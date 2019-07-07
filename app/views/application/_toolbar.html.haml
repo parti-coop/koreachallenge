@@ -6,8 +6,8 @@
       %ul
         %li{ class: ('selected' if local_assigns[:selected] == :home)}
           %a(href=root_path) 코리아챌린지 홈
-        %li{ class: ('selected' if local_assigns[:selected] == :about)}
-          %a(href=about_path) 아이디어 제안
+        %li{ class: ('selected' if local_assigns[:selected] == :intro)}
+          %a(href=intro_path) 아이디어 제안
         - if false
           - if user_signed_in?
             %li

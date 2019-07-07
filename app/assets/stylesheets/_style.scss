@@ -811,21 +811,21 @@ div.tab {
         padding-left: 40px;
         span {
           display: block;
-          height: 49px;
-          padding: 0 30px;
-          border-radius: 24px;
+          height: 48px;
+          padding: 0 20px;
+          line-height: 45px;
           border: solid 1px #c1c1c1;
           font-size: 20px;
-          line-height: 47px;
+          border-radius: 24px;
           box-sizing: border-box;
         }
         &:before {
           content: '';
           position: absolute;
-          top: 15px;
-          left: 4px;
-          width: 18px;
-          height: 18px;
+          width: 11px;
+          height: 11px;
+          top: 18px;
+          left: 12px;
           border: {
             width: 1px 0 0 1px;
             style: solid;
@@ -1412,6 +1412,27 @@ div.tab {
     }
   }
 }
+@include respond-to(xsTablet) {
+  .sub-cnts {
+    .introduce {
+      > ol {
+        li {
+          float: none;
+          margin-bottom: 35px;
+          text-align: center;
+          padding-left: 0;
+          margin-top: 5px;
+          width: 70%;
+          &:before {
+            top: -20px;
+            left: 50%;
+            transform: rotate(225deg) translateX(75%);
+          }
+        }
+      }
+    }
+  }
+}
 @include respond-to(mobile) {
   .sub-cnts {
     padding: 0 20px 0 10px;
@@ -1434,10 +1455,11 @@ div.tab {
         font-size: 15px;
       }
       > ol {
-        margin-top: 5px;
-        padding-left: 10px;
+        margin-top: 20px;
+        padding-left: 0;
         li {
           margin-top: 5px;
+          width: 100%
         }
       }
       > ul {
