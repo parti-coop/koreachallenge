@@ -13,7 +13,7 @@
         = page_title
   %main#snContent.js-hamburger-open-invisible.js-hamburger-close-visible(style="padding-bottom: 0")
     .tab.js-menu-header
-      %button.js-menu-toggle(type="button") 대회 소개
+      %button.js-menu-toggle(type="button")= page_title
       %ul
         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/intro')), 'data-url': intro_path }
           %a(href=intro_path) 출전 안내
