@@ -95,6 +95,7 @@ div.wrapper {
     }
     .desc {
       padding-top: 60px;
+      padding-right: 100px;
       em {
         color: #fe4c76;
         font-size: 20px;
@@ -103,6 +104,18 @@ div.wrapper {
         margin-top: 20px;
         color: #fff;
         font-size: 20px;
+      }
+      li {
+        margin-top: 20px;
+        color: #fff;
+        font-size: 20px;
+        list-style-type: inherit;
+        list-style-position: outside;
+      }
+      ul {
+        list-style-type: inherit;
+        list-style-position: outside;
+        margin-left: 20px;
       }
     }
     .btn {
@@ -645,6 +658,9 @@ div.tab {
       position: relative;
       width: 33%;
       vertical-align: top;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       a {
         height: 67px;
         font-size: 22px;
@@ -1507,17 +1523,15 @@ div.tab {
         font-size: 16px;
       }
       .desc {
-        padding: 20px 15px 0 0;
-        em {
+        padding-top: 30px;
+        padding-right: 5px;
+        font-size: 16px;
+        p {
           font-size: 16px;
         }
-        p {
-          font-size: 15px;
+        ul, li {
+          font-size: 16px;
         }
-        border-left: 4px solid #df022f;
-        padding-top: 0;
-        margin-top: 20px;
-        padding-left: 10px;
       }
       .btn {
         margin-top: 30px;
@@ -1687,4 +1701,8 @@ div.tab {
   li:before {
     content: none;
   }
+}
+
+.text-nowrap {
+  white-space: nowrap;
 }

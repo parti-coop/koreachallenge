@@ -7,10 +7,17 @@
   .top-wrap
     = render 'application/toolbar', selected: :home
     .top-cnts.js-hamburger-open-invisible.js-hamburger-close-visible
-      %h1 코리아챌린지
+      %h1
+        %span.text-nowrap
+          2019
+        %span.text-nowrap
+          코리아 챌린지:
+        %span.text-nowrap
+          국민 제안,
+        %span.text-nowrap
+          국민 선택
       %strong
-        %span.big 국민과 함께 그리는 
-        %span.big 대한민국 미래 100년
+        %span.big 함께 그리는 대한민국 미래 100년
       %p.keep-all
         새로운 대한민국 100년의 미래,
         %br
@@ -20,14 +27,32 @@
         %br
         여러분이 대한민국 미래의 주인공입니다.
       .desc
-        %em 코리아 챌린지는?
-        %p
-          국민 판정단, 정책 전문가, 국민의 투표를 통해 여러분이 제안한 아이디어 중 최고 아이디어를 선정합니다.
-          %br
-          국민에 의한, 국민을 위한 정책으로 새로운 대한민국 100년을 함께 만들어요!
+        %em 2019 코리아 챌린지에 참여하려면?
+        %p 여러분은 출전자와 국민 판정단, 온라인 투표에 참여할 수 있습니다.
+        %ul
+          %li
+            출전자
+            %br
+            한국사회를 업그레이드 할 수 있는 창의적인 아이디어를 보내주세요.
+            %br
+            서류심사를 통과한 분께는 10분 동안 자신의 아이디어를 발표할 기회를 드립니다. 본선에서 우승한 분께는 1919만원의 상금과 상장을 드려요!
+          %li
+            국민판정단
+            %br
+            예선과 본선에 올라온 아이디어를 직접 심사할 수 있는 기회를 드립니다.
+            %br
+            출전자들의 멋진 발표를 직접 지켜보고 가장 좋은 아이디어를 선택해 주세요!
+          %li
+            온라인 투표
+            %br
+            예선과 본선 출전자에 대한 온라인 투표에 참여할 수 있습니다.
+            %br
+            바로 이 페이지에서 온라인 투표를 기다려 주세요!
       .btn
-        %a(href=about_path) 코리아챌린지란?
-        %a.actv.after-angle(href=about_path) 아이디어 제출
+        %a(href=about_path) 출전 안내
+        %a.actv.after-angle(href=about_path) 참가 신청
+      .desc{ style: 'padding-top: 0;' }
+        %p 국민판정단은 서류신청 접수 마감 후 모집합니다
     .schedule
       %h2
         코리아챌린지
@@ -70,7 +95,7 @@
             %br
             1:1 멘토링
         %li
-          %span 11.9
+          %span 11.16
           %p
             본선 및
             %br
