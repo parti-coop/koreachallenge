@@ -1646,6 +1646,9 @@ div.tab {
         display: flex;
         align-items: flex-end;
         flex-direction: column;
+        &.box-wrapper-start {
+          align-items: flex-start;
+        }
         @include respond-to(sTablet) {
           height: auto;
           // width: 100%;
