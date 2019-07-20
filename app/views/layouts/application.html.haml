@@ -19,10 +19,13 @@
     %section.unobtrusive-flash-section
       .container
         .unobtrusive-flash-container
-    - if content_for? :main
-      = yield :main
-    - else
-      = yield
+    = render 'application/navbar'
+    .main.js-main-navbar-nav-exclude
+      - if content_for? :main
+        = yield :main
+      - else
+        = yield
+    = render 'application/footer'
 
     = javascript_include_tag 'application'
     = yield :script if content_for?(:script)

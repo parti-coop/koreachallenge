@@ -1,33 +1,50 @@
-#skipNav
-  %ul
-    %li
-      %a(href="#snContent") 본문바로가기
-    / <li><a href="#snMenu">주메뉴 바로가기</a></li>
-.wrapper
-  .top-wrap.sub
-    = render 'application/toolbar', selected: :intro
-    .tit-wrap.js-hamburger-open-invisible.js-hamburger-close-visible
-      %h2
-        = link_to root_path do
-          %span 코리아챌린지
-        = page_title
-  %main#snContent.js-hamburger-open-invisible.js-hamburger-close-visible(style="padding-bottom: 0")
-    .tab.js-menu-header
-      %button.js-menu-toggle(type="button")= page_title
-      %ul
-        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/intro')), 'data-url': intro_path }
-          %a(href=intro_path) 출전 안내
-        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/about')), 'data-url': about_path }
-          %a(href=about_path) 이런 아이디어를 기다립니다
-        %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/schedule')), 'data-url': schedule_path }
-          %a(href=schedule_path) 대회 일정
-        -# %li
-        -#   %a(href="#") 심사 기준
-        -# %li
-        -#   %a(href="#") 유의 사항
-        -# %li
-        -#   %a(href="#") 오시는 길
-    .sub-cnts
+%section.site-header
+  .container
+    .clearfix
+      = image_tag 'pages/about.png', class: 'site-header-image'
+      .site-header-title 참가신청
+
+%section.site-tabs
+  .container
+    .site-content-container
+      %ul.nav.js-tab-menu-list
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/intro')) }
+          = link_to '출전 안내', intro_path
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/about')) }
+          = link_to '이런 아이디어를 기다립니다', about_path
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/schedule')) }
+          = link_to '대회 일정', schedule_path
+
+%section
+  .container
+    .site-content-container
       = main_content
 
-  = render 'application/footer'
+-# .wrapper
+-#   .top-wrap.sub
+-#     = render 'application/toolbar', selected: :intro
+-#     .tit-wrap.js-hamburger-open-invisible.js-hamburger-close-visible
+-#       %h2
+-#         = link_to root_path do
+-#           %span 코리아챌린지
+-#         = page_title
+-#   %main#snContent.js-hamburger-open-invisible.js-hamburger-close-visible(style="padding-bottom: 0")
+-#     .tab.js-menu-header
+-#       %button.js-menu-toggle(type="button")= page_title
+-#       %ul
+-#         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/intro')), 'data-url': intro_path }
+-#           %a(href=intro_path) 출전 안내
+-#         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/about')), 'data-url': about_path }
+-#           %a(href=about_path) 이런 아이디어를 기다립니다
+-#         %li.js-link.cursor-pointer{ class: ('selected' if current_page?('/schedule')), 'data-url': schedule_path }
+-#           %a(href=schedule_path) 대회 일정
+-#         -# %li
+-#         -#   %a(href="#") 심사 기준
+-#         -# %li
+-#         -#   %a(href="#") 유의 사항
+-#         -# %li
+-#         -#   %a(href="#") 오시는 길
+-#     .sub-cnts
+-#       = main_content
+
+-#   = render 'application/footer'

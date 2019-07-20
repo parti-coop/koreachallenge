@@ -7,14 +7,10 @@ class ApplicationController < ActionController::Base
   layout -> { get_layout }
 
   def get_layout
-    if helpers.bootstrap_style?
-      if devise_controller?
-        'devise'
-      else
-        'application'
-      end
+    if devise_controller?
+      'devise'
     else
-      'root'
+      'application'
     end
   end
 

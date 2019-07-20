@@ -1,17 +1,17 @@
 - main_content = capture do
-  %strong
-    2019 코리아 챌린지
-    %br/
-    = succeed "," do
-      %span.text-inline-block-nowrap 함께 그리는
-    %br
-      %span.text-nowrap 대한민국 미래
-      %span.text-nowrap 100년의 모습!
-  %p.keep-all
-    새로운 대한민국 100년의 미래, 여러분의 아이디어로 만듭니다.
-    %br
-    더 나은 미래를 위한 아이디어를 들려주세요. 여러분이 대한민국 미래의 주인공입니다.
-  .introduce
+  .site-margin-top-80.site-basic-contents
+    %h3
+      2019 코리아 챌린지
+      %br/
+      = succeed "," do
+        %span.text-inline-block-nowrap 함께 그리는
+      %br
+        %span.text-nowrap 대한민국 미래
+        %span.text-nowrap 100년의 모습!
+    %p.keep-all
+      새로운 대한민국 100년의 미래, 여러분의 아이디어로 만듭니다.
+      %br
+      더 나은 미래를 위한 아이디어를 들려주세요. 여러분이 대한민국 미래의 주인공입니다.
     -# %img(alt="" src="#{asset_url('introduce_img.png')}")
     -# %h3 코리아 챌린지는?
     -# %p
@@ -81,7 +81,9 @@
         .item
           .box-wrapper.box-wrapper-start
             .box
-              .subtitle 예선(국민판정단, 전문심사위원, 온라인 투표)
+              .subtitle
+                예선
+                %span.text-nowrap (국민판정단, 전문심사위원, 온라인 투표)
       %li
         .item
           .box-wrapper.box-wrapper-start
@@ -110,7 +112,7 @@
         %span.text-nowrap 자유롭게 제작한 후,
         %span.text-nowrap 소개 페이지에 올릴 수 있습니다.
         %span.text-nowrap (온라인 투표 시 노출됩니다.)
-  .m-btn{ style: 'padding-bottom: 50px'}
-    %a(href="/코리아챌린지_신청양식.zip") 신청서 양식 다운로드
+  .site-btn-basic-container.text-center
+    %a.btn.btn-white(href="/코리아챌린지_신청양식.zip") 신청서 양식 다운로드
 
 = render 'pages/about_layout', main_content: main_content, page_title: '이런 아이디어를 기다립니다'

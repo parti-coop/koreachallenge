@@ -6,6 +6,25 @@
 //= require imagesloaded.min
 //= require unobtrusive_flash
 
+// breakpoint
+$('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
+$('body').append($('<span id="js-sm-breakpoint" class="d-none d-sm-block d-md-none"></span>'));
+$('body').append($('<span id="js-md-breakpoint" class="d-none d-md-block d-lg-none"></span>'));
+$('body').append($('<span id="js-lg-breakpoint" class="d-none d-lg-block d-xl-none"></span>'));
+$.breakpoint_max = function() {
+  if($('#js-xs-breakpoint').is(":visible")) {
+    return 'xs';
+  } else if($('#js-sm-breakpoint').is(":visible")) {
+    return 'sm';
+  } else if($('#js-md-breakpoint').is(":visible")) {
+    return 'md';
+  } else if($('#js-lg-breakpoint').is(":visible")) {
+    return 'lg';
+  } else {
+    return 'xl';
+  }
+}
+
 $(document).imagesLoaded(function() {
   $(".posts").masonry();
 });
@@ -212,5 +231,32 @@ $(document).ready(function(){
   $('#js-main-navbar-nav').on('hidden.bs.collapse', function(e) {
     $('#js-main-navbar').removeClass('navbar-collapse');
     $('.js-main-navbar-nav-exclude').show();
+  });
+
+  // 탭 메뉴 클릭
+  $('.js-tab-menu').on('click', function(e) {
+    if($.breakpoint_max() != 'xs' && $.breakpoint_max() != 'sm') {
+      return;
+    }
+
+    $elm = $(e.currentTarget);
+    $menu_list = $elm.closest('.js-tab-menu-list');
+    $sibling_menus = $menu_list.find('.js-tab-menu');
+
+    if(!$elm.hasClass('js-tab-menu-active')) {
+      return; // 페이지 이동
+    }
+
+    if($menu_list.hasClass('js-open')) {
+      // 닫기
+      $menu_list.removeClass('js-open');
+      $sibling_menus.hide();
+      $elm.show();
+    } else {
+      // 열기
+      $menu_list.addClass('js-open');
+      $sibling_menus.show();
+    }
+    e.preventDefault();
   });
 });

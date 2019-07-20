@@ -1,28 +1,22 @@
-%footer.js-hamburger-open-invisible.js-hamburger-close-visible
-  .inner
-    %p.keep-all
-      3.1운동 및 대한민국 임시정부수립
-      %br
-      100주년 기념사업추진위원회
-    %ul.sns
-      %li
-        %a.facebook(href="https://www.facebook.com/together100years" target="_blank") facebook
-      -# %li
-      -#   %a.youtube{:href => "#"} youtube
-      -# %li
-      -#   %a.instagram{:href => "#"} instagram
-
-    %ul.contactus
-      %li.tel 02 6959 2003
-      %li.mail
-        %a(href="mailto:2019koreachall@gmail.com") 2019koreachall@gmail.com
-      %li
-        %a(href=terms_path) 이용약관
-      %li
-        %a(href=privacy_path) 개인정보취급방침
-      %li
-        - if user_signed_in?
-          - if current_user.admin?
-            = link_to '관리', admin_home_path
-        - else
-          = link_to '관리', new_user_session_path
+%footer.site-footer.js-main-navbar-nav-exclude
+  .container
+    .site-footer-container
+      .logo
+        = image_tag 'home/logo.png', style: 'height: 56px;'
+        .logo-desc
+          3.1운동 및 대한민국 임시정부수립
+          %br.d-block.d-md-none
+          100주년 기념사업추진위원회
+      .site-meta
+        .item
+          %i.fa.fa-phone
+          %a(href='tel:0269592003') 02 6959 2003
+        %br.d-block.d-sm-none
+        .item
+          %i.fa.fa-envelope
+          %a(href='mailto:2019koreachall@gmail.com') 2019koreachall@gmail.com
+        %br.d-block.d-md-none
+        .item
+          %a{ href: terms_path } 이용약관
+        .item
+          %a{ href: privacy_path } 개인정보취급방침 관리

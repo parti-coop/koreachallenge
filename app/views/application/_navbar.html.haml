@@ -1,0 +1,29 @@
+%nav.navbar.navbar-expand-md.navbar-light#js-main-navbar
+  .container
+    .navbar-brand-container
+      %a.navbar-brand(href="#")
+        = image_tag 'home/logo.png', style: 'height: 40px; vertical-align: text-bottom;'
+        %span{ style: 'font-size: 18px; font-weight: bold;' } 코리아챌린지
+      %button.navbar-toggler.navbar-toggler-noborder(aria-controls="js-main-navbar-nav" aria-expanded="false" aria-label="Toggle navigation" data-target="#js-main-navbar-nav" data-toggle="collapse" type="button")
+        %span.navbar-toggler-icon
+    #js-main-navbar-nav.collapse.navbar-collapse
+      %ul.navbar-nav.navbar-nav-contents.mx-md-auto
+        %li.nav-item
+          %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') ) ) }
+            참가신청
+            %span.sr-only (current)
+        -# %li.nav-item
+        -#   %a.nav-link(href="#") 국민판정단
+        %li.nav-item
+          %a.nav-link(href="#") 소식과 공지
+      %ul.navbar-nav.navbar-nav-utils
+        - if user_signed_in?
+          %li.nav-item.dropdown
+            %a#dropdown07.nav-link.dropdown-toggle(aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#")= current_user.name
+            .dropdown-menu.dropdown-menu-right(aria-labelledby="dropdown07")
+              = link_to '로그아웃', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+        - else
+          %li.nav-item
+            %a.nav-link.btn.btn-outline-primary.nav-btn.cursor-pointer{ href: new_user_session_path } 로그인
+          %li.nav-item
+            %a.nav-link.btn.btn-outline-primary.ml-2.nav-btn.cursor-pointer{ href: new_user_registration_path } 회원가입
