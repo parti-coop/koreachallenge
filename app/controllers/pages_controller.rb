@@ -8,6 +8,9 @@ class PagesController < ApplicationController
   def schedule
   end
 
+  def judge
+  end
+
   def privacy
   end
 

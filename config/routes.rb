@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   get 'intro', to: 'pages#intro'
   get 'schedule', to: 'pages#schedule'
+  get 'judge', to: 'pages#judge'
 
   delete :cancel_current_user, to: 'users#cancel'
   delete :confirm_user, to: 'users#confirm'

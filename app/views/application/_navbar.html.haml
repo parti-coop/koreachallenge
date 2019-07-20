@@ -1,7 +1,7 @@
 %nav.navbar.navbar-expand-md.navbar-light#js-main-navbar
   .container
     .navbar-brand-container
-      %a.navbar-brand(href="#")
+      %a.navbar-brand{ href: root_path }
         = image_tag 'home/logo.png', style: 'height: 40px; vertical-align: text-bottom;'
         %span{ style: 'font-size: 18px; font-weight: bold;' } 코리아챌린지
       %button.navbar-toggler.navbar-toggler-noborder(aria-controls="js-main-navbar-nav" aria-expanded="false" aria-label="Toggle navigation" data-target="#js-main-navbar-nav" data-toggle="collapse" type="button")
@@ -9,11 +9,11 @@
     #js-main-navbar-nav.collapse.navbar-collapse
       %ul.navbar-nav.navbar-nav-contents.mx-md-auto
         %li.nav-item
-          %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') ) ) }
+          %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') ) ) }
             참가신청
             %span.sr-only (current)
-        -# %li.nav-item
-        -#   %a.nav-link(href="#") 국민판정단
+        %li.nav-item
+          %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단
         %li.nav-item
           %a.nav-link(href="#") 소식과 공지
       %ul.navbar-nav.navbar-nav-utils

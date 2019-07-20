@@ -51,6 +51,13 @@ a.nav-link.btn.btn-outline-primary.nav-btn:active {
   white-space: nowrap;
 }
 
+nav.navbar {
+  font-size: 16px;
+  .btn {
+    font-size: 14px;
+  }
+}
+
 @include media-breakpoint-down(sm) {
   nav.navbar {
     margin: 0;
