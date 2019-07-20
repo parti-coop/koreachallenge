@@ -9,11 +9,14 @@
     .site-content-container
       %ul.nav.js-tab-menu-list
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/intro')) }
-          = link_to '출전 안내', intro_path
+          = link_to intro_path do
+            .link-text 출전 안내
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/about')) }
-          = link_to '이런 아이디어를 기다립니다', about_path
+          = link_to about_path do
+            .link-text 이런 아이디어를 기다립니다
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/schedule')) }
-          = link_to '대회 일정', schedule_path
+          = link_to schedule_path do
+            .link-text 대회 일정
 
 %section
   .container

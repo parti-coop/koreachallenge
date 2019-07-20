@@ -217,12 +217,17 @@ nav.navbar .nav-item > a.nav-link {
       line-height: 54px;
       font-size: 14px;
       & > a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
         color: $text-inactive-color;
         text-decoration: none;
       }
       border-bottom: 1px solid $line-light-color;
       &.active, &:active, &:hover {
-        border-bottom: 2px solid $brand-primary-color;
+        @include media-breakpoint-up(md) {
+          border-bottom: 2px solid $brand-primary-color;
+        }
         & > a {
           color: $text-base-color;
         }
@@ -243,7 +248,8 @@ nav.navbar .nav-item > a.nav-link {
         &.active {
           display: block;
           border-width: 0;
-          > a {
+          > a > .link-text {
+            display: inline-block;
             position: relative;
             &:before {
               content: ' ';
@@ -253,11 +259,11 @@ nav.navbar .nav-item > a.nav-link {
               border-width: 2px 0 0 2px;
               border-color: $text-inactive-color;
               border-style: solid;
-              transform: rotate(225deg);
+              transform: rotate(225deg) translateY(100%);;
               box-sizing: border-box;
-              right: -18px;
+              right: -10px;
               position: absolute;
-              top: 3px;
+              top: 50%;
             }
           }
         }
