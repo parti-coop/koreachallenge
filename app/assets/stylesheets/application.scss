@@ -729,7 +729,7 @@ body.app-pages-home {
       margin-top: 18px;
       margin-bottom: 18px;
       @include media-breakpoint-down(sm) {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         margin-top: 0;
         margin-bottom: 0;
@@ -754,9 +754,13 @@ body.app-pages-home {
 }
 
 .devise-container {
-  margin-top: 100px;
   text-align: center;
+  margin-top: 100px;
   margin-bottom: 100px;
+  @include media-breakpoint-down(sm) {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
   ul {
     list-style: none;
     padding: 0;
