@@ -203,4 +203,14 @@ $(document).ready(function(){
       window.location.href  = url;
     }
   });
+
+  // navbar collapse
+  $('#js-main-navbar-nav').on('show.bs.collapse', function(e) {
+    $('#js-main-navbar').addClass('navbar-collapse');
+    $('.js-main-navbar-nav-exclude').hide();
+  });
+  $('#js-main-navbar-nav').on('hidden.bs.collapse', function(e) {
+    $('#js-main-navbar').removeClass('navbar-collapse');
+    $('.js-main-navbar-nav-exclude').show();
+  });
 });
