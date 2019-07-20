@@ -4,16 +4,6 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  layout -> { get_layout }
-
-  def get_layout
-    if devise_controller?
-      'devise'
-    else
-      'application'
-    end
-  end
-
   def errors_to_flash(model)
     return if model.errors.empty?
     result ||= ""

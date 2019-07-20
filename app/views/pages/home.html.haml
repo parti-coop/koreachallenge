@@ -51,8 +51,8 @@
         .video
           = image_tag 'home/play.png', class: 'play'
         .buttons
-          %a.btn.btn-white.btn-subkey 출전 안내
-          %a.btn.btn-primary.btn-mainkey 참가 신청
+          %a.btn.btn-white.btn-subkey{ href: intro_path } 출전 안내
+          %a.btn.btn-primary.btn-mainkey{ href: about_path } 참가 신청
           .button-help
             국민판정단은 서류신청 접수 마감 후 모집합니다
         = image_tag 'home/key-visual-tables.png', class: 'key-image-tables'

@@ -58,6 +58,17 @@ nav.navbar {
   }
 }
 
+nav.navbar .nav-item > a.nav-link {
+  font-size: 16px;
+  color: $text-inactive-color;
+  &.active, &:hover, &:focus, &:active {
+    color: $text-base-color;
+    @include media-breakpoint-up(md) {
+      font-weight: 600;
+    }
+  }
+}
+
 @include media-breakpoint-down(sm) {
   nav.navbar {
     margin: 0;
@@ -106,12 +117,18 @@ nav.navbar {
             font-weight: 600;
           }
         }
-        &.navbar-nav-utils > .nav-item > a.nav-link {
+        &.navbar-nav-utils > .nav-item > a.nav-link.btn {
           color: $brand-primary-color;
           font-size: 14px;
+          &:active, &:hover, &:focus {
+            color: white;
+          }
         }
         &.navbar-nav-contents {
           flex: 1;
+          &.navbar-nav-contents-user-signed-in {
+            flex: 0;
+          }
           > .nav-item {
             border-bottom: 1px solid $brand-primary-weak-color;
             padding-left: 16px;
@@ -123,10 +140,28 @@ nav.navbar {
           flex-direction: row;
           padding-left: 16px;
           padding-right: 16px;
+          &.navbar-nav-utils-user-signed-in {
+            border-bottom: 1px solid $brand-primary-weak-color;
+          }
           > .nav-item {
             flex: 1;
             & + li.nav-item {
               margin-left: 16px;
+            }
+          }
+          .dropdown-menu {
+            margin-left: -16px;
+            margin-right: -16px;
+            border-radius: 0;
+            border: none;
+            padding: 0;
+            li {
+              border-top: 1px solid $line-light-color;
+              background-color: $bg-light-color;
+              a {
+                line-height: 35px;
+                color: $text-light-color;
+              }
             }
           }
         }
@@ -186,7 +221,7 @@ nav.navbar {
         text-decoration: none;
       }
       border-bottom: 1px solid $line-light-color;
-      &.active {
+      &.active, &:active, &:hover {
         border-bottom: 2px solid $brand-primary-color;
         & > a {
           color: $text-base-color;
@@ -709,6 +744,65 @@ body.app-pages-home {
         }
       }
     }
+  }
+}
+
+.devise-container {
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 100px;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      a {
+        width: 254px;
+        height: 56px;
+        line-height: 56px;
+        font-size: 18px;
+        font-weight: 500;
+        display: inline-block;
+        border-radius: 3px;
+        text-decoration: none;
+        img {
+          height: 36px;
+        }
+      }
+      &.facebook a{
+        color: white;
+        background-color: #1578f2;
+        border: solid 1px #1578f2;
+        &:hover, &:focus, &:active {
+          background-color: #095ec6;
+          border: solid 1px #095ec6;
+        }
+      }
+      &.naver a{
+        color: white;
+        background-color: #00b650;
+        border: solid 1px #03cf5d;
+        &:hover, &:focus, &:active {
+          background-color: #039845;
+          border: solid 1px #039845;
+        }
+      }
+      &.kakao a{
+        color: $text-base-color;
+        background-color: #ffcf4d;
+        border: solid 1px #fdc800;
+        &:hover, &:focus, &:active {
+          background-color: #fdb300;
+          border: solid 1px #fdb300;
+        }
+      }
+    }
+    li + li {
+      margin-top: 15px;
+    }
+  }
+  .desc {
+    margin-top: 40px;
   }
 }
 
