@@ -281,15 +281,15 @@ nav.navbar .nav-item > a.nav-link {
   margin-right: auto;
 }
 
-.site-margin-top-80 {
-  margin-top: 80px;
-}
-
 .site-margin-top-100 {
   margin-top: 100px;
 }
 
 .site-basic-contents {
+  margin-top: 80px;
+  @include media-breakpoint-down(sm) {
+    margin-top: 40px;
+  }
   h3 {
     font-size: 20px;
     font-weight: 500;
@@ -431,7 +431,7 @@ body.app-pages-home {
           }
           @include media-breakpoint-down(xs) {
             padding-top: 360px;
-            font-size: 36px;
+            font-size: 34px;
             line-height: 38px;
           }
           font-weight: bold;
@@ -554,6 +554,7 @@ body.app-pages-home {
         }
         .button-help {
           margin-top: 10px;
+          font-size: 14px;
         }
       }
       a.btn.btn-primary.btn-mainkey {
