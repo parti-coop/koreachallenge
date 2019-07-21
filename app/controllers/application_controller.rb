@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   after_action :prepare_unobtrusive_flash
 
   include Pundit
+  protect_from_forgery
 
   def errors_to_flash(model)
     return if model.errors.empty?
@@ -21,7 +22,11 @@ class ApplicationController < ActionController::Base
   end
   rescue_from Pundit::NotAuthorizedError do |exception|
     policy_name = exception.policy.class.to_s.underscore
-    flash[:alert] = t("#{policy_name}.#{exception.query}", scope: "pundit", default: :default)
+    if user_signed_in?
+      flash[:alert] = t("#{policy_name}.#{exception.query}", scope: "pundit", default: :default)
+    else
+      flash[:alert] = t("unsigned", scope: "pundit", default: :default)
+    end
     render_401
   end
 

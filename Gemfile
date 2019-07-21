@@ -8,9 +8,10 @@ gem 'unicorn'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'bundler', '= 2.0.1'
+gem 'bundler', '~> 2.0', '>= 2.0.2'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'mini_racer'
+gem 'enumerize', '~> 2.3', '>= 2.3.1'
 
 gem 'jbuilder', '~> 2.5'
 
@@ -51,6 +52,7 @@ gem 'unobtrusive_flash'
 gem 'tinymce-rails', '~> 4.9', '>= 4.9.3'
 gem 'tinymce-rails-imageupload', '~> 4.0.17.beta.3'
 gem 'video_info', '~> 2.7'
+gem 'browser', '~> 2.6', '>= 2.6.1'
 
 # seo
 gem 'meta-tags', '~> 2.11', '>= 2.11.1'

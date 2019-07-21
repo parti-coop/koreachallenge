@@ -1,18 +1,19 @@
 ko:
   errors:
+    format: "%{attribute}%{message}"
     messages:
       blank: "을(를) 반드시 입력해야 합니다."
-      carrierwave_processing_error: "이미지 사이즈 조정에 실패했습니다."
-      carrierwave_integrity_error: "이미지 파일이 아닙니다."
-      carrierwave_download_error: "다운로드 할 수 없습니다."
-      extension_whitelist_error: "허용되지 않는 파일 종류입니다."
-      extension_blacklist_error: "허용되지 않는 파일 종류입니다."
-      content_type_whitelist_error: "허용되지 않는 파일 종류입니다."
-      content_type_blacklist_error: "허용되지 않는 파일 종류입니다."
-      rmagick_processing_error: "이미지 파일이 아니거나 처리할 수 없는 파일입니다."
-      mini_magick_processing_error: "이미지 파일이 아니거나 처리할 수 없는 파일입니다."
-      min_size_error: "파일사이즈가 너무 작습니다."
-      max_size_error: "파일사이즈가 너무 큽니다."
+      carrierwave_processing_error: "의 이미지 사이즈 조정에 실패했습니다."
+      carrierwave_integrity_error: "는(은) 이미지 파일만 선택할 수 있습니다."
+      carrierwave_download_error: "을(를) 다운로드 할 수 없습니다."
+      extension_whitelist_error: "는(은) 허용되지 않는 파일 종류입니다."
+      extension_blacklist_error: "는(은) 허용되지 않는 파일 종류입니다."
+      content_type_whitelist_error: "는(은) 허용되지 않는 파일 종류입니다."
+      content_type_blacklist_error: "는(은) 허용되지 않는 파일 종류입니다."
+      rmagick_processing_error: "는(은) 이미지 파일이 아니거나 처리할 수 없는 파일입니다."
+      mini_magick_processing_error: "는(은) 이미지 파일이 아니거나 처리할 수 없는 파일입니다."
+      min_size_error: "는(은) 파일사이즈가 너무 작습니다."
+      max_size_error: "는(은) 파일사이즈가 너무 큽니다."
   activerecord:
     attributes:
       user:
@@ -39,7 +40,38 @@ ko:
         unconfirmed_email: 확인되지 않은 이메일 주소
         unlock_token: 잠금해제 토큰
         updated_at: 업데이트된 시간
+      idea:
+        category: 참가분야
+        title: 아이디어명
+        mode: 참가구분
+        team_member_count: 총 인원
+        team_name: 팀명
+        planner_name: 성명
+        planner_age: 나이
+        planner_sex: 성별
+        planner_org: 소속
+        planner_address: 주소
+        planner_tel: 휴대전화
+        planner_email: 이메일
+        motivation: 참가동기
+        summary: 아이디어 소개(요약)
+        pt: 발표 방식
+        desc: 상세설명
+        attachment: 첨부 파일
+        user_id: 회원
     models:
       user: 사용자
+    errors:
+      models:
+        idea:
+          attributes:
+            attachment:
+              file_size_is_less_than_or_equal_to: "는(은) 파일사이즈가 너무 큽니다."
   pundit:
-   default: '권한이 없습니다'
+    default: '권한이 없습니다.'
+    unsigned: '먼저 로그인해주세요.'
+  enumerize:
+    idea:
+      mode:
+        team: 팀
+        solo: 개인

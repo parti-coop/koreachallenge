@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_134855) do
+ActiveRecord::Schema.define(version: 2019_07_21_024307) do
+
+  create_table "ideas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "category", null: false
+    t.string "title", null: false
+    t.string "mode"
+    t.integer "team_member_count"
+    t.string "team_name"
+    t.string "planner_name"
+    t.string "planner_age"
+    t.string "planner_sex"
+    t.string "planner_org"
+    t.string "planner_address"
+    t.string "planner_tel"
+    t.string "planner_email"
+    t.text "motivation"
+    t.text "summary"
+    t.text "pt"
+    t.text "desc"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "attachment"
+    t.string "attachment_name"
+    t.string "attachment_type", null: false
+    t.integer "attachment_size", null: false
+    t.datetime "submitted_at"
+    t.index ["user_id"], name: "index_ideas_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: ""

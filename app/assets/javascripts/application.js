@@ -5,6 +5,11 @@
 //= require masonry.min
 //= require imagesloaded.min
 //= require unobtrusive_flash
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.messages_ko
+//= require tooltipster.bundle
+//= require js.cookie
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
@@ -258,5 +263,148 @@ $(document).ready(function(){
       $sibling_menus.show();
     }
     e.preventDefault();
+  });
+
+  // 아이디어 폼 js-idea-form-mode-team-fieldset
+  $('.js-idea-form-mode').on('change', function(e) {
+    var $elm = $(e.currentTarget);
+    var value = $elm.val();
+    if(value === 'team') {
+      $('.js-idea-form-mode-team-fieldset').show();
+      $('.js-idea-form-mode-team-fieldset input').attr('data-rule-required', 'true');
+      $elm.closest('form').trigger('parti-rebuild-validator');
+    } else {
+      $('.js-idea-form-mode-team-fieldset').hide();
+      $('.js-idea-form-mode-team-fieldset input').attr('data-rule-required', 'false');
+      $elm.closest('form').trigger('parti-rebuild-validator');
+    }
+    var instances = $.tooltipster.instances();
+    $.each(instances, function(i, instance){
+        instance.close();
+    });
+  });
+
+  // 폼 검증
+  $('.js-form-validation').each(function() {
+    var $form = $(this);
+    var $submit = $($form.data("form-validation-submit-control"));
+
+    var build_validator = function() {
+      return $form.validate({
+        ignore: ':hidden:not(.js-form-validation-force)',
+        errorPlacement: function(error, element) {
+          return true;
+        },
+        invalidHandler: function(event, validator) {
+          var errors = validator.numberOfInvalids();
+          if(errors) {
+            var successList = validator.successList;
+            console.log('successList', successList);
+            $.each(successList, function(index, element) {
+              var _popover;
+              var $popover_target = $($(element).data('form-validation-error-popover-target'));
+              if($popover_target.length <= 0) {
+                $popover_target = $(element);
+              }
+              if($popover_target.hasClass('tooltipstered')) {
+                $popover_target.tooltipster('destroy');
+              }
+            });
+
+            var focused = false;
+
+            var errorList = validator.errorList;
+            console.log('errorList', errorList);
+
+            return $.each(errorList, function(index, value) {
+              if(!focused && !$(value.element).data('form-validation-prevent-error-focus')) {
+                $(value.element).focus();
+                focused = true;
+              }
+
+              var _popover;
+              var $popover_target = $($(value.element).data('form-validation-error-popover-target'));
+              if($popover_target.length <= 0) {
+                $popover_target = $(value.element);
+              }
+
+              if($popover_target.hasClass('tooltipstered')) {
+              } else {
+                $popover_target.tooltipster({})
+              }
+              $popover_target.tooltipster('content', value.message).tooltipster('open');
+            });
+          }
+        },
+        focusInvalid: false
+      });
+    };
+    var _form_validator = build_validator();
+
+    $submit.removeClass('active');
+    var form_callback = function() {
+      if(_form_validator.checkForm()) {
+        $submit.addClass('active');
+      } else {
+        $submit.removeClass('active');
+      }
+    }
+    form_callback();
+
+    $form.find(':input').on('input', function(e) {
+      form_callback();
+    });
+
+    $form.find(':input').on('change', function(e) {
+      form_callback();
+    });
+
+    $form.find('select').on('change', function(e) {
+      form_callback();
+    });
+
+    $form.find(':input').on('parti-need-to-validate', function(e) {
+      form_callback();
+    });
+
+    $form.on('parti-need-to-validate', function(e) {
+      form_callback();
+    });
+
+    $form.on('parti-rebuild-validator', function(e) {
+      _form_validator = build_validator();
+      console.log(_form_validator);
+    });
+  });
+
+  // 파일 업로드
+  $('.js-custom-file-input').on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".js-custom-file-label").addClass("selected").html(fileName);
+  });
+
+  // 아이디어폼 계속 편집 모드
+  (function() {
+    if(Cookies.get('idea-form-continue') === 'true') {
+      $('.js-idea-form-continue').prop('checked', true);
+    } else {
+      $('.js-idea-form-continue').prop('checked', false);
+    }
+    $('.js-idea-form-continue').on('change', function(e) {
+      $elm = $(e.currentTarget);
+      if($elm.is(':checked')) {
+        Cookies.set('idea-form-continue', 'true');
+      } else {
+        Cookies.set('idea-form-continue', 'false');
+      }
+    });
+  })();
+
+  $('.js-idea-form-confirm-all').on('change', function(e) {
+    $elm = $(e.currentTarget);
+    console.log('ok', $elm.is(':checked'));
+    if($elm.is(':checked')) {
+      $('.js-idea-form-confirm').prop('checked', true);
+    }
   });
 });

@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :omniauthable
 
+  has_many :ideas, dependent: :destroy
+
   validates_format_of       :email, with: Devise.email_regexp, allow_blank: true, if: :will_save_change_to_email?
   validates_presence_of     :password, if: :password_required?
   validates_confirmation_of :password, if: :password_required?
@@ -56,6 +58,10 @@ class User < ApplicationRecord
 
   def confirmation?
     confirmation_terms == true and confirmation_privacy == true
+  end
+
+  def current_idea
+    ideas.first
   end
 
   private

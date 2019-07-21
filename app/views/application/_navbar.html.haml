@@ -9,7 +9,7 @@
     #js-main-navbar-nav.collapse.navbar-collapse
       %ul.navbar-nav.navbar-nav-contents.mx-md-auto{ class: ('navbar-nav-contents-user-signed-in' if user_signed_in?) }
         %li.nav-item
-          %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') ) ) }
+          %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') or params[:controller] == 'ideas' ) ) }
             참가신청
             %span.sr-only (current)
         %li.nav-item
@@ -21,6 +21,10 @@
           %li.nav-item.dropdown
             %a#user-dropdown.nav-link.dropdown-toggle(aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#")= current_user.name
             %ul.dropdown-menu.dropdown-menu-right(aria-labelledby="user-dropdown")
+              - if current_user.ideas.exists?
+                %li= link_to '신청서 수정', new_idea_path, class: 'dropdown-item'
+              - else
+                %li= link_to '신청하기', new_idea_path, class: 'dropdown-item'
               %li= link_to '로그아웃', destroy_user_session_path, method: :delete, class: 'dropdown-item'
               %li= link_to "탈퇴", cancel_current_user_path, method: :delete, class: 'dropdown-item', 'data-confirm': '탈퇴하시겠습니까? 모든 데이터가 삭제됩니다.'
         - else

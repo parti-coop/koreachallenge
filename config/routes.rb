@@ -16,6 +16,13 @@ Rails.application.routes.draw do
   post 'users/confirm', to: 'users#confirm'
   get 'users/confirm_form', to: 'users#confirm_form'
 
+  resources :ideas do
+    member do
+      get :download_attachment
+      delete :remove_attachment
+    end
+  end
+
   namespace :admin do
     get 'home', to: 'pages#home'
     resources :users
