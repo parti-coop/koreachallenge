@@ -297,6 +297,45 @@ nav.navbar .nav-item > a.nav-link {
   }
 }
 
+.site-line-list-faq {
+  .site-line-list-item {
+    .title, .body {
+      padding-left: 32px;
+      position: relative;
+    }
+    .title:before {
+      content: ' ';
+      background-image: asset_url('pages/faq_q');
+      min-width: 22px;
+      min-height: 22px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      vertical-align: text-bottom;
+      position: absolute;
+      left: 0;
+    }
+    .body {
+      font-weight: normal;
+    }
+    .body:before {
+      content: ' ';
+      background-image: asset_url('pages/faq_a');
+      min-width: 22px;
+      min-height: 22px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      vertical-align: text-bottom;
+      position: absolute;
+      left: 0;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
 .site-detail {
   margin-top: 60px;
   margin-bottom: 60px;
