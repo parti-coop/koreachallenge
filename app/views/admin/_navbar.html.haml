@@ -2,7 +2,9 @@
   %section.section-admin-nav
     .container
       %nav.navbar.navbar-light.bg-light
-        %a.navbar-brand{:href => admin_home_path} 운영홈
+        %a.navbar-brand{:href => admin_root_path} 운영홈
         %ul.nav.nav-pills
           %li.nav-item
             = link_to '회원관리', admin_users_path, class: 'nav-link'
+          %li.nav-item
+            = link_to '참가신청관리', admin_ideas_path, class: 'nav-link'

@@ -1051,7 +1051,8 @@ body.app-pages-home {
   }
 }
 
-body.app-ideas {
+body.app-ideas,
+body.app-admin--ideas {
   background-color: $bg-light-color;
   h2 {
     margin-top: 66px;

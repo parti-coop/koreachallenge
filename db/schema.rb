@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_125429) do
+ActiveRecord::Schema.define(version: 2019_07_21_233514) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_125429) do
     t.string "attachment_type", null: false
     t.integer "attachment_size", null: false
     t.datetime "submitted_at"
-    t.index ["user_id"], name: "index_ideas_on_user_id"
+    t.index ["user_id"], name: "index_ideas_on_user_id", unique: true
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

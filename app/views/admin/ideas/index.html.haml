@@ -1,0 +1,35 @@
+= render 'admin/navbar'
+
+%section.section-admin-page
+  .container
+    .clearfix
+      %h4.float-left 참가신청관리
+
+    %table.table.table-striped#users
+      %thead
+        %tr
+          %th{width: '10%'} #
+          %th{width: '30%'} 제목
+          %th{width: '20%'} 상태
+          %th{width: '20%'} 제출 회원 닉네임
+          %th{width: '20%'} 제출 회원 이메일
+      %tbody
+        - @ideas.each do |idea|
+          %tr
+            %td= idea.id
+            %td
+              = link_to idea.title, admin_idea_path(idea)
+            %td
+              = link_to admin_idea_path(idea) do
+                - if idea.submitted?
+                  신청 완료
+                  = human_datetime_f(idea.submitted_at)
+                - else
+                  .text-muted
+                    임시저장 중
+                    = human_datetime_f(idea.updated_at)
+
+            %td= idea.user.name
+            %td= (idea.user.email.present? ? link_to(idea.user.email, "mailto:#{idea.user.email}") : '')
+
+    = paginate @ideas

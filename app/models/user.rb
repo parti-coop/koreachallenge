@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :omniauthable
 
-  has_many :ideas, dependent: :destroy
+  has_one :idea, dependent: :destroy
   has_many :notices, dependent: :restrict_with_error
   has_many :stories, dependent: :restrict_with_error
   has_many :likes, dependent: :destroy
@@ -57,15 +57,15 @@ class User < ApplicationRecord
   end
 
   def admin?
-    self.admin or %w(contact@parti.xyz foroso@gmail.comx).include?(self.email)
+    self.admin or fixed_admin?
+  end
+
+  def fixed_admin?
+    %w(contact@parti.xyz foroso@gmail.com).include?(self.email)
   end
 
   def confirmation?
     confirmation_terms == true and confirmation_privacy == true
-  end
-
-  def current_idea
-    ideas.first
   end
 
   private

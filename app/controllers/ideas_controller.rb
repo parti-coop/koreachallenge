@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   def new
-    @idea = current_user.current_idea
+    @idea = current_user.idea
     @idea = Idea.new(mode: :solo) if @idea.blank?
     authorize @idea
   end

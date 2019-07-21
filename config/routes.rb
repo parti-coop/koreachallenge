@@ -39,8 +39,14 @@ Rails.application.routes.draw do
   post '/tinymce_assets', to: 'tinymce_assets#create'
 
   namespace :admin do
-    get 'home', to: 'pages#home'
-    resources :users
+    root 'pages#home'
+    resources :users do
+      member do
+        patch :add_admin
+        delete :remove_admin
+      end
+    end
+    resources :ideas
   end
 
   match '/404', to: 'errors#not_found', via: :all, as: :error_404

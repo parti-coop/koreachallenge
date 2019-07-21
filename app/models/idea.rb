@@ -20,6 +20,8 @@ class Idea < ApplicationRecord
 
   before_save :update_type
 
+  scope :order_recent, -> { order(created_at: :desc) }
+
   def submitted?
     self.submitted_at.present?
   end

@@ -3,7 +3,7 @@
 %section.section-admin-page
   .container
     .clearfix
-      %h3.float-left 회원목록
+      %h4.float-left 회원관리
 
       .float-right
         = form_with url: admin_users_path, method: :get, local: true do |f|
@@ -22,15 +22,36 @@
           %th{width: '5%'} #
           %th{width: '20%'} 닉네임
           %th{width: '20%'} 이메일
-          %th{width: '20%'} SNS
+          %th{width: '10%'} SNS
           %th{width: '20%'} 가입일
+          %th{width: '15%'} 관리자
+          %th{width: '10%'} 참가신청
       %tbody
         - @users.each do |user|
           %tr
             %td= user.id
             %td= user.name
-            %td= (user.email.present? ? link_to("#{user.email} →", "mailto:#{user.email}") : '')
+            %td= (user.email.present? ? link_to(user.email, "mailto:#{user.email}") : '')
             %td= user.provider
             %td= human_datetime_f(user.created_at)
+            %td
+              = '관리자' if user.admin?
+              - if user.admin? and !user.fixed_admin?
+                = link_to remove_admin_admin_user_path(user), method: :delete do
+                  %span.text-danger
+                    %i.fa.fa-window-close-o
+                    삭제
+              - unless user.admin?
+                = link_to add_admin_admin_user_path(user), method: :patch do
+                  %i.fa.fa-plus-square
+                  추가
+            %td
+              - if user.idea.present?
+                = link_to admin_idea_path(user.idea) do
+                  - if user.idea.submitted?
+                    신청서
+                  - else
+                    .text-muted
+                      임시저장
 
     = paginate @users
