@@ -6,6 +6,10 @@ class User < ApplicationRecord
          :rememberable, :omniauthable
 
   has_many :ideas, dependent: :destroy
+  has_many :notices, dependent: :restrict_with_error
+  has_many :stories, dependent: :restrict_with_error
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates_format_of       :email, with: Devise.email_regexp, allow_blank: true, if: :will_save_change_to_email?
   validates_presence_of     :password, if: :password_required?
@@ -53,7 +57,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    self.admin or %w(contact@parti.xyz foroso@gmail.com).include?(self.email)
+    self.admin or %w(contact@parti.xyz foroso@gmail.comx).include?(self.email)
   end
 
   def confirmation?

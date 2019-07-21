@@ -1,0 +1,13 @@
+.story.site-card-list-item.cursor-pointer.js-link{ 'data-url': story_path(story, page: params[:page]) }
+  .img{ class: ('img-default' unless story.image?), style: "background-image: url(#{ story.image? ? story.image.lg.url : asset_url('no-img.png') });" }
+  .title= story.title
+  .info
+    %span.date
+      = static_day_f(story.created_at)
+    .counts
+      %span.count.like{ class: ('active' if story.like_by?(current_user)) }
+        %i.fa{ class: (story.like_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
+        = story.likes_count
+      -# %span.count.comment
+      -#   %i.fa.fa-comment-o
+      -#   = story.comments_count

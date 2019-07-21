@@ -1,0 +1,41 @@
+- content = capture do
+  .site-content-container
+    .site-detail
+      %h2= @story.title
+      .info
+        %span.date
+          = static_day_f(@story.created_at)
+        %span.view
+          조회
+          = @story.reads_count
+      .body.js-fit-vids
+        - if @story.image?
+          .image-container
+            = image_tag @story.image.lg.url
+        %p!= @story.body
+      .btns
+        .btns-left
+          = render 'likes/button', likable: @story
+          %a.btn.btn-meta.btn-meta-detail.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{polymorphic_url(@story)}", target: '_blank', title: '공유하기'}
+            %i.fa.fa-share-alt
+            %span.d-none.d-sm-inline 공유하기
+          %a.btn.btn-meta.btn-meta-detail.js-clipboard{'data-clipboard-text': polymorphic_url(@story)}
+            %i.fa.fa-link
+            %span.d-none.d-sm-inline 주소복사
+          - manage_menus = capture do
+            - if policy(@story).edit?
+              %li= link_to '수정', [:edit, @story], class: 'dropdown-item'
+            - if policy(@story).destroy?
+              %li= link_to '삭제', @story, method: :delete, class: 'dropdown-item', 'data-confirm': '정말 삭제하시겠습니까?'
+          - if manage_menus.present?
+            .dropdown.btn.btn-meta.btn-meta-detail
+              %a(data-toggle="dropdown")
+                관리
+                %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-menu-right
+                = manage_menus
+        .btns-right
+          %a.list{href: stories_path(page: params[:page])} 목록
+
+
+= render 'layouts/story', content: content

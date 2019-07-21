@@ -1,5 +1,6 @@
 //= require rails-ujs
 //= require jquery
+//= require popper
 //= require bootstrap
 //= require activestorage
 //= require masonry.min
@@ -10,6 +11,9 @@
 //= require jquery.validate.messages_ko
 //= require tooltipster.bundle
 //= require js.cookie
+//= require jquery.fitvids
+//= require clipboard
+//= require tinymce-jquery
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
@@ -406,5 +410,36 @@ $(document).ready(function(){
     if($elm.is(':checked')) {
       $('.js-idea-form-confirm').prop('checked', true);
     }
+  });
+
+  $('.js-fit-vids').fitVids();
+
+  $(document).ajaxError(function (e, xhr, settings) {
+    if(xhr.status == 500) {
+      UnobtrusiveFlash.showFlashMessage('뭔가 잘못되었습니다. 곧 고치겠습니다.', {type: 'error'});
+    } else if(xhr.status == 403) {
+      UnobtrusiveFlash.showFlashMessage('새로 로그인을 해야하거나 적절한 권한이 없습니다.', {type: 'error'})
+    } else if(xhr.status == 404) {
+      UnobtrusiveFlash.showFlashMessage('어머나! 누가 지웠네요. 페이지를 새로 고쳐보세요.', {type: 'notice'});
+    }
+  });
+
+  //clipboard
+  $('.js-clipboard').each(function() {
+    var clipboard = new Clipboard(this);
+
+    var self = this;
+    clipboard.on('success', function(e) {
+      $(self)
+        .tooltipster({})
+        .tooltipster('content', '복사되었습니다')
+        .tooltipster('open')
+        .tooltipster('instance').on('off', function(e) {
+          if($(e.currentTarget).tooltipster('instance')) {
+            $(e.currentTarget).tooltipster('destroy');
+          }
+        });
+      e.clearSelection();
+    });
   });
 });

@@ -1,0 +1,32 @@
+- like_btn_label = case likable
+- when Comment
+  - '추천'
+- else
+  - '공감해요'
+
+- like_btn_label_dom = capture do
+  - if likable.likes_count > 0 and !likable.is_a?(Comment)
+    = likable.likes_count
+  - else
+    %span.d-none.d-sm-inline
+      = like_btn_label
+
+- like_btn_text = capture do
+  - if likable.like_by?(current_user)
+    %i.fa.fa-heart
+  - else
+    %i.fa.fa-heart-o
+  = like_btn_label_dom
+
+- button_dom_id = "rnd-#{SecureRandom.uuid}"
+- like_btn_path = likes_path(likable_type: likable.class.to_s, likable_id: likable.id, dom_id: button_dom_id, class_name: local_assigns[:class_name], counter_dom_id: local_assigns[:counter_dom_id])
+
+- if policy(likable).like? or !user_signed_in?
+  - if user_signed_in?
+    - if likable.like_by?(current_user)
+      = link_to like_btn_text, like_btn_path, method: :delete, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-white #{local_assigns[:class_name]}"
+    - else
+      = link_to like_btn_text, like_btn_path, method: :post, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-meta #{local_assigns[:class_name]}"
+  - else
+    = link_to like_btn_text, new_user_session_path, id: button_dom_id, class: "btn-meta-detail btn btn-meta #{local_assigns[:class_name]}"
+

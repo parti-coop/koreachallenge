@@ -1,0 +1,15 @@
+- notice ||= (@notice || Notice.new)
+.site-content-container
+  .site-form
+    %h2 공지 #{ notice.persisted? ? '수정' : '게시' }
+    = form_with model: notice do |f|
+      .write-box
+        .form-group
+          = f.label :title, '제목'
+          = f.text_field :title, class: 'form-control'
+        .form-group
+          = f.label :body, '내용'
+          = f.text_area :body, class: 'tinymce js-tinymce', 'data-content-css': asset_url('tinymce_content.css')
+        .form-group.form-group-submit
+          = f.submit (f.object.persisted? ? "수정" : "등록"), class: 'btn btn-primary js-confirm-btn'
+          %a{href: notices_path} 취소

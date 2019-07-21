@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'intro', to: 'pages#intro'
   get 'schedule', to: 'pages#schedule'
   get 'judge', to: 'pages#judge'
+  get 'faq', to: 'pages#faq'
 
   delete :cancel_current_user, to: 'users#cancel'
   delete :confirm_user, to: 'users#confirm'
@@ -22,6 +23,20 @@ Rails.application.routes.draw do
       delete :remove_attachment
     end
   end
+
+  concern :commentable do
+    resources :comments, shallow: true
+  end
+  resources :stories, concerns: :commentable do
+    member do
+      delete :remove_image
+    end
+  end
+  resources :notices, concerns: :commentable
+  delete :likes, to: 'likes#destroy'
+  resources :likes
+
+  post '/tinymce_assets', to: 'tinymce_assets#create'
 
   namespace :admin do
     get 'home', to: 'pages#home'

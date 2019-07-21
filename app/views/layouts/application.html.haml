@@ -28,4 +28,18 @@
     = render 'application/footer'
 
     = javascript_include_tag 'application'
+    = tinymce selector: 'textarea.--tinymce-dummy'
+    :javascript
+      $(function(){
+        $('textarea.js-tinymce').each(function() {
+          var $elm = $(this);
+          var content_css = $elm.data('content-css');
+          var params =  {
+            target: this,
+            content_css: content_css
+          }
+          TinyMCERails.initialize('default', params);
+        });
+      });
+
     = yield :script if content_for?(:script)

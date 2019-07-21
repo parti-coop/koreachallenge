@@ -1,0 +1,14 @@
+- content = capture do
+  .site-content-container
+    .site-card-list
+      = render @stories
+
+    = paginate @stories
+
+    - if policy(Story).new?
+      %hr
+      .site-btn-basic-container.text-center
+        %a.btn.btn-white{ href: new_story_path } 글쓰기
+        %p.text-muted 관리자만 보입니다.
+
+= render 'layouts/story', content: content

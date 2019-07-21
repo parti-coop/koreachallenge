@@ -1,0 +1,23 @@
+%section.site-header
+  .container
+    .clearfix
+      = image_tag 'pages/story.png', class: 'site-header-image'
+      .site-header-title 소식과 공지
+
+%section.site-tabs
+  .container
+    .site-content-container
+      %ul.nav.js-tab-menu-list
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if params[:controller] == 'stories') }
+          = link_to stories_path do
+            .link-text 소식
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if params[:controller] == 'notices') }
+          = link_to notices_path do
+            .link-text 공지
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/faq')) }
+          = link_to faq_path do
+            .link-text FAQ
+
+%section
+  .container{ class: local_assigns[:container_calss] }
+    = content

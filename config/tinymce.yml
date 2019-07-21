@@ -1,0 +1,18 @@
+menubar: false
+toolbar:
+  - styleselect | bold italic | undo redo | uploadimage | link media
+plugins:
+  - image
+  - link
+  - uploadimage
+  - media
+  - autoresize
+language: ko_KR
+statusbar: false
+relative_urls: false
+media_alt_source: false
+media_poster: false
+media_live_embeds: true
+autoresize_min_height: 350
+autoresize_bottom_margin: 0
+autoresize_overflow_padding: 0

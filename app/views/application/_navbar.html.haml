@@ -15,7 +15,7 @@
         %li.nav-item
           %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단
         %li.nav-item
-          %a.nav-link(href="#") 소식과 공지
+          %a.nav-link{ href: stories_path, class: ('active' if (%w(stories notices).include?(params[:controller]) or current_page?('/faq')) ) } 소식과 공지
       %ul.navbar-nav.navbar-nav-utils{ class: ('navbar-nav-utils-user-signed-in' if user_signed_in?) }
         - if user_signed_in?
           %li.nav-item.dropdown
