@@ -1,4 +1,5 @@
 class IdeasController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
   def new
     @idea = current_user.try(:idea)
     @idea = Idea.new(mode: :solo) if @idea.blank?
