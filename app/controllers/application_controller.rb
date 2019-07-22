@@ -96,14 +96,14 @@ class ApplicationController < ActionController::Base
     {
       title:       options[:title],
       reverse:     true,
-      # image:       helpers.asset_url(options[:image]),
+      image:       helpers.asset_url(options[:image]),
       description: options[:description],
       keywords:    options[:keywords],
       canonical:   current_url,
       og: {
         url: current_url,
         title: options[:og_title] || options[:title],
-        # image: helpers.asset_url(options[:image]),
+        image: helpers.asset_url(options[:image]),
         description: og_description,
         type: 'website'
       }
@@ -115,6 +115,7 @@ class ApplicationController < ActionController::Base
       title: "2019 코리아 챌린지",
       description: "함께 꿈꾸는 대한민국, 함께 실천하는 미래 100년! 새로운 대한민국 100년의 미래, 여러분의 아이디어로 만듭니다.",
       keywords: "삼일운동, 정치, 민주주의, 공론장",
+      image: helpers.asset_url("kochal_seo.png"),
       twitter_card_type: "summary_card"
     }
   end
