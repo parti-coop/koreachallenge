@@ -1,0 +1,16 @@
+.nested-fields
+  .row
+    - %i(name age sex org address tel email).each do |attribute|
+      - if attribute == :sex
+        .form-gruop.col-sm-6.col-12
+          = f.label :sex
+          %br
+          = f.collection_radio_buttons :sex, Member.sex.options, :last, :first do |ff|
+            .form-check.form-check-inline
+              = ff.radio_button class: 'form-check-input', data: { 'rule-required': 'true' }
+              = ff.label class: 'form-check-label'
+      - else
+        .form-gruop{ class: (attribute == :address ? 'col-12' : 'col-sm-6 col-12') }
+          = f.label attribute
+          = f.text_field attribute, class: 'form-control', data: { 'rule-required': %i(planner_org).include?(attribute) ? 'false' : 'true' }
+  = link_to_remove_association "참가자 삭제", f, class: 'btn btn-outline-secondary btn-sm'

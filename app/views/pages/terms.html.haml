@@ -1,20 +1,8 @@
-#skipNav
-  %ul
-    %li
-      %a(href="#snContent") 본문바로가기
-    / <li><a href="#snMenu">주메뉴 바로가기</a></li>
-.wrapper
-  .top-wrap.sub
-    = render 'application/toolbar'
-    .tit-wrap
-      %h2
-        = link_to root_path do
-          %span 코리아챌린지
-        이용약관
-  %hr/
-  %main#snContent(style="padding-bottom: 0")
-    .sub-cnts(style="padding-right: 10px;")
-      .introduce
+%section
+  .container
+    .site-content-container.site-box-content
+      .site-basic-contents
+        %h2 코리아챌린지 이용약관
         %h3 제 1조 목적
         %p
           이 약관은 3‧1운동 및 대한민국 임시정부 수립 100주년 기념사업추진위원회가 코리아챌린지(이하 “코리아 챌린지”라고 합니다) 인터넷 사이트(
@@ -210,5 +198,3 @@
           %br
           ② 코리아 챌린지와 회원간 발생한 분쟁에 관한 소송은 민사소송법 상의 관할법원에 제소합니다.
 
-  %hr
-  = render 'application/footer'

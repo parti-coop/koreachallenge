@@ -14,6 +14,7 @@ gem 'bundler', '~> 1.17', '>= 1.17.3'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'mini_racer'
 gem 'enumerize', '~> 2.3', '>= 2.3.1'
+gem 'cocoon'
 
 gem 'jbuilder', '~> 2.5'
 

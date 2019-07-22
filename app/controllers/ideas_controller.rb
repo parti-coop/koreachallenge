@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   def new
-    @idea = current_user.idea
+    @idea = current_user.try(:idea)
     @idea = Idea.new(mode: :solo) if @idea.blank?
     authorize @idea
   end
@@ -85,9 +85,8 @@ class IdeasController < ApplicationController
 
   def idea_params
     params.require(:idea).permit(:category, :title,
-      :mode, :team_member_count, :team_name,
-      :planner_name, :planner_age, :planner_sex, :planner_org, :planner_address, :planner_tel, :planner_email,
-      :motivation, :summary, :pt, :desc, :attachment)
+      :mode, :team_name, :motivation, :summary, :pt, :desc, :attachment,
+      members_attributes: [:id, :name, :age, :sex, :org, :address, :tel, :email, :_destroy])
   end
 
   def temporary_save?

@@ -14,6 +14,7 @@
 //= require jquery.fitvids
 //= require clipboard
 //= require tinymce-jquery
+//= require cocoon
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));

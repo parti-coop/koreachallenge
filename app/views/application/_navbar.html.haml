@@ -26,7 +26,12 @@
               - else
                 %li= link_to '신청하기', new_idea_path, class: 'dropdown-item'
               %li= link_to '로그아웃', destroy_user_session_path, method: :delete, class: 'dropdown-item'
-              %li= link_to "탈퇴", cancel_current_user_path, method: :delete, class: 'dropdown-item', 'data-confirm': '탈퇴하시겠습니까? 모든 데이터가 삭제됩니다.'
+              - if current_user.cancelable?
+                %li= link_to "탈퇴", cancel_current_user_path, method: :delete, class: 'dropdown-item', 'data-confirm': '탈퇴하시겠습니까? 모든 데이터가 삭제됩니다.'
+              - else
+                %li.dropdown-item.text-muted
+                  탈퇴 불가
+                  %small.text-muted 작성한 소식과 공지를 먼저 지워 주세요.
         - else
           %li.nav-item
             %a.nav-link.btn.btn-outline-primary.nav-btn.cursor-pointer{ href: new_user_session_path } 로그인

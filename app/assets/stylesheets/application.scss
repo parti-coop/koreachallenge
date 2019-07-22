@@ -576,6 +576,15 @@ nav.navbar .nav-item > a.nav-link {
   max-width: 768px;
   margin-left: auto;
   margin-right: auto;
+  &.site-box-content {
+    background-color: #fff;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 60px 60px 45px 60px;
+    @include media-breakpoint-down(xs) {
+      padding: 20px 16px 20px 16px;
+    }
+  }
 }
 
 .site-margin-top-100 {
@@ -1051,6 +1060,18 @@ body.app-pages-home {
   }
 }
 
+body.app-pages-privacy,
+body.app-pages-terms {
+  background-color: $bg-light-color;
+  h2 {
+    font-size: 30px;
+    color: $brand-primary-color;
+  }
+  .site-basic-contents:first-child {
+    margin-top: 40px;
+  }
+}
+
 body.app-ideas,
 body.app-admin--ideas {
   background-color: $bg-light-color;
@@ -1068,13 +1089,12 @@ body.app-admin--ideas {
     border-bottom: 2px solid $bg-light-color;
     font-size: 24px;
     color: $brand-primary-color;
-
   }
   .form-box {
     background-color: #fff;
-    padding: 60px 60px 45px 60px;
+    padding: 60px 0 45px 0;
     @include media-breakpoint-down(xs) {
-      padding: 20px 16px 20px 16px;
+      padding: 20px 0 20px 0;
     }
     legend {
       font-size: 20px;
@@ -1095,7 +1115,47 @@ body.app-admin--ideas {
       font-size: 14px;
       font-weight: normal;
     }
-    fieldset {
+    > fieldset {
+      padding-left: 60px;
+      padding-right: 60px;
+      @include media-breakpoint-down(xs) {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      &.fieldset-bare {
+        padding-left: 0;
+        padding-right: 0;
+        legend,
+        .nested-fields,
+        .add-member-link {
+          padding-left: 60px;
+          padding-right: 60px;
+          padding-top: 40px;
+          padding-bottom: 20px;
+          @include media-breakpoint-down(xs) {
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+          }
+        }
+        .add-member-link {
+          padding-top: 20px;
+          @include media-breakpoint-down(xs) {
+            padding-top: 10px;
+          }
+        }
+        legend {
+          margin-bottom: 0;
+        }
+        .nested-fields {
+          background-color: #fbfbfb;
+          border-top: 1px solid #d8d8d8;
+        }
+        .add-member-link {
+          border-top: 1px solid #d8d8d8;
+        }
+      }
       &.fieldset-confirm {
         label {
           font-size: 16px;

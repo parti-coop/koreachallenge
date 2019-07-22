@@ -20,3 +20,9 @@
           %a{ href: terms_path } 이용약관
         .item
           %a{ href: privacy_path } 개인정보취급방침 관리
+
+      - if user_signed_in? and current_user.admin?
+        %hr
+        .site-meta
+          .item
+            %a{ href: admin_root_path } 운영

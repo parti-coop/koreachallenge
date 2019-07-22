@@ -7,10 +7,12 @@
         .form-box
           %fieldset
             %legend 기본 정보
-            - %i(category title).each do |attribute|
-              .form-gruop
-                = f.label attribute
-                = f.text_field attribute, class: 'form-control', data: { 'rule-required': 'true' }
+            .form-gruop
+              = f.label :category
+              = f.select :category, Idea.category.options, {}, class: 'form-control', data: { 'rule-required': 'true' }
+            .form-gruop
+              = f.label :title
+              = f.text_field :title, class: 'form-control', data: { 'rule-required': 'true' }
           %fieldset
             %legend 참가 구분
             .form-gruop
@@ -19,16 +21,17 @@
                   = ff.radio_button class: 'form-check-input js-idea-form-mode'
                   = ff.label class: 'form-check-label'
             %fieldset.js-idea-form-mode-team-fieldset{ class: ('collapse' if f.object.mode.solo?) }
-              - %i(team_member_count team_name).each do |attribute|
+              - %i(team_name).each do |attribute|
                 .form-gruop
                   = f.label attribute
                   = f.text_field attribute, class: 'form-control', data: { 'rule-required': 'false' }
-          %fieldset
+          %fieldset.fieldset-bare
             %legend 참가자 정보
-            - %i(planner_name planner_age planner_sex planner_org planner_address planner_tel planner_email).each do |attribute|
-              .form-gruop
-                = f.label attribute
-                = f.text_field attribute, class: 'form-control', data: { 'rule-required': %i(planner_org).include?(attribute) ? 'false' : 'true' }
+            #idea-form-members
+              = f.fields_for :members do |ff|
+                = render 'ideas/member_fields', f: ff
+              .add-member-link
+                = link_to_add_association '참가자 추가', f, :members, class: 'btn btn-outline-secondary btn-sm'
           %fieldset
             %legend 상세 정보
             - %i(motivation summary pt desc).each do |attribute|

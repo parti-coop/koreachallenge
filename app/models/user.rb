@@ -68,6 +68,10 @@ class User < ApplicationRecord
     confirmation_terms == true and confirmation_privacy == true
   end
 
+  def cancelable?
+    !self.notices.exists? and !self.stories.exists?
+  end
+
   private
 
   def password_required?

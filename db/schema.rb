@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_233514) do
+ActiveRecord::Schema.define(version: 2019_07_22_021147) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -28,15 +28,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_233514) do
     t.string "category", null: false
     t.string "title", null: false
     t.string "mode"
-    t.integer "team_member_count"
     t.string "team_name"
-    t.string "planner_name"
-    t.string "planner_age"
-    t.string "planner_sex"
-    t.string "planner_org"
-    t.string "planner_address"
-    t.string "planner_tel"
-    t.string "planner_email"
     t.text "motivation"
     t.text "summary"
     t.text "pt"
@@ -60,6 +52,20 @@ ActiveRecord::Schema.define(version: 2019_07_21_233514) do
     t.datetime "updated_at", null: false
     t.index ["likable_type", "likable_id"], name: "index_likes_on_likable_type_and_likable_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "idea_id"
+    t.string "name"
+    t.string "age"
+    t.string "sex"
+    t.string "org"
+    t.string "address"
+    t.string "tel"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_members_on_idea_id"
   end
 
   create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

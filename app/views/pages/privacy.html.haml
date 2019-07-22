@@ -1,27 +1,15 @@
-#skipNav
-  %ul
-    %li
-      %a(href="#snContent") 본문바로가기
-    / <li><a href="#snMenu">주메뉴 바로가기</a></li>
-.wrapper
-  .top-wrap.sub
-    = render 'application/toolbar'
-    .tit-wrap
-      %h2
-        = link_to root_path do
-          %span 코리아챌린지
-        개인정보취급방침
-  %hr/
-  %main#snContent(style="padding-bottom: 0")
-    .sub-cnts(style="padding-right: 10px;")
-      .introduce
+%section
+  .container
+    .site-content-container.site-box-content
+      .site-basic-contents
+        %h2 코리아챌린지 개인정보취급방침
         %p.keep-all
           개인정보처리방침
           %br
           담당 소통홍보과 손우정 사무관
           %br
           02-2100-1428 roots96@korea.kr
-      .introduce
+      .site-basic-contents
         %p.keep-all
           개인정보 처리방침이란 ?
           %br
@@ -59,5 +47,3 @@
           이용자에게 개인정보 보관기간에 대해 별도의 동의를 얻은 경우는 아래와 같습니다.
           %br
           부정가입 및 징계기록 등의 부정이용기록은 부정 가입 및 이용 방지를 위하여 수집 시점으로부터 6개월간 보관하고 파기하고 있습니다. 부정이용기록 내 개인정보는 가입인증 휴대폰 번호(만 14세 미만 회원의 경우 법정대리인 DI)가 있습니다.
-  %hr
-  = render 'application/footer'

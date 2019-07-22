@@ -37,14 +37,14 @@
             %td
               = '관리자' if user.admin?
               - if user.admin? and !user.fixed_admin?
-                = link_to remove_admin_admin_user_path(user), method: :delete do
+                = link_to remove_admin_admin_user_path(user), method: :delete, class: 'text-nowrap' do
                   %span.text-danger
                     %i.fa.fa-window-close-o
-                    삭제
+                    권한삭제
               - unless user.admin?
-                = link_to add_admin_admin_user_path(user), method: :patch do
+                = link_to add_admin_admin_user_path(user), method: :patch, class: 'text-nowrap' do
                   %i.fa.fa-plus-square
-                  추가
+                  권한지정
             %td
               - if user.idea.present?
                 = link_to admin_idea_path(user.idea) do
