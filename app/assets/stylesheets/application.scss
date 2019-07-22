@@ -34,6 +34,11 @@ a.btn.btn-primary:hover {
   color: white;
 }
 
+.text-basic-wrap {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 .btn-white {
   @include button-variant(white, $brand-primary-color);
 }
