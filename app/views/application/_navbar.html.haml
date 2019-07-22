@@ -10,7 +10,7 @@
       %ul.navbar-nav.navbar-nav-contents.mx-md-auto{ class: ('navbar-nav-contents-user-signed-in' if user_signed_in?) }
         %li.nav-item
           %a.nav-link{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') or params[:controller] == 'ideas' ) ) }
-            참가신청
+            출전신청
             %span.sr-only (current)
         %li.nav-item
           %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단

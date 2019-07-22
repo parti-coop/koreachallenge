@@ -2,7 +2,7 @@
   .container
     .clearfix
       = image_tag 'pages/about.png', class: 'site-header-image'
-      .site-header-title 참가신청
+      .site-header-title 출전신청
 
 %section.site-tabs
   .container
@@ -10,7 +10,7 @@
       %ul.nav.js-tab-menu-list
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/intro')) }
           = link_to intro_path do
-            .link-text 출전 안내
+            .link-text 참가 안내
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/about')) }
           = link_to about_path do
             .link-text 이런 아이디어를 기다립니다
@@ -23,7 +23,18 @@
     .site-content-container
       = main_content
       .site-btn-basic-container.text-center
-        %a.btn.btn-white{ href: new_idea_path } 참가신청하기
+        - if user_signed_in? and current_user.idea.present?
+          %a.btn.btn-white{ href: new_idea_path } 참가신청서 수정
+          .text-muted.mt-2
+            #{current_user.name}님은
+            - if current_user.idea.submitted?
+              #{static_day_f(current_user.idea.submitted_at)} 참가 신청하셨습니다.
+            - else
+              #{static_day_f(current_user.idea.updated_at)} 임시저장하셨습니다.
+            %br
+            신청서는 마감일(9월 20일) 18시까지 수정할 수 있습니다.
+        - else
+          %a.btn.btn-white{ href: new_idea_path } 참가신청하기
 
 -# .wrapper
 -#   .top-wrap.sub
