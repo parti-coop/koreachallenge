@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   after_action :prepare_unobtrusive_flash
+  before_action :prepare_meta_tags, if: -> { request.get? and !Rails.env.test? }
 
   include Pundit
   protect_from_forgery
@@ -74,5 +75,47 @@ class ApplicationController < ActionController::Base
 
   def store_user_location!
     store_location_for(:user, request.fullpath)
+  end
+
+  private
+
+  def prepare_meta_tags(options={})
+    set_meta_tags build_meta_options(options)
+  end
+
+  def build_meta_options(options)
+    unless options.nil?
+      options.compact!
+      options.reverse_merge! default_meta_options
+    else
+      options = default_meta_options
+    end
+
+    current_url = request.url
+    og_description = (helpers.strip_tags options[:description]).truncate(160)
+    {
+      title:       options[:title],
+      reverse:     true,
+      # image:       helpers.asset_url(options[:image]),
+      description: options[:description],
+      keywords:    options[:keywords],
+      canonical:   current_url,
+      og: {
+        url: current_url,
+        title: options[:og_title] || options[:title],
+        # image: helpers.asset_url(options[:image]),
+        description: og_description,
+        type: 'website'
+      }
+    }.reject{ |_,v| v.nil? }
+  end
+
+  def default_meta_options
+    {
+      title: "2019 코리아 챌린지",
+      description: "함께 꿈꾸는 대한민국, 함께 실천하는 미래 100년! 새로운 대한민국 100년의 미래, 여러분의 아이디어로 만듭니다.",
+      keywords: "삼일운동, 정치, 민주주의, 공론장",
+      twitter_card_type: "summary_card"
+    }
   end
 end

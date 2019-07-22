@@ -443,4 +443,20 @@ $(document).ready(function(){
       e.clearSelection();
     });
   });
+
+  $('.js-alert').on('click', function(e) {
+    e.preventDefault();
+    alert($(e.currentTarget).data('message'));
+  });
+
+  $('.js-user-confirm-check-all').change(function(e) {
+    e.preventDefault();
+    var $elm = $(e.currentTarget);
+
+    if($elm.is(":checked")) {
+      var $form = $elm.closest('form');
+      $form.find('.js-user-confirm-check-all-target').prop('checked', true);
+      $.scrollTo($form.find('.js-user-confirm-check-all-scroll-to'), 100);
+    }
+  });
 });

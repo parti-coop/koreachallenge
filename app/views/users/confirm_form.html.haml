@@ -1,30 +1,30 @@
 %section
   .container
-    %h2 약관 동의
-    %p
-      100년토론광장의 이용 약관에
-      = succeed "동의해주세요." do
-        %br/
-    = form_with url: users_confirm_path, id: 'new-terms-form', class: 'js-form-validation', 'data-form-validation-submit-control': '#new-terms-form .js-confirm-btn', local: true do
-      .service
+    .site-content-container.site-box-content
+      .site-basic-contents
+        %h2 약관 동의
         %p
-          %input#all_confirmation.js-user-confirm-check-all{type: "checkbox"}/
-          %label{for: "all_confirmation"} 이용약관, 개인정보 수집 및 이용, 이벤트 등 메일 수신에 모두 동의합니다.
-        %p
-          %input#confirmation_terms.js-user-confirm-check-all-target{name: "confirmation_terms", type: "checkbox", value: "y", "data-rule-required": "true"}/
-          %label{for: "confirmation_terms"} 이용약관(필수 )
-        .info-box
-          이용약관내용
+          100년토론광장의 이용 약관에 동의해주세요
+        = form_with url: users_confirm_path, id: 'new-terms-form', class: 'js-form-validation', 'data-form-validation-submit-control': '#new-terms-form .js-confirm-btn', local: true do
+          .service
+            %p
+              %input#all_confirmation.js-user-confirm-check-all{type: "checkbox"}/
+              %label{for: "all_confirmation"} 이용약관, 개인정보 수집 및 이용, 이벤트 등 메일 수신에 모두 동의합니다.
+            %p
+              %input#confirmation_terms.js-user-confirm-check-all-target{name: "confirmation_terms", type: "checkbox", value: "y", "data-rule-required": "true"}/
+              %label{for: "confirmation_terms"} 이용약관(필수 )
+              = link_to terms_path, target: '_blank', style: 'text-decoration: underline' do
+                확인하기
 
-        %p
-          %input#confirmation_privacy.js-user-confirm-check-all-target{name: "confirmation_privacy", type: "checkbox", value: "y", "data-rule-required": "true"}/
-          %label{for: "confirmation_privacy"} 개인정보 수집 및 이용에 대한 안내(필수)
-        .info-box
-          개인정보 수집 및 이용에 대한 안내
 
-        %p
-          %input#confirmation_mailing.js-user-confirm-check-all-target{name: "confirmation_mailing", type: "checkbox", value: "y"}/
-          %label{for: "confirmation_mailing"} 이벤트 등 알림 메일 수신 (선택)
-      .def-btn.js-user-confirm-check-all-scroll-to
-        = link_to '비동의', destroy_user_session_path, method: :delete
-        %button.active.js-confirm-btn 동의
+            %p
+              %input#confirmation_privacy.js-user-confirm-check-all-target{name: "confirmation_privacy", type: "checkbox", value: "y", "data-rule-required": "true"}/
+              %label{for: "confirmation_privacy"} 개인정보 수집 및 이용에 대한 안내(필수)
+              = link_to ' 확인하기', privacy_path, target: '_blank', style: 'text-decoration: underline'
+
+            %p
+              %input#confirmation_mailing.js-user-confirm-check-all-target{name: "confirmation_mailing", type: "checkbox", value: "y"}/
+              %label{for: "confirmation_mailing"} 이벤트 등 알림 메일 수신 (선택)
+          .def-btn.js-user-confirm-check-all-scroll-to
+            = link_to '비동의', destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary'
+            %button.btn.btn-primary.js-confirm-btn 동의

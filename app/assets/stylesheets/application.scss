@@ -171,6 +171,7 @@ nav.navbar .nav-item > a.nav-link {
           padding-left: 16px;
           padding-right: 16px;
           background-color: white;
+          margin-bottom: 70px;
           &.navbar-nav-utils-user-signed-in {
             border-bottom: 1px solid $brand-primary-weak-color;
           }
@@ -1061,7 +1062,8 @@ body.app-pages-home {
 }
 
 body.app-pages-privacy,
-body.app-pages-terms {
+body.app-pages-terms,
+body.app-users-confirm_form {
   background-color: $bg-light-color;
   h2 {
     font-size: 30px;
