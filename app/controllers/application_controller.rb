@@ -112,8 +112,8 @@ class ApplicationController < ActionController::Base
 
   def default_meta_options
     {
-      title: "2019 코리아 챌린지",
-      description: "함께 꿈꾸는 대한민국, 함께 실천하는 미래 100년! 새로운 대한민국 100년의 미래, 여러분의 아이디어로 만듭니다.",
+      title: "2019 코리아 챌린지 : 국민 제안, 국민 선택",
+      description: "한국사회를 변화시킬 국민참여 아이디어 경연대회! 상금 1,919만원의 주인공이 되세요!",
       keywords: "삼일운동, 정치, 민주주의, 공론장",
       image: helpers.asset_url("kochal_seo.png"),
       twitter_card_type: "summary_card"

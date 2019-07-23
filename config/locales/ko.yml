@@ -46,14 +46,14 @@ ko:
         mode: 참가구분
         team_name: 팀명
         motivation: 참가동기
-        summary: 아이디어 소개(요약)
+        summary: 아이디어 소개
         pt: 발표 방식
         desc: 상세설명
         attachment: 첨부 파일
         user_id: 회원
       member:
         name: 성명
-        age: 나이
+        age: 나이(만)
         sex: 성별
         org: 소속
         address: 주소
@@ -71,6 +71,12 @@ ko:
           attributes:
             attachment:
               file_size_is_less_than_or_equal_to: "는(은) 파일사이즈가 너무 큽니다."
+  helpers:
+    label:
+      idea:
+        summary: '아이디어 소개 (자신의 아이디어를 간략히 소개해 주세요.)'
+        pt: '발표 방식 (PT, 공연, 실험 등 자신의 아이디어를 표현할 계획을 알려 주세요.)'
+        desc: '상세설명 (심사위원이 해당 아이디어를 충분히 이해할 수 있도록 작성해 주세요.)'
   pundit:
     default: '권한이 없습니다.'
     unsigned: '먼저 로그인해주세요.'
@@ -82,7 +88,7 @@ ko:
       category:
         dae: '대: 지속가능한 국가성장'
         han: '한: 고르게 발전하는 포용사회'
-        min: '고르게 발전하는 포용사회'
+        min: '민: 국민이 주인인 나라'
         kook: '국: 한반도의 평화와 번영'
         etc: '기타'
     member:
