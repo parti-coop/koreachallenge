@@ -716,9 +716,7 @@ body.app-pages-home {
     .key-panel-header {
       display: flex;
       flex-direction: row;
-      @include media-breakpoint-down(lg) {
-        position: relative;
-      }
+      position: relative;
       .text-box {
         max-width: 50%;
         @include media-breakpoint-down(lg) {
@@ -798,6 +796,8 @@ body.app-pages-home {
       .image-box {
         max-width: 50%;
         padding-left: 50px;
+        position: absolute;
+        right: 0;
         @include media-breakpoint-down(lg) {
           max-width: none;
           position: absolute;
