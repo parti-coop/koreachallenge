@@ -13,4 +13,5 @@
         .form-gruop{ class: (attribute == :address ? 'col-12' : 'col-sm-6 col-12') }
           = f.label attribute
           = f.text_field attribute, class: 'form-control', data: { 'rule-required': %i(planner_org).include?(attribute) ? 'false' : 'true' }
-  = link_to_remove_association "참가자 삭제", f, class: 'btn btn-outline-secondary btn-sm'
+  - unless controller.class.parents.include?(Admin)
+    = link_to_remove_association "참가자 삭제", f, class: 'btn btn-outline-secondary btn-sm'

@@ -8,7 +8,7 @@
         님 참가신청서
 
     - if @idea.submitted?
-      %p #{human_datetime_f @idea.sumitted_at} 제출 완료
+      %p #{human_datetime_f @idea.submitted_at} 제출 완료
     - else
       %p #{human_datetime_f @idea.updated_at} 임시저장
 

@@ -29,9 +29,10 @@
             %legend 참가자 정보
             #idea-form-members
               = f.fields_for :members do |ff|
-                = render 'ideas/member_fields', f: ff
-              .add-member-link
-                = link_to_add_association '참가자 추가', f, :members, class: 'btn btn-outline-secondary btn-sm'
+                = render '/ideas/member_fields', f: ff
+              - unless controller.class.parents.include?(Admin)
+                .add-member-link
+                  = link_to_add_association '참가자 추가', f, :members, class: 'btn btn-outline-secondary btn-sm'
           %fieldset
             %legend 상세 정보
             - %i(motivation summary pt desc).each do |attribute|
