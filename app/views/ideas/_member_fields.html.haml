@@ -5,13 +5,15 @@
         .form-gruop.col-sm-6.col-12
           = f.label :sex
           %br
+          - invalid_feedback_sex_id = "form-control-#{SecureRandom.uuid}"
           = f.collection_radio_buttons :sex, Member.sex.options, :last, :first do |ff|
             .form-check.form-check-inline
-              = ff.radio_button class: 'form-check-input', data: { 'rule-required': 'true' }
+              = ff.radio_button class: 'form-check-input', data: { 'rule-required': 'true', 'invalid-feedback': "##{invalid_feedback_sex_id}" }
               = ff.label class: 'form-check-label'
+          .invalid-feedback-force{ id: invalid_feedback_sex_id }
       - else
         .form-gruop{ class: (attribute == :address ? 'col-12' : 'col-sm-6 col-12') }
           = f.label attribute
-          = f.text_field attribute, class: 'form-control', data: { 'rule-required': %i(planner_org).include?(attribute) ? 'false' : 'true' }
+          = f.text_field attribute, class: 'form-control', data: { 'rule-required': 'true' }
   - unless controller.class.parents.include?(Admin)
     = link_to_remove_association "참가자 삭제", f, class: 'btn btn-outline-secondary btn-sm js-idea-member-remove'

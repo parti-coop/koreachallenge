@@ -65,7 +65,12 @@ a.btn.btn-white:active, input.btn.btn-white:active {
   padding-right: 0;
 }
 
-
+.invalid-feedback-force {
+  display: none;
+  &.invalid-feedback {
+    display: block;
+  }
+}
 
 a.nav-link.btn.btn-outline-primary.nav-btn {
   color: $brand-primary-color;

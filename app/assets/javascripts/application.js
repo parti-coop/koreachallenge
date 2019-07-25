@@ -325,20 +325,36 @@ $(document).ready(function(){
           var errors = validator.numberOfInvalids();
           if(errors) {
             var successList = validator.successList;
-            console.log('successList', successList);
             $.each(successList, function(index, element) {
               $control = $(element);
               $control.removeClass('is-invalid');
-              $control_next = $control.next();
-              if($control_next.hasClass('.js-invalid-feedback')) {
-                $control_next.remove();
+              if($control.is(':radio')) {
+                var name = $control.attr("name");
+                if ($control.parents().find("form").length > 0) {
+                  $siblings = $control.closest("form").find("input[type=radio][name='" + name + "']");
+                  $siblings.removeClass('is-invalid');
+                }
+              }
+
+              var $invalid_feedback = null;
+              if($control.data('invalid-feedback')) {
+                $invalid_feedback = $($control.data('invalid-feedback'));
+              } else {
+                $control_next = $control.next();
+                if($control_next.hasClass('.js-invalid-feedback')) {
+                  $invalid_feedback = $control_next;
+                }
+              }
+
+              if($invalid_feedback && $invalid_feedback.length > 0) {
+                $invalid_feedback.remove();
               }
             });
 
             var focused = false;
 
             var errorList = validator.errorList;
-            console.log('errorList', errorList);
+            console.log(errorList);
 
             return $.each(errorList, function(index, value) {
               $control = $(value.element);
@@ -353,17 +369,40 @@ $(document).ready(function(){
               }
 
               $control.addClass('is-invalid');
-              $control_next = $control.next();
-              if($control_next.hasClass('form-check-label')) {
-                $control = $control_next;
-                $control_next = $control.next();
+              if($control.is(':radio')) {
+                var name = $control.attr("name");
+                if ($control.parents().find("form").length > 0) {
+                  $siblings = $control.closest("form").find("input[type=radio][name='" + name + "']");
+                  $siblings.addClass('is-invalid');
+                }
               }
 
-              if(!$control_next.hasClass('js-invalid-feedback')) {
-                $control.after('<div class="js-invalid-feedback invalid-feedback"></div>');
+              var $invalid_feedback = null;
+              if($control.data('invalid-feedback')) {
+                $invalid_feedback = $($control.data('invalid-feedback'));
+              } else {
+                $control_next = $control.next();
+                if($control_next.hasClass('js-invalid-feedback')) {
+                  $invalid_feedback = $control_next;
+                }
               }
-              $control_next = $control.next();
-              $control_next.html(value.message);
+
+              if($control.data('invalid-feedback')) {
+                $invalid_feedback = $($control.data('invalid-feedback'));
+              } else {
+                $control_next = $control.next();
+                if($control_next.hasClass('js-invalid-feedback')) {
+                  $invalid_feedback = $control_next;
+                }
+              }
+
+              if(!$invalid_feedback || $invalid_feedback.length <= 0) {
+                $invalid_feedback = $('<div class="js-invalid-feedback invalid-feedback invalid-feedback-force"></div>');
+                $control.after($invalid_feedback);
+              }
+              $invalid_feedback.addClass('js-invalid-feedback');
+              $invalid_feedback.addClass('invalid-feedback');
+              $invalid_feedback.html(value.message);
             });
           }
         },
@@ -404,7 +443,6 @@ $(document).ready(function(){
 
     $form.on('parti-rebuild-validator', function(e) {
       _form_validator = build_validator();
-      console.log(_form_validator);
     });
   });
 
@@ -433,17 +471,18 @@ $(document).ready(function(){
 
   $('.js-idea-form-confirm-all').on('change', function(e) {
     $elm = $(e.currentTarget);
-    console.log('ok', $elm.is(':checked'));
     if($elm.is(':checked')) {
       $('.js-idea-form-confirm').prop('checked', true);
+    } else {
+      $('.js-idea-form-confirm').prop('checked', false);
     }
+
   });
 
   $('.js-fit-vids').fitVids();
 
   $(document).ajaxError(function (e, xhr, settings) {
     if(xhr.status == 500) {
-      console.log(xhr);
       UnobtrusiveFlash.showFlashMessage('뭔가 잘못되었습니다. 곧 고치겠습니다.', {type: 'error'});
     } else if(xhr.status == 403) {
       UnobtrusiveFlash.showFlashMessage('새로 로그인을 해야하거나 적절한 권한이 없습니다.', {type: 'error'})
@@ -512,11 +551,9 @@ $(document).ready(function(){
       }
     }
     $('#idea-form-members').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
-      console.log('xx insert');
       process_remove_button($(e.currentTarget));
     });
     $('#idea-form-members').on('cocoon:after-remove', function(e, insertedItem, originalEvent) {
-      console.log('xx remove');
       process_remove_button($(e.currentTarget));
     });
     process_remove_button($('#idea-form-members'));

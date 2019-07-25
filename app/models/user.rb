@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :rememberable, :omniauthable
 
   has_one :idea, dependent: :destroy
-  has_many :notices, dependent: :restrict_with_error
+  has_many :notices, dependent: :destroy
   has_many :stories, dependent: :restrict_with_error
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def cancelable?
-    !self.notices.exists? and !self.stories.exists?
+    !self.stories.exists?
   end
 
   private

@@ -9,6 +9,7 @@ class Member < ApplicationRecord
   validates :sex, presence: true, if: :submitted?
   validates :address, presence: true, if: :submitted?
   validates :tel, presence: true, if: :submitted?
+  validates :org, presence: true, if: :submitted?
   validates :email, presence: true, if: :submitted?
 
   private

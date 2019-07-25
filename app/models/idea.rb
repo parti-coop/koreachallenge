@@ -11,6 +11,10 @@ class Idea < ApplicationRecord
   validates :title, presence: true, if: :submitted?
   validates :mode, presence: true, if: :submitted?
   validates :team_name, presence: true, if: :team_submitted?
+  validates :pt, presence: true, if: :submitted?
+  validates :motivation, presence: true, if: :submitted?
+  validates :summary, presence: true, if: :submitted?
+  validates :desc, presence: true, if: :submitted?
   # validates :planner_name, presence: true, if: :submitted?
   # validates :planner_age, presence: true, if: :submitted?
   # validates :planner_sex, presence: true, if: :submitted?
