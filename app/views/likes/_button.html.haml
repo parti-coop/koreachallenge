@@ -24,7 +24,7 @@
 - if policy(likable).like? or !user_signed_in?
   - if user_signed_in?
     - if likable.like_by?(current_user)
-      = link_to like_btn_text, like_btn_path, method: :delete, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-white #{local_assigns[:class_name]}"
+      = link_to like_btn_text, like_btn_path, method: :delete, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-outline-primary #{local_assigns[:class_name]}"
     - else
       = link_to like_btn_text, like_btn_path, method: :post, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-meta #{local_assigns[:class_name]}"
   - else

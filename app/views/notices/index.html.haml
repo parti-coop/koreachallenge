@@ -1,12 +1,19 @@
 - content = capture do
   .site-content-container
-    .site-line-list
-      = render @notices
-    = paginate @notices
+    .site-btn-notice-container.d-flex.flex-sm-row.justify-content-sm-between.align-items-sm-center.flex-column.justify-content-between.align-items-center
+      .text-left{ style: 'line-height: 38px' }
+        함께 나누고 싶은 의견을 남겨주시기 바랍니다.
+      .text-right
+        %a.btn.btn-white.btn-outline-primary{ href: new_notice_path } 글쓰기
 
-    - if policy(Notice).new?
-      .site-btn-basic-container.text-center
-        %a.btn.btn-white{ href: new_notice_path } 글쓰기
-        %p.text-muted 관리자만 보입니다.
+    - if @notices.any?
+      .site-line-list-container.mb-5
+        .site-line-list
+          = render @notices
+        = paginate @notices
+    - elsif @notices.total_count <= 0
+      .site-basic-contents
+        .text-center.text-muted.mb-5
+          의견이 없습니다. 가장 먼저 의견을 작성해 보세요.
 
 = render 'layouts/story', content: content, container_calss: 'container-xs-no-padding'

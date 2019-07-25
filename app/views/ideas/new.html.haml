@@ -24,7 +24,7 @@
               - %i(team_name).each do |attribute|
                 .form-gruop
                   = f.label attribute
-                  = f.text_field attribute, class: 'form-control', data: { 'rule-required': 'false' }
+                  = f.text_field attribute, class: 'form-control', data: { 'rule-required': 'true' }
           %fieldset.fieldset-bare
             %legend 참가자 정보
             #idea-form-members
@@ -48,7 +48,7 @@
             %legend 파일 제출
             .form-group
               = f.label :attachment
-              - if f.object.attachment?
+              - if f.object.attachment? and f.object.persisted?
                 %p.help-block
                   = link_to download_attachment_idea_path(f.object), class: 'text-decoration-none' do
                     %i.fa.fa-file
@@ -60,7 +60,7 @@
 
               - unless controller.class.parents.include?(Admin)
                 .custom-file
-                  = f.file_field :attachment, class: 'form-control-file custom-file-input js-custom-file-input', lang: 'ko'
+                  = f.file_field :attachment, class: 'form-control-file custom-file-input js-custom-file-input', lang: 'ko', data: { 'rule-filesize': '20971520', 'msg-filesize': '파일의 크기를 확인해 주세요.' }
                   = f.label :attachment, class: 'custom-file-label js-custom-file-label' do
                     - if f.object.attachment?
                       새로운 파일 선택...
@@ -106,10 +106,10 @@
           .form-group.text-center.form-group-submit
             - if f.object.submitted?
               = f.submit '수정하기', class: 'btn btn-primary js-confirm-btn'
-              = f.submit '제출취소', class: 'btn btn-white', formnovalidate: true
+              = f.submit '제출취소', class: 'btn btn-outline-primary', formnovalidate: true
             - else
               = f.submit '제출하기', class: 'btn btn-primary js-confirm-btn'
-              = f.submit '임시저장', class: 'btn btn-white', formnovalidate: true
+              = f.submit '임시저장', class: 'btn btn-outline-primary', formnovalidate: true
             .form-check
               %input.form-check-input.js-idea-form-continue{ type: :checkbox, name: :continue_edit, value: :ok, id: :continue_edit, checked: (params[:continue_edit] == 'ok')}
               %label.form-check-label{ for: :continue_edit } 저장 후에 계속 편집합니다.

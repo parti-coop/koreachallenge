@@ -14,6 +14,6 @@ class Member < ApplicationRecord
   private
 
   def submitted?
-    self.idea.try(:submitted?)
+    self.idea.try(:submitted?) and self.idea.try(:persisted?)
   end
 end

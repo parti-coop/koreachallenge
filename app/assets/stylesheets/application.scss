@@ -40,14 +40,13 @@ a.btn.btn-primary:hover {
 }
 
 .btn-white {
-  @include button-variant(white, $brand-primary-color);
+  background-color: white;
 }
 
-a.btn.btn-white, input.btn.btn-white,
 a.btn.btn-white:hover, input.btn.btn-white:hover,
 a.btn.btn-white:focus, input.btn.btn-white:focus,
 a.btn.btn-white:active, input.btn.btn-white:active {
-  color: $brand-primary-important-color;
+  background-color: $brand-primary-important-color;
 }
 
 .btn-meta {
@@ -161,7 +160,7 @@ nav.navbar .nav-item > a.nav-link {
         &.navbar-nav-contents {
           flex: 1;
           &.navbar-nav-contents-user-signed-in {
-            flex: 0;
+            flex: initial;
           }
           > .nav-item {
             border-bottom: 1px solid $brand-primary-weak-color;
@@ -266,7 +265,7 @@ nav.navbar .nav-item > a.nav-link {
 .site-card-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
+  margin-top: 60px;
   .site-card-list-item {
     flex-basis: 50%;
     @include media-breakpoint-down(xs) {
@@ -706,6 +705,65 @@ nav.navbar .nav-item > a.nav-link {
   }
 }
 
+.site-btn-notice-container {
+  margin-top: 20px;
+  margin-bottom: -40px;
+  padding: 20px;
+  background-color: $bg-light-color;
+  color: $text-light-color;
+  .btn {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.site-write-box {
+  .form-control {
+    border-radius: 0;
+    border-color: $line-color;
+  }
+}
+
+.site-new-terms-form {
+  margin-top: 33px;
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    &[for='all_confirmation'] {
+      text-decoration: underline;
+    }
+  }
+  .view {
+    border: 1px solid $line-light-color;
+    max-height: 160px;
+    overflow: scroll;
+    margin-top: -14px;
+    margin-bottom: 20px;
+    .site-content-container.site-box-content {
+      margin: 0;
+      padding: 0;
+      h2 {
+        display: none;
+      }
+      h3,
+      p,
+      ul,
+      li {
+        font-size: 12px;
+      }
+      h3 {
+        margin-top: 10px;
+        color: $text-base-color;
+      }
+      .site-basic-contents {
+        margin: 0;
+      }
+    }
+  }
+}
+
 body.app-pages-home {
   .video {
     width: 800px;
@@ -980,6 +1038,7 @@ body.app-pages-home {
           padding-left: 40px;
           padding-right: 40px;
           line-height: 36px;
+          font-weight: bold;
           @include media-breakpoint-down(xs) {
             padding-left: 30px;
             padding-right: 30px;
@@ -1018,19 +1077,19 @@ body.app-pages-home {
     }
     .items-single-row {
       display: none;
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(xl) {
         display: block;
       }
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         display: block;
       }
     }
     .items-multiple-rows {
       display: none;
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(lg) {
         display: block;
       }
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         display: none;
       }
     }
@@ -1040,7 +1099,7 @@ body.app-pages-home {
       flex-direction: row;
       justify-content: space-between;
       border-bottom: 1px solid rgb(229, 229, 229);
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         flex-direction: column;
         border-bottom: 0;
         position: relative;
@@ -1049,7 +1108,7 @@ body.app-pages-home {
         font-size: 16px;
         text-align: center;
         position: relative;
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
           padding-left: 24px;
           text-align: left;
           padding-bottom: 20px;
@@ -1058,8 +1117,9 @@ body.app-pages-home {
           background-color: rgba(0, 0, 0, 0.1);
           border-radius: 2px;
           white-space: nowrap;
-          padding: 2px 4px;
-          @include media-breakpoint-down(xs) {
+          padding: 2px 8px;
+          display: inline-block;
+          @include media-breakpoint-down(sm) {
             display: inline;
           }
         }
@@ -1077,7 +1137,7 @@ body.app-pages-home {
           position: relative;
           bottom: -6px;
           z-index: 1;
-          @include media-breakpoint-down(xs) {
+          @include media-breakpoint-down(sm) {
             position: absolute;
             top: 0;
             left: 0;
@@ -1099,7 +1159,7 @@ body.app-pages-home {
           left: 0;
           background: white;
         }
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
           width: 1px;
           height: 100%;
           background: rgb(229, 229, 229);
@@ -1116,11 +1176,11 @@ body.app-pages-home {
         bottom: -1px;
         left: 50%;
         background: white;
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
           display: none;
         }
       }
-      @include media-breakpoint-down(xs) {
+      @include media-breakpoint-down(sm) {
         & .item:after {
           content: ' ';
           width: 1px;

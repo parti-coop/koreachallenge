@@ -3,6 +3,7 @@ class IdeasController < ApplicationController
   def new
     @idea = current_user.try(:idea)
     @idea = Idea.new(mode: :solo) if @idea.blank?
+    @idea.members.build() if @idea.members.count <= 0
     authorize @idea
   end
 
@@ -13,10 +14,11 @@ class IdeasController < ApplicationController
     unless temporary_save?
       @idea.submitted_at = DateTime.current
     end
+
     if @idea.save
       flash[:success] = @idea.submitted? ? '제출되었습니다.' : '임시저장되었습니다.'
       if continue_edit?
-        redirect_to new_idea_path(@idea, continue_edit: :ok)
+        redirect_to new_idea_path
       else
         redirect_to root_path
       end
@@ -35,10 +37,11 @@ class IdeasController < ApplicationController
     else
       @idea.submitted_at = DateTime.current
     end
+
     if @idea.save
       flash[:success] = @idea.submitted? ? '제출되었습니다.' : '임시저장되었습니다.'
       if continue_edit?
-        redirect_to new_idea_path(@idea, continue_edit: :ok)
+        redirect_to new_idea_path
       else
         redirect_to root_path
       end

@@ -35,7 +35,9 @@
               %ul.dropdown-menu.dropdown-menu-right
                 = manage_menus
         .btns-right
-          %a.list{href: stories_path(page: params[:page])} 목록
+          %a.list{href: stories_path(page: params[:page])}
+            목록
+            %i.fa.fa-angle-right
 
 
 = render 'layouts/story', content: content

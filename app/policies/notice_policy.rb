@@ -1,22 +1,22 @@
 class NoticePolicy < ApplicationPolicy
   def new?
-    admin_only
+    user.present?
   end
 
   def create?
-    admin_only
+    user.present?
   end
 
   def edit?
-    admin_only
+    user == record.user
   end
 
   def update?
-    admin_only
+    user == record.user
   end
 
   def destroy?
-    admin_only
+    user.try(:admin?) or user == record.user
   end
 
   def like?

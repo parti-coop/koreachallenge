@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_045844) do
+ActiveRecord::Schema.define(version: 2019_07_25_021458) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 2019_07_22_045844) do
     t.integer "attachment_size"
     t.datetime "submitted_at"
     t.index ["user_id"], name: "index_ideas_on_user_id", unique: true
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "alt"
+    t.string "hint"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -110,7 +118,6 @@ ActiveRecord::Schema.define(version: 2019_07_22_045844) do
     t.boolean "confirmation_terms", default: false
     t.boolean "confirmation_privacy", default: false
     t.boolean "confirmation_mailing", default: false
-    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

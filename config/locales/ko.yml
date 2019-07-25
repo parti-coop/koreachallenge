@@ -14,8 +14,12 @@ ko:
       mini_magick_processing_error: "는(은) 이미지 파일이 아니거나 처리할 수 없는 파일입니다."
       min_size_error: "는(은) 파일사이즈가 너무 작습니다."
       max_size_error: "는(은) 파일사이즈가 너무 큽니다."
+      idea:
+        no_members: '를 입력해 주세요'
   activerecord:
     attributes:
+      image:
+        file: 해당 파일
       user:
         confirmation_sent_at: 확인 메일 전송 시간
         confirmation_token: 확인 토큰
@@ -51,6 +55,7 @@ ko:
         desc: 상세설명
         attachment: 첨부 파일
         user_id: 회원
+        members: 참가자
       member:
         name: 성명
         age: 나이(만)
@@ -63,6 +68,9 @@ ko:
         title: 제목
         body: 내용
         image: 사진/이미지
+      notice:
+        title: 제목
+        body: 내용
     models:
       user: 사용자
     errors:
@@ -70,13 +78,33 @@ ko:
         idea:
           attributes:
             attachment:
-              file_size_is_less_than_or_equal_to: "는(은) 파일사이즈가 너무 큽니다."
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+        image:
+          attributes:
+            file:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
   helpers:
     label:
       idea:
+        category: 참가분야 (필수)
+        title: 아이디어명 (필수)
+        mode: 참가구분 (필수)
+        team_name: 팀명 (필수)
+        motivation: 참가동기
+        pt: 발표 방식
+        desc: 상세설명
+        attachment: 첨부 파일
         summary: '아이디어 소개 (자신의 아이디어를 간략히 소개해 주세요.)'
         pt: '발표 방식 (PT, 공연, 실험 등 자신의 아이디어를 표현할 계획을 알려 주세요.)'
         desc: '상세설명 (심사위원이 해당 아이디어를 충분히 이해할 수 있도록 작성해 주세요.)'
+      member:
+        name: 성명 (필수)
+        age: 나이 (만, 필수)
+        sex: 성별 (필수)
+        org: 소속
+        address: 주소 (필수)
+        tel: 휴대전화 (필수)
+        email: 이메일 (필수)
   pundit:
     default: '권한이 없습니다.'
     unsigned: '먼저 로그인해주세요.'

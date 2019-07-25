@@ -1,7 +1,7 @@
 - story ||= (@story || Story.new)
 .site-content-container
   .site-form
-    %h2 소식 #{ story.persisted? ? '수정' : '게시' }
+    %h2 소식 #{ story.persisted? ? '수정' : '글쓰기' }
     = form_with model: story do |f|
       .form-group
         = f.label :title
@@ -11,7 +11,7 @@
         = f.text_area :body, class: 'tinymce js-tinymce', 'data-content-css': asset_url('tinymce_content.css')
       .form-group
         = f.label :image
-        - if f.object.image?
+        - if f.object.image? and f.object.persisted?
           %p.help-block
             = image_tag f.object.image.lg.url, style: 'max-width: 100px; vertical-align: bottom'
             &nbsp;
@@ -25,4 +25,4 @@
               이미지 선택...
       .form-group.form-group-submit
         = f.submit (f.object.persisted? ? "수정" : "등록"), class: 'btn btn-primary js-confirm-btn'
-        %a{href: stories_path} 취소
+        %a{href: stories_path, class: 'btn btn-outline-secondary'} 취소

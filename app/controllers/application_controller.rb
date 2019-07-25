@@ -2,15 +2,20 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   after_action :prepare_unobtrusive_flash
   before_action :prepare_meta_tags, if: -> { request.get? and !Rails.env.test? }
+  before_action :check_confirmed_user
 
   include Pundit
   protect_from_forgery
 
   def errors_to_flash(model)
+    flash[:notice] = errors_to_str(model, '<br>').html_safe
+  end
+
+  def errors_to_str(model, br)
     return if model.errors.empty?
     result ||= ""
-    result += model.errors.full_messages.join('<br>')
-    flash[:notice] = result.html_safe
+    result += model.errors.full_messages.join(br)
+    result
   end
 
   if Rails.env.production? or Rails.env.staging?
@@ -47,7 +52,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def render_404
     self.response_body = nil
     respond_to do |format|
@@ -56,17 +60,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render_500
+    self.response_body = nil
+    respond_to do |format|
+      format.html { redirect_to error_500_path }
+      format.js { head 500 }
+    end
+  end
+
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || super
   end
 
   def storable_location?
-    request.get? and is_navigational_format? and !devise_controller? and
-      !request.xhr? and controller_name != 'errors' and
-      !devise_controller? and
+    (request.get? and is_navigational_format? and
+      !devise_controller? and !request.xhr? and
+      controller_name != 'errors' and !devise_controller? and
       !(controller_name == 'users' and action_name == 'confirm') and
       !(controller_name == 'users' and action_name == 'confirm_form') and
-      !(controller_name == 'users' and action_name == 'cancel')
+      !(controller_name == 'users' and action_name == 'cancel') and
+      !(controller_name == 'pages' and action_name == 'privacy') and
+      !(controller_name == 'pages' and action_name == 'terms'))
   end
 
   def store_user_location!
@@ -78,6 +92,20 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_confirmed_user
+    return unless user_signed_in?
+
+    if !current_user.confirmation?
+      if !devise_controller? and
+          !(controller_name == 'users' and action_name == 'confirm') and
+          !(controller_name == 'users' and action_name == 'confirm_form') and
+          !(controller_name == 'users' and action_name == 'cancel')
+        flash[:notice] = '더 진행하기 위해 약관에 동의하세요.'
+        redirect_to users_confirm_form_path and return
+      end
+    end
+  end
 
   def prepare_meta_tags(options={})
     set_meta_tags build_meta_options(options)

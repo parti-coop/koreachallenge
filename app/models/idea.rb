@@ -18,6 +18,7 @@ class Idea < ApplicationRecord
   # validates :planner_tel, presence: true, if: :submitted?
   # validates :planner_email, presence: true, if: :submitted?
   validates :attachment, file_size: { less_than_or_equal_to: 20.megabytes }
+  validate :valid_members, if: :submitted?
 
   before_save :update_type
 
@@ -26,7 +27,7 @@ class Idea < ApplicationRecord
   accepts_nested_attributes_for :members, reject_if: :all_blank, allow_destroy: true
 
   def submitted?
-    self.submitted_at.present?
+    self.submitted_at.present? and self.persisted?
   end
 
   def team_submitted?
@@ -43,6 +44,12 @@ class Idea < ApplicationRecord
     if attachment.present? && will_save_change_to_attachment?
       self.attachment_type = attachment.file.content_type
       self.attachment_size = attachment.file.size
+    end
+  end
+
+  def valid_members
+    if self.members.length <= 0
+      errors.add(:members, I18n.t('errors.messages.idea.no_members'))
     end
   end
 end

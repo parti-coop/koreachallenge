@@ -10,7 +10,7 @@
       %ul.nav.js-tab-menu-list
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/intro')) }
           = link_to intro_path do
-            .link-text 참가 안내
+            .link-text 출전 안내
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/about')) }
           = link_to about_path do
             .link-text 이런 아이디어를 기다립니다
@@ -24,7 +24,7 @@
       = main_content
       .site-btn-basic-container.text-center
         - if user_signed_in? and current_user.idea.present?
-          %a.btn.btn-white{ href: new_idea_path } 참가신청서 수정
+          %a.btn.btn-outline-primary{ href: new_idea_path } 참가신청서 수정
           .text-muted.mt-2
             #{current_user.name}님은
             - if current_user.idea.submitted?
@@ -34,7 +34,7 @@
             %br
             신청서는 마감일(9월 20일) 18시까지 수정할 수 있습니다.
         - else
-          %a.btn.btn-white{ href: new_idea_path } 참가신청하기
+          %a.btn.btn-outline-primary{ href: new_idea_path } 참가신청하기
 
 -# .wrapper
 -#   .top-wrap.sub

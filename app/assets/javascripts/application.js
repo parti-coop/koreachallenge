@@ -39,12 +39,33 @@ $(document).imagesLoaded(function() {
   $(".posts").masonry();
 });
 
+$.validator.addMethod('filesize', function (value, element, param) {
+  return this.optional(element) || (element.files[0].size <= param)
+});
+
+$.validator.addMethod('filetype', function (value, element, param) {
+  if(this.optional(element)) {
+    var check = false;
+    var name = element.files[0].name;
+    if(name) {
+      var extName = name.substring(name.lastIndexOf(".")+1).toUpperCase();
+      var validExtNames = param.split(",");
+      for(var i = 0; i < validExtNames.length; i++) {
+        if(extName == $.trim(validExtNames[i])) {
+          return true
+        }
+      }
+    }
+  }
+  return false;
+});
+
 $(document).ready(function(){
   // unobtrusive_flash
   (function() {
     window.UnobtrusiveFlash.flashOptions = {
       type: 'notice',
-      timeout: 0,
+      timeout: 4000,
       mapping: {
         notice: 'info',
         alert: 'warning',
@@ -306,13 +327,11 @@ $(document).ready(function(){
             var successList = validator.successList;
             console.log('successList', successList);
             $.each(successList, function(index, element) {
-              var _popover;
-              var $popover_target = $($(element).data('form-validation-error-popover-target'));
-              if($popover_target.length <= 0) {
-                $popover_target = $(element);
-              }
-              if($popover_target.hasClass('tooltipstered')) {
-                $popover_target.tooltipster('destroy');
+              $control = $(element);
+              $control.removeClass('is-invalid');
+              $control_next = $control.next();
+              if($control_next.hasClass('.js-invalid-feedback')) {
+                $control_next.remove();
               }
             });
 
@@ -322,22 +341,29 @@ $(document).ready(function(){
             console.log('errorList', errorList);
 
             return $.each(errorList, function(index, value) {
-              if(!focused && !$(value.element).data('form-validation-prevent-error-focus')) {
-                $(value.element).focus();
+              $control = $(value.element);
+              if(!focused && !$control.data('form-validation-prevent-error-focus')) {
+                $control.focus();
                 focused = true;
               }
 
-              var _popover;
-              var $popover_target = $($(value.element).data('form-validation-error-popover-target'));
-              if($popover_target.length <= 0) {
-                $popover_target = $(value.element);
+              var $control_target = $($control.data('form-validation-error-target'));
+              if($control_target.length > 0) {
+                $control = $control_target;
               }
 
-              if($popover_target.hasClass('tooltipstered')) {
-              } else {
-                $popover_target.tooltipster({})
+              $control.addClass('is-invalid');
+              $control_next = $control.next();
+              if($control_next.hasClass('form-check-label')) {
+                $control = $control_next;
+                $control_next = $control.next();
               }
-              $popover_target.tooltipster('content', value.message).tooltipster('open');
+
+              if(!$control_next.hasClass('js-invalid-feedback')) {
+                $control.after('<div class="js-invalid-feedback invalid-feedback"></div>');
+              }
+              $control_next = $control.next();
+              $control_next.html(value.message);
             });
           }
         },
@@ -417,6 +443,7 @@ $(document).ready(function(){
 
   $(document).ajaxError(function (e, xhr, settings) {
     if(xhr.status == 500) {
+      console.log(xhr);
       UnobtrusiveFlash.showFlashMessage('뭔가 잘못되었습니다. 곧 고치겠습니다.', {type: 'error'});
     } else if(xhr.status == 403) {
       UnobtrusiveFlash.showFlashMessage('새로 로그인을 해야하거나 적절한 권한이 없습니다.', {type: 'error'})
@@ -457,6 +484,9 @@ $(document).ready(function(){
       var $form = $elm.closest('form');
       $form.find('.js-user-confirm-check-all-target').prop('checked', true);
       $.scrollTo($form.find('.js-user-confirm-check-all-scroll-to'), 100);
+    } else {
+      var $form = $elm.closest('form');
+      $form.find('.js-user-confirm-check-all-target').prop('checked', false);
     }
   });
 
@@ -472,4 +502,24 @@ $(document).ready(function(){
     $('.js-dimd-wrap').css('display', 'none');
     $('.js-dimd-wrap iframe').attr('src', '');
   });
+
+  (function() {
+    var process_remove_button = function($elm) {
+      if($elm.find('.js-idea-member-remove').length <= 1) {
+        $elm.find('.js-idea-member-remove').hide();
+      } else {
+        $elm.find('.js-idea-member-remove').show();
+      }
+    }
+    $('#idea-form-members').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+      console.log('xx insert');
+      process_remove_button($(e.currentTarget));
+    });
+    $('#idea-form-members').on('cocoon:after-remove', function(e, insertedItem, originalEvent) {
+      console.log('xx remove');
+      process_remove_button($(e.currentTarget));
+    });
+    process_remove_button($('#idea-form-members'));
+  })();
+
 });
