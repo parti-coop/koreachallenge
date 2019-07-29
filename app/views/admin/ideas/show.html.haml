@@ -2,14 +2,14 @@
 
 %section.section-admin-page
   .container
-    .clearfix
-      %h4.float-left
+    .text-center
+      %h4
         %span.text-primary #{@idea.user.name}
         님 참가신청서
 
-    - if @idea.submitted?
-      %p #{human_datetime_f @idea.submitted_at} 제출 완료
-    - else
-      %p #{human_datetime_f @idea.updated_at} 임시저장
+      - if @idea.submitted?
+        %p #{human_datetime_f @idea.submitted_at} 제출 완료
+      - else
+        %p #{human_datetime_f @idea.updated_at} 임시저장
 
     = render file: 'ideas/new'

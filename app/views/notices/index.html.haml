@@ -1,10 +1,9 @@
 - content = capture do
   .site-content-container
     .site-btn-notice-container.d-flex.flex-sm-row.justify-content-sm-between.align-items-sm-center.flex-column.justify-content-between.align-items-center
-      .text-left{ style: 'line-height: 38px' }
+      .desc
         함께 나누고 싶은 의견을 남겨주시기 바랍니다.
-      .text-right
-        %a.btn.btn-white.btn-outline-primary{ href: new_notice_path } 글쓰기
+      %a.btn.btn-white.btn-outline-primary{ href: new_notice_path } 글쓰기
 
     - if @notices.any?
       .site-line-list-container.mb-5

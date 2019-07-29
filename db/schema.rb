@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_021458) do
+ActiveRecord::Schema.define(version: 2019_07_29_155307) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -99,6 +99,46 @@ ActiveRecord::Schema.define(version: 2019_07_25_021458) do
     t.boolean "pin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "attachment1"
+    t.string "attachment1_name"
+    t.string "attachment1_type"
+    t.integer "attachment1_size"
+    t.string "attachment2"
+    t.string "attachment2_name"
+    t.string "attachment2_type"
+    t.integer "attachment2_size"
+    t.string "attachment3"
+    t.string "attachment3_name"
+    t.string "attachment3_type"
+    t.integer "attachment3_size"
+    t.string "attachment4"
+    t.string "attachment4_name"
+    t.string "attachment4_type"
+    t.integer "attachment4_size"
+    t.string "attachment5"
+    t.string "attachment5_name"
+    t.string "attachment5_type"
+    t.integer "attachment5_size"
+    t.string "attachment6"
+    t.string "attachment6_name"
+    t.string "attachment6_type"
+    t.integer "attachment6_size"
+    t.string "attachment7"
+    t.string "attachment7_name"
+    t.string "attachment7_type"
+    t.integer "attachment7_size"
+    t.string "attachment8"
+    t.string "attachment8_name"
+    t.string "attachment8_type"
+    t.integer "attachment8_size"
+    t.string "attachment9"
+    t.string "attachment9_name"
+    t.string "attachment9_type"
+    t.integer "attachment9_size"
+    t.string "attachment10"
+    t.string "attachment10_name"
+    t.string "attachment10_type"
+    t.integer "attachment10_size"
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
@@ -118,6 +158,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_021458) do
     t.boolean "confirmation_terms", default: false
     t.boolean "confirmation_privacy", default: false
     t.boolean "confirmation_mailing", default: false
+    t.boolean "confirmation_offer", default: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

@@ -28,11 +28,11 @@
           %fieldset.fieldset-bare
             %legend 참가자 정보
             #idea-form-members
-              = f.fields_for :members do |ff|
+              = f.fields_for :members, include_id: false do |ff|
                 = render '/ideas/member_fields', f: ff
               - unless controller.class.parents.include?(Admin)
                 .add-member-link
-                  = link_to_add_association '참가자 추가', f, :members, class: 'btn btn-outline-secondary btn-sm'
+                  = link_to_add_association '참가자 추가', f, :members, class: "btn btn-outline-secondary btn-sm js-idea-add-member-btn #{'collapse' if f.object.mode.solo?}"
           %fieldset
             %legend 상세 정보
             - %i(motivation summary pt desc).each do |attribute|
@@ -57,10 +57,14 @@
                   - unless controller.class.parents.include?(Admin)
                     &nbsp;
                     = link_to '파일 삭제', remove_attachment_idea_path(f.object), method: :delete, class: 'btn btn-outline-secondary btn-sm'
+              - else
+                - if controller.class.parents.include?(Admin)
+                  %p.small 업로드된 파일이 없습니다.
 
               - unless controller.class.parents.include?(Admin)
                 .custom-file
                   = f.file_field :attachment, class: 'form-control-file custom-file-input js-custom-file-input', lang: 'ko', data: { 'rule-filesize': '20971520', 'msg-filesize': '파일의 크기를 확인해 주세요.' }
+                  = f.hidden_field :attachment_cache
                   = f.label :attachment, class: 'custom-file-label js-custom-file-label' do
                     - if f.object.attachment?
                       새로운 파일 선택...
@@ -91,7 +95,7 @@
                 %ol
                   %li 개인정보의 수집‧이용 목적 : 공모전 접수, 심사, 시상 등에 활용
                   %li 수집하려는 개인정보의 항목 : 성명, 휴대폰, 이메일
-                  %li 개인정보의 보유 및 이용 기간 : 수집일로부터 1년까지
+                  %li 개인정보의 보유 및 이용 기간 : 수집일로부터 6개월까지
 
               .form-group
                 .form-check

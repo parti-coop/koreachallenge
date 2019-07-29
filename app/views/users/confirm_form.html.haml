@@ -10,20 +10,41 @@
             %p
               %input#all_confirmation.js-user-confirm-check-all{type: "checkbox"}/
               %label{for: "all_confirmation"} 이용약관, 개인정보 수집 및 이용, 이벤트 등 메일 수신에 모두 동의합니다.
+
             %p
-              %input#confirmation_terms.js-user-confirm-check-all-target{name: "confirmation_terms", type: "checkbox", value: "y", "data-rule-required": "true"}/
+              %input#confirmation_terms.js-user-confirm-check-all-target{name: "confirmation_terms", type: "checkbox", value: "y", checked: current_user.confirmation_terms, "data-rule-required": "true"}/
               %label{for: "confirmation_terms"} 이용약관(필수)
             .view
               = render file: '/pages/terms'
 
             %p
-              %input#confirmation_privacy.js-user-confirm-check-all-target{name: "confirmation_privacy", type: "checkbox", value: "y", "data-rule-required": "true"}/
+              %input#confirmation_offer.js-user-confirm-check-all-target{name: "confirmation_offer", type: "checkbox", value: "y", checked: current_user.confirmation_offer, "data-rule-required": "true"}/
+              %label{for: "confirmation_offer"} 개인정보 3자 제공 동의(필수)
+            .view
+              %section
+                .container
+                  .site-content-container.site-box-content
+                    .site-basic-contents
+                      %p
+                        %br
+                        ① 개인정보를 제공받는 자: (주)피알비즈, (유)빠띠데모스
+                        %br
+                        ② 제공 목적: 코리아챌린지 운영 대행 및 홈페이지 관리
+                        %br
+                        ③ 제공 항목 : 성명, 휴대폰, 이메일
+                        %br
+                        ④ 제공 기간 : 수집일로부터 6개월까지
+                        %br
+                        ⑤ 미 동의시 행사 참여가 제한될 수 있습니다.
+
+            %p
+              %input#confirmation_privacy.js-user-confirm-check-all-target{name: "confirmation_privacy", type: "checkbox", value: "y", checked: current_user.confirmation_privacy, "data-rule-required": "true"}/
               %label{for: "confirmation_privacy"} 개인정보 수집 및 이용에 대한 안내(필수)
             .view
               = render file: '/pages/privacy'
 
             %p
-              %input#confirmation_mailing.js-user-confirm-check-all-target{name: "confirmation_mailing", type: "checkbox", value: "y"}/
+              %input#confirmation_mailing.js-user-confirm-check-all-target{name: "confirmation_mailing", type: "checkbox", value: "y", checked: current_user.confirmation_mailing}/
               %label{for: "confirmation_mailing"} 이벤트 등 알림 메일 수신(선택)
           .def-btn.js-user-confirm-check-all-scroll-to.text-center
             %button.btn.btn-primary.js-confirm-btn 동의하기

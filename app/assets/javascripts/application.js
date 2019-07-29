@@ -15,6 +15,7 @@
 //= require clipboard
 //= require tinymce-jquery
 //= require cocoon
+//= require jquery.scrollTo
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
@@ -299,10 +300,12 @@ $(document).ready(function(){
       $('.js-idea-form-mode-team-fieldset').show();
       $('.js-idea-form-mode-team-fieldset input').attr('data-rule-required', 'true');
       $elm.closest('form').trigger('parti-rebuild-validator');
+      $elm.closest('form').find('.js-idea-add-member-btn').show();
     } else {
       $('.js-idea-form-mode-team-fieldset').hide();
       $('.js-idea-form-mode-team-fieldset input').attr('data-rule-required', 'false');
       $elm.closest('form').trigger('parti-rebuild-validator');
+      $elm.closest('form').find('.js-idea-add-member-btn').hide();
     }
     var instances = $.tooltipster.instances();
     $.each(instances, function(i, instance){
@@ -559,4 +562,19 @@ $(document).ready(function(){
     process_remove_button($('#idea-form-members'));
   })();
 
+  $('.js-subnav-xs').on('click', function(e) {
+    if($.breakpoint_max() != 'xs') {
+      return;
+    }
+    e.preventDefault();
+    var $elm = $(e.currentTarget);
+    var $subnav = $($elm.data('subnav'));
+    if($subnav.is(':visible')) {
+      $subnav.hide();
+      $elm.addClass('nav-arrow-down').removeClass('nav-arrow-up');
+    } else {
+      $subnav.show();
+      $elm.addClass('nav-arrow-up').removeClass('nav-arrow-down');
+    }
+  });
 });

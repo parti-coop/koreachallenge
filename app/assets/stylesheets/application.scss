@@ -29,6 +29,73 @@ a {
   cursor: pointer;
 }
 
+@include media-breakpoint-up(sm) {
+  .navbar-expand-md > .container,
+  .navbar-expand-md > .container-fluid {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  nav.navbar.navbar-kc {
+    .nav-item > a.nav-link {
+      color: $brand-primary-color;
+    }
+    .navbar-nav.navbar-nav-contents .nav-item > a.nav-link {
+      margin-right: 30px;
+      margin-left: 30px;
+    }
+    .nav-item > a.nav-link.active,
+    .nav-item > a.nav-link:hover,
+    .nav-item > a.nav-link:focus,
+    .nav-item > a.nav-link:active {
+      color: $brand-primary-color;
+    }
+  }
+}
+
+.custom-file-label {
+  overflow: hidden;
+}
+
+nav.navbar > .container .navbar-nav.navbar-nav-contents > .nav-item {
+  .navbar-subnav {
+    display: none !important;
+  }
+  @include media-breakpoint-down(sm) {
+    position: relative;
+    .navbar-subnav {
+      display: block;
+    }
+    a.nav-arrow-down:after {
+      content: ' ';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-width: 1px 0 0 1px;
+      border-color: $brand-primary-color;
+      border-style: solid;
+      transform: rotate(225deg);
+      box-sizing: border-box;
+      right: 15px;
+      position: absolute;
+      bottom: 20px;
+    }
+    a.nav-arrow-up:after {
+      content: ' ';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-width: 1px 0 0 1px;
+      border-color: $brand-primary-color;
+      border-style: solid;
+      transform: rotate(45deg);
+      box-sizing: border-box;
+      right: 15px;
+      position: absolute;
+      bottom: 14px;
+    }
+  }
+}
+
 a.btn.btn-primary,
 a.btn.btn-primary:hover {
   color: white;
@@ -172,11 +239,26 @@ nav.navbar .nav-item > a.nav-link {
           &.navbar-nav-contents-user-signed-in {
             flex: initial;
           }
-          > .nav-item {
+          > .nav-item,
+          > .navbar-nav.navbar-subnav > .nav-item:last-child {
             border-bottom: 1px solid $brand-primary-weak-color;
+          }
+          > .navbar-nav.navbar-subnav > .nav-item + .nav-item {
+            border-top: 1px solid white;
+          }
+
+          > .nav-item,
+          > .navbar-nav.navbar-subnav > .nav-item {
             padding-left: 16px;
             padding-right: 16px;
             background-color: white;
+          }
+          > .navbar-nav.navbar-subnav > .nav-item {
+            font-size: 16px;
+            background-color: $bg-light-color;
+            > .nav-link {
+              font-size: 16px;
+            }
           }
         }
         &.navbar-nav-utils {
@@ -281,6 +363,7 @@ nav.navbar .nav-item > a.nav-link {
     @include media-breakpoint-down(xs) {
       flex-basis: 100%;
     }
+    overflow: hidden;
     margin-bottom: 40px;
     &:last-child {
       margin-bottom: 0;
@@ -374,6 +457,7 @@ nav.navbar .nav-item > a.nav-link {
     margin-top: 16px;
     margin-bottom: 40px;
     font-size: 16px;
+    word-break: break-word;
     .image-container {
       text-align: center;
       img {
@@ -461,6 +545,23 @@ nav.navbar .nav-item > a.nav-link {
     border-top: 1px solid $line-light-color;
     text-align: center;
   }
+  .story-file-help-block {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    @include media-breakpoint-down(xs) {
+      margin-top: 16px;
+      width: 100%;
+    }
+    > a.download {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    > a.remove-btn {
+      width: 80px;
+    }
+  }
 }
 
 .site-header {
@@ -474,7 +575,7 @@ nav.navbar .nav-item > a.nav-link {
     margin-right: 16px;
     @include media-breakpoint-down(sm) {
       float: right;
-      width: 44px;
+      height: 44px;
     }
   }
   .site-header-title {
@@ -717,10 +818,19 @@ nav.navbar .nav-item > a.nav-link {
 
 .site-btn-notice-container {
   margin-top: 20px;
-  margin-bottom: -40px;
   padding: 20px;
   background-color: $bg-light-color;
   color: $text-light-color;
+  @include media-breakpoint-down(xs) {
+    margin-top: 0;
+    margin-left: -15px;
+    margin-right: -15px;
+    text-align: center;
+    .desc + .btn {
+      margin-top: 16px;
+    }
+  }
+
   .btn {
     padding-left: 20px;
     padding-right: 20px;
@@ -1348,10 +1458,16 @@ body.app-admin--ideas {
         }
         .nested-fields {
           background-color: #fbfbfb;
+        }
+        .nested-fields + .nested-fields,
+        .nested-fields + .add-member-link {
           border-top: 1px solid #d8d8d8;
         }
-        .add-member-link {
+        .nested-fields:first-child {
           border-top: 1px solid #d8d8d8;
+        }
+        .nested-fields:last-child {
+          border-bottom: 1px solid #d8d8d8;
         }
       }
       &.fieldset-confirm {

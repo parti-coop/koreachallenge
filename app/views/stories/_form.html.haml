@@ -18,11 +18,36 @@
             = link_to '파일 삭제', remove_image_story_path(f.object), method: :delete, class: 'btn btn-outline-secondary btn-sm'
         .custom-file
           = f.file_field :image, class: 'form-control-file custom-file-input js-custom-file-input', lang: 'ko'
+          = f.hidden_field :image_cache
           = f.label :image, class: 'custom-file-label js-custom-file-label' do
             - if f.object.image?
               새로운 이미지 선택...
             - else
               이미지 선택...
+      - (1..Story::ATTACHMENT_MAX_INDEX).each do |i|
+        .form-group
+          = f.label :"attachment#{i}"
+          .row
+            .col-12.col-sm-6
+              .custom-file
+                = f.file_field :"attachment#{i}", class: 'form-control-file custom-file-input js-custom-file-input', lang: 'ko'
+                = f.hidden_field :"attachment#{i}_cache"
+                = f.label :"attachment#{i}", class: 'custom-file-label js-custom-file-label' do
+                  - if f.object.attachment_of(i, '?')
+                    새로운 파일 선택...
+                  - else
+                    파일 선택...
+            .col-12.col-sm-6
+              - if f.object.attachment_of(i, '?')
+                %p.help-block.story-file-help-block
+                  = link_to f.object.attachment_of(i, :url), target: '_blank', class: 'download text-decoration-none' do
+                    %i.fa.fa-file
+                    = f.object.attachment_of(i, :name)
+                    다운로드
+                  - if f.object.persisted?
+                    %span.d-block.d-sm-none
+                    = link_to '파일 삭제', remove_attachment_story_path(f.object, index: i), method: :delete, class: 'btn btn-outline-secondary btn-sm remove-btn'
+
       .form-group.form-group-submit
         = f.submit (f.object.persisted? ? "수정" : "등록"), class: 'btn btn-primary js-confirm-btn'
         %a{href: stories_path, class: 'btn btn-outline-secondary'} 취소

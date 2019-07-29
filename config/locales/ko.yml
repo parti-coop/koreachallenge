@@ -68,6 +68,16 @@ ko:
         title: 제목
         body: 내용
         image: 사진/이미지
+        attachment1: "첨부 파일 #1"
+        attachment2: "첨부 파일 #2"
+        attachment3: "첨부 파일 #3"
+        attachment4: "첨부 파일 #4"
+        attachment5: "첨부 파일 #5"
+        attachment6: "첨부 파일 #6"
+        attachment7: "첨부 파일 #7"
+        attachment8: "첨부 파일 #8"
+        attachment9: "첨부 파일 #9"
+        attachment10: "첨부 파일 #10"
       notice:
         title: 제목
         body: 내용
@@ -82,6 +92,28 @@ ko:
         image:
           attributes:
             file:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+        idea:
+          attributes:
+            attachment1:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment2:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment3:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment4:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment5:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment6:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment7:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment8:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment9:
+              file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
+            attachment10:
               file_size_is_less_than_or_equal_to: "는(은) 너무 큽니다."
   helpers:
     label:

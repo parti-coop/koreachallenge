@@ -20,10 +20,11 @@ class UsersController < ApplicationController
 
     current_user.confirmation_terms = (params[:confirmation_terms] == "y")
     current_user.confirmation_privacy = (params[:confirmation_privacy] == "y")
+    current_user.confirmation_offer = (params[:confirmation_offer] == "y")
     current_user.confirmation_mailing = (params[:confirmation_mailing] == "y")
     current_user.save
 
-    flash[:success] = '가입이 완료되었습니다.'
+    flash[:success] = '동의 절차가 완료되었습니다.'
     redirect_to after_sign_in_path_for(current_user)
   end
 end

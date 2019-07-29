@@ -13,6 +13,15 @@
           .image-container
             = image_tag @story.image.lg.url
         %p!= @story.body
+
+        %ul.list-unstyled.downloads
+          - (1..Story::ATTACHMENT_MAX_INDEX).each do |index|
+            - if @story.attachment_of(index, '?')
+              %li.download
+                = link_to @story.attachment_of(index).url do
+                  %i.fa.fa-download
+                  #{@story.attachment_of(index, :name)}
+                %span.text-muted #{number_to_human_size @story.attachment_of(index, :size)}
       .btns
         .btns-left
           = render 'likes/button', likable: @story
@@ -30,7 +39,7 @@
           - if manage_menus.present?
             .dropdown.btn.btn-meta.btn-meta-detail
               %a(data-toggle="dropdown")
-                관리
+                더 보기
                 %i.fa.fa-angle-down
               %ul.dropdown-menu.dropdown-menu-right
                 = manage_menus

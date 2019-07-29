@@ -85,9 +85,25 @@ class StoriesController < ApplicationController
     redirect_to edit_story_path(@story)
   end
 
+  def remove_attachment
+    @story = Story.find(params[:id])
+    authorize @story, :update?
+    @story.send(:"remove_attachment#{params[:index]}!")
+    if @story.save
+      flash[:success] = '첨부파일이 삭제되었습니다.'
+    else
+      flash[:error] = '앗! 뭔가 잘못되었습니다. 잠시 후에 다시 시도해 주세요.'
+    end
+    redirect_to edit_story_path(@story)
+  end
+
   private
 
   def story_params
-    params.require(:story).permit(:title, :body, :image, :pin)
+    attributes = %i(title body image image_cache pin)
+    (1..Story::ATTACHMENT_MAX_INDEX).each do |i|
+      attributes += [:"attachment#{i}", :"attachment#{i}_cache"]
+    end
+    params.require(:story).permit(*attributes)
   end
 end

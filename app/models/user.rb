@@ -65,7 +65,7 @@ class User < ApplicationRecord
   end
 
   def confirmation?
-    confirmation_terms == true and confirmation_privacy == true
+    confirmation_terms == true and confirmation_privacy == true and confirmation_offer == true
   end
 
   def cancelable?

@@ -30,8 +30,8 @@ class DefaultDocumentUploader < CarrierWave::Uploader::Base
 
   before :cache, :save_original_filename
   def save_original_filename(file)
-    if real_original_filename and model.respond_to?(:attachment_name)
-      model.attachment_name = real_original_filename
+    if real_original_filename and model.respond_to?(:"#{mounted_as}_name")
+      model.send(:"#{mounted_as}_name=", real_original_filename)
     end
   end
 

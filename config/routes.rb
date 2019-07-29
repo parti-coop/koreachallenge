@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :stories, concerns: :commentable do
     member do
       delete :remove_image
+      delete :remove_attachment
     end
   end
   resources :notices, concerns: :commentable
