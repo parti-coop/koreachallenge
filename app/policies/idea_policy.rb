@@ -15,6 +15,10 @@ class IdeaPolicy < ApplicationPolicy
     user == record.user
   end
 
+  def download?
+    user.try(:admin?) or user == record.user
+  end
+
   def destroy?
     user.try(:admin?) or user == record.user
   end

@@ -65,7 +65,7 @@ class IdeasController < ApplicationController
 
   def download_attachment
     @idea = Idea.find(params[:id])
-    authorize @idea, :update?
+    authorize @idea, :download?
     # local storage
     send_file(@idea.attachment.path,
       filename: encoded_attachment_name(@idea),
