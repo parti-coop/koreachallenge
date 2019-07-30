@@ -258,11 +258,11 @@ $(document).ready(function(){
   // navbar collapse
   $('#js-main-navbar-nav').on('show.bs.collapse', function(e) {
     $('#js-main-navbar').addClass('navbar-collapse');
-    $('.js-main-navbar-nav-exclude').hide();
+    $('.js-main-navbar-nav-exclude').addClass('d-sm-none').addClass('d-md-block');
   });
   $('#js-main-navbar-nav').on('hidden.bs.collapse', function(e) {
     $('#js-main-navbar').removeClass('navbar-collapse');
-    $('.js-main-navbar-nav-exclude').show();
+    $('.js-main-navbar-nav-exclude').removeClass('d-sm-none').removeClass('d-md-block');
   });
 
   // 탭 메뉴 클릭
@@ -563,7 +563,7 @@ $(document).ready(function(){
   })();
 
   $('.js-subnav-xs').on('click', function(e) {
-    if($.breakpoint_max() != 'xs') {
+    if($.breakpoint_max() != 'xs' && $.breakpoint_max() != 'sm') {
       return;
     }
     e.preventDefault();

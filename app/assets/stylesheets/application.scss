@@ -56,15 +56,13 @@ a {
   overflow: hidden;
 }
 
-nav.navbar > .container .navbar-nav.navbar-nav-contents > .nav-item {
-  .navbar-subnav {
-    display: none !important;
+nav.navbar > .container .navbar-nav.navbar-nav-contents {
+  @include media-breakpoint-up(md) {
+    .navbar-subnav {
+      display: none !important;
+    }
   }
   @include media-breakpoint-down(sm) {
-    position: relative;
-    .navbar-subnav {
-      display: block;
-    }
     a.nav-arrow-down:after {
       content: ' ';
       display: inline-block;
@@ -180,6 +178,16 @@ nav.navbar .nav-item > a.nav-link {
 }
 
 @include media-breakpoint-down(sm) {
+  nav.navbar.navbar-collapse {
+    > .container {
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    }
+    .collapsing {
+      width: 100%;
+      border-top: 1px solid $brand-primary-color;
+    }
+  }
   nav.navbar {
     margin: 0;
     padding-left: 0;
@@ -238,6 +246,9 @@ nav.navbar .nav-item > a.nav-link {
           flex: 1;
           &.navbar-nav-contents-user-signed-in {
             flex: initial;
+          }
+          > .nav-item {
+            position: relative;
           }
           > .nav-item,
           > .navbar-nav.navbar-subnav > .nav-item:last-child {

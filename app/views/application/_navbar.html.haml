@@ -13,11 +13,13 @@
             출전신청
         %ul.navbar-nav.navbar-subnav.collapse#navsub-intro
           %li.nav-item
-            %a.nav-link{ href: judge_path, class: ('active' if current_page?('/intro') ) } 출전 안내
+            %a.nav-link{ href: intro_path, class: ('active' if current_page?('/intro') ) } 출전 안내
           %li.nav-item
             %a.nav-link{ href: about_path, class: ('active' if current_page?('/about') ) } 이런 아이디어를 기다립니다
           %li.nav-item
             %a.nav-link{ href: schedule_path, class: ('active' if current_page?('/schedule') ) } 대회 일정
+        %li.nav-item
+          %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단
         %li.nav-item
           %a.nav-link.nav-arrow-down.js-subnav-xs{ href: stories_path, class: ('active' if (%w(stories notices).include?(params[:controller]) or current_page?('/faq')) ), 'data-subnav': '#navsub-stories' } 소통광장
         %ul.navbar-nav.navbar-subnav.collapse#navsub-stories
