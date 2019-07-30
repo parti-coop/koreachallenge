@@ -305,7 +305,8 @@ nav.navbar .nav-item > a.nav-link {
           }
         }
       }
-      .navbar-collapse.show {
+      .navbar-collapse.show,
+      .navbar-collapse.collapsing {
         border-top: 1px solid $brand-primary-color;
         flex: 1;
         width: 100%;
