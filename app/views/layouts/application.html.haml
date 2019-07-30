@@ -36,13 +36,14 @@
         $('textarea.js-tinymce').each(function() {
           var $elm = $(this);
           var params =  {
-            cache_suffix: '?v=4',
+            cache_suffix: '?v=6',
             target: this,
             mobile: {
               theme: 'silver',
             },
             menubar: false,
             min_height: 250,
+            forced_root_block: true,
             autoresize_bottom_margin: 0,
             statusbar: false,
             document_base_url: 'https://dev.koreachallenge.kr/',
@@ -94,7 +95,25 @@
               });
 
               $input.trigger('click');
-            }
+            },
+            init_instance_callback: function (editor) {
+              editor.on('keydown', _.throttle(function (e) {
+                if(e.keyCode == 13) {
+                  console.log('Element clicked:', e.target.nodeName);
+                  $('#notice_body_ifr').blur();
+                  $('#notice_body_ifr').focus();
+                  uniqueId = "___cursor___" + Math.random().toString(36).substr(2, 16);
+                  editor.execCommand('mceInsertContent', false, "<cursorbr id=" + uniqueId + "></cursorbr>");
+                  editor.selection.select(editor.dom.select('#' + uniqueId)[0]);
+                  editor.selection.collapse(0);
+                  editor.dom.remove(uniqueId);
+                }
+              }, 500));
+            },
+            valid_classes: '',
+            valid_styles: '',
+            extended_valid_elements : 'div,span,cursorbr[id]',
+            custom_elements : '~cursorbr',
           }
           var toolbar = $elm.data('toolbar');
           if(toolbar) {

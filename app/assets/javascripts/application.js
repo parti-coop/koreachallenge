@@ -16,6 +16,7 @@
 //= require tinymce-jquery
 //= require cocoon
 //= require jquery.scrollTo
+//= require underscore
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
