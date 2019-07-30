@@ -31,6 +31,7 @@
     = javascript_include_tag 'application'
     = tinymce selector: 'textarea.--tinymce-dummy'
     %input( id="js-tinymce-file-input" type="file" accept="image/*" name="tinymce-file-input" style="display: none;" onchange="")
+    - current_host = root_url;
     :javascript
       $(function(){
         $('textarea.js-tinymce').each(function() {
@@ -46,7 +47,7 @@
             forced_root_block: true,
             autoresize_bottom_margin: 0,
             statusbar: false,
-            document_base_url: 'https://dev.koreachallenge.kr/',
+            document_base_url: '#{current_host}',
             target_list: false,
             relative_urls: false,
             remove_script_host : false,
