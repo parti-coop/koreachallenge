@@ -43,6 +43,12 @@ a {
       margin-right: 30px;
       margin-left: 30px;
     }
+    .nav-item > a.btn.nav-link.active,
+    .nav-item > a.btn.nav-link:hover,
+    .nav-item > a.btn.nav-link:focus,
+    .nav-item > a.btn.nav-link:active {
+      color: white;
+    }
     .nav-item > a.nav-link.active,
     .nav-item > a.nav-link:hover,
     .nav-item > a.nav-link:focus,

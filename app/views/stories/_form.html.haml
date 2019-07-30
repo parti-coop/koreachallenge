@@ -8,7 +8,7 @@
         = f.text_field :title, class: 'form-control'
       .form-group
         = f.label :body
-        = f.text_area :body, class: 'tinymce js-tinymce', 'data-content-css': asset_url('tinymce_content.css')
+        = f.text_area :body, class: 'tinymce js-tinymce', 'data-toolbar': 'styleselect | bold italic | undo redo | image | link media', 'data-content-css': asset_url('tinymce_content.css')
       .form-group
         = f.label :image
         - if f.object.image? and f.object.persisted?

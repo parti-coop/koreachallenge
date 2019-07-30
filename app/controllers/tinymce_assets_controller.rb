@@ -4,9 +4,7 @@ class TinymceAssetsController < ApplicationController
 
     if image.errors.empty?
       render json: {
-        image: {
-          url: image.file.url
-        }
+        location: image.file.url
       }, content_type: "text/html"
     else
       render json: {

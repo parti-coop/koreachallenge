@@ -1,10 +1,9 @@
 menubar: false
 toolbar:
-  - styleselect | bold italic | undo redo | uploadimage | link media
+  - bold italic | undo redo | image | link media
 plugins:
   - image
   - link
-  - uploadimage
   - media
   - autoresize
 language: ko_KR
