@@ -840,9 +840,10 @@ nav.navbar .nav-item > a.nav-link {
   background-color: $bg-light-color;
   color: $text-light-color;
   @include media-breakpoint-down(xs) {
-    margin-top: 0;
-    margin-left: -15px;
-    margin-right: -15px;
+    &.site-btn-notice-container-flux {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
     text-align: center;
     .desc + .btn {
       margin-top: 16px;

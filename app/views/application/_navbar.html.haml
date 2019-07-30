@@ -8,10 +8,11 @@
         %span.navbar-toggler-icon
     #js-main-navbar-nav.collapse.navbar-collapse
       %ul.navbar-nav.navbar-nav-contents.mx-md-auto{ class: ('navbar-nav-contents-user-signed-in' if user_signed_in?) }
+
+        - active_intro = ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') or params[:controller] == 'ideas' )
         %li.nav-item
-          %a.nav-link.nav-arrow-down.js-subnav-xs{ href: intro_path, class: ('active' if ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') or params[:controller] == 'ideas' ) ), 'data-subnav': '#navsub-intro' }
-            출전신청
-        %ul.navbar-nav.navbar-subnav.collapse#navsub-intro
+          %a.nav-link.js-subnav-xs{ href: intro_path, class: ( active_intro ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-intro' } 출전신청
+        %ul.navbar-nav.navbar-subnav#navsub-intro{ class: ('collapse' unless active_intro) }
           %li.nav-item
             %a.nav-link{ href: intro_path, class: ('active' if current_page?('/intro') ) } 출전 안내
           %li.nav-item
@@ -20,13 +21,15 @@
             %a.nav-link{ href: schedule_path, class: ('active' if current_page?('/schedule') ) } 대회 일정
         %li.nav-item
           %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단
+
+        - active_stories = (%w(stories notices).include?(params[:controller]) or current_page?('/faq'))
         %li.nav-item
-          %a.nav-link.nav-arrow-down.js-subnav-xs{ href: stories_path, class: ('active' if (%w(stories notices).include?(params[:controller]) or current_page?('/faq')) ), 'data-subnav': '#navsub-stories' } 소통광장
-        %ul.navbar-nav.navbar-subnav.collapse#navsub-stories
+          %a.nav-link.js-subnav-xs{ href: stories_path, class: ( active_stories ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-stories' } 소통광장
+        %ul.navbar-nav.navbar-subnav#navsub-stories{ class: ('collapse' unless active_stories) }
           %li.nav-item
-            %a.nav-link{ href: stories_path, class: ('active' if current_page?('/stories') ) } 소식
+            %a.nav-link{ href: stories_path, class: ('active' if params[:controller] == 'stories' ) } 소식
           %li.nav-item
-            %a.nav-link{ href: notices_path, class: ('active' if current_page?('/notices') ) } 국민의견
+            %a.nav-link{ href: notices_path, class: ('active' if params[:controller] == 'notices' ) } 국민의견
           %li.nav-item
             %a.nav-link{ href: faq_path, class: ('active' if current_page?('/faq') ) } FAQ
       %ul.navbar-nav.navbar-nav-utils{ class: ('navbar-nav-utils-user-signed-in' if user_signed_in?) }
