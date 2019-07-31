@@ -5,6 +5,13 @@
         %h2 약관 동의
         %p.text-danger
           코리아 챌린지 이용 약관에 동의해주세요
+        - if current_user.confirmation_terms?
+          .alert.alert-danger
+            .title
+              %strong
+                이미 이용 약관 동의하셨나요?
+            약관에 <개인정보 3자 제공 동의>가 추가되었습니다. 확인 후 이용약관에 동의해주세요.
+
         = form_with url: users_confirm_path, id: 'new-terms-form', class: 'site-new-terms-form js-form-validation', 'data-form-validation-submit-control': '#new-terms-form .js-confirm-btn', local: true do
           .service
             %p
