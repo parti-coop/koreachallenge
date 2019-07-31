@@ -57,6 +57,7 @@ gem 'browser', '~> 2.6', '>= 2.6.1'
 
 # seo
 gem 'meta-tags', '~> 2.11', '>= 2.11.1'
+gem 'sitemap_generator'
 
 # scheduler
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
