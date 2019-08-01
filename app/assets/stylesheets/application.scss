@@ -39,10 +39,6 @@ a {
     .nav-item > a.nav-link {
       color: $brand-primary-color;
     }
-    .navbar-nav.navbar-nav-contents .nav-item > a.nav-link {
-      margin-right: 30px;
-      margin-left: 30px;
-    }
     .nav-item > a.btn.nav-link.active,
     .nav-item > a.btn.nav-link:hover,
     .nav-item > a.btn.nav-link:focus,
@@ -54,6 +50,15 @@ a {
     .nav-item > a.nav-link:focus,
     .nav-item > a.nav-link:active {
       color: $brand-primary-color;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  nav.navbar.navbar-kc {
+    .navbar-nav.navbar-nav-contents .nav-item > a.nav-link {
+      margin-right: 30px;
+      margin-left: 30px;
     }
   }
 }
@@ -251,7 +256,7 @@ nav.navbar .nav-item > a.nav-link {
         &.navbar-nav-contents {
           flex: 1;
           &.navbar-nav-contents-user-signed-in {
-            flex: initial;
+            flex: none;
           }
           > .nav-item {
             position: relative;
@@ -377,9 +382,9 @@ nav.navbar .nav-item > a.nav-link {
   flex-wrap: wrap;
   margin-top: 60px;
   .site-card-list-item {
-    flex-basis: 50%;
+    width: 50%;
     @include media-breakpoint-down(xs) {
-      flex-basis: 100%;
+      width: 100%;
     }
     overflow: hidden;
     margin-bottom: 40px;
@@ -646,6 +651,7 @@ nav.navbar .nav-item > a.nav-link {
       flex: 1;
       text-align: center;
       line-height: 54px;
+      height: 54px;
       font-size: 14px;
       & > a {
         display: inline-block;
@@ -672,7 +678,7 @@ nav.navbar .nav-item > a.nav-link {
     }
     border-bottom: 1px solid $line-color;
     ul.nav {
-      flex-direction: column;
+      display: block;
       .nav-item {
         display: none;
         border-width: 0;

@@ -89,8 +89,6 @@
                   blobCache.add(blobInfo);
 
                   /* call the callback and populate the Title field with the file name */
-                  console.log(e.target.result);
-                  console.log(file.name);
                   cb(blobInfo.blobUri(), { title: file.name });
                 };
                 reader.readAsDataURL(file);
@@ -101,7 +99,6 @@
             init_instance_callback: function (editor) {
               editor.on('keydown', _.throttle(function (e) {
                 if(e.keyCode == 13) {
-                  console.log('Element clicked:', e.target.nodeName);
                   $('#notice_body_ifr').blur();
                   $('#notice_body_ifr').focus();
                   uniqueId = "___cursor___" + Math.random().toString(36).substr(2, 16);

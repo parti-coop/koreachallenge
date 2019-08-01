@@ -35,6 +35,28 @@
           %a.list{href: notices_path(page: params[:page])}
             목록
             %i.fa.fa-angle-right
+      .comments
+        .comment-header
+          댓글
+        = form_with url: [@notice, @notice.comments.build], class: 'comment-form' do |f|
+          .form-group
+            = f.text_area :body
+          .form-group
+            = link_to '취소', '#'
+            = f.submit '등록'
+        .comments-list
+          .comment
+            .comment-meta
+              .user 레셈
+              .created-at 2019.04.20
+              .likes
+                %i.fa.fa-heart-o
+                30
+            .comment-body
+              xxx
+            .comment-control
+              = link_to '수정', '#', class: 'btn btn-outline-default'
+              = link_to '삭제', '#', class: 'btn btn-outline-default'
 
 = render 'layouts/story', content: content
 

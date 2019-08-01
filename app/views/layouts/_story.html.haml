@@ -10,13 +10,13 @@
       %ul.nav.js-tab-menu-list
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if params[:controller] == 'stories') }
           = link_to stories_path do
-            .link-text 소식
+            %span.link-text 소식
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if params[:controller] == 'notices') }
           = link_to notices_path do
-            .link-text 국민의견
+            %span.link-text 국민의견
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/faq')) }
           = link_to faq_path do
-            .link-text FAQ
+            %span.link-text FAQ
 
 %section
   .container{ class: local_assigns[:container_calss] }
