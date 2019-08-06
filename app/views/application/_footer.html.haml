@@ -22,6 +22,9 @@
           %a{ href: terms_path } 이용약관
         .item
           %a{ href: privacy_path } 개인정보처리방침
+        .item
+          %a{ href: "https://www.facebook.com/together100years", target: '_blank' }
+            = image_tag "share-facebook.png", style: 'height: 24px; width: 24px;'
 
       - if user_signed_in? and current_user.admin?
         %hr
