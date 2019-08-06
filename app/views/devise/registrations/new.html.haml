@@ -9,7 +9,7 @@
             = image_tag 'devise/facebook.png'
             페이스북으로 로그인
         %li.naver
-          = link_to user_naver_omniauth_authorize_path, class: 'js-alert', data: { 'message': '네이버 계정을 이용한 가입은 준비 중입니다.' } do
+          = link_to user_naver_omniauth_authorize_path do
             = image_tag 'devise/naver.png'
             네이버로 로그인
         %li.kakao
