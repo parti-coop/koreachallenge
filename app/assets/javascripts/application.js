@@ -578,4 +578,16 @@ $(document).ready(function(){
       $elm.addClass('nav-arrow-up').removeClass('nav-arrow-down');
     }
   });
+
+  // 댓글
+  $('.js-comment-cancel').on('click', function(e) {
+    e.preventDefault();
+
+    if(!confirm('작성하신 것을 모두 지우겠습니까?')) {
+      return;
+    }
+    $elm = $(e.currentTarget);
+    $form = $elm.closest('form');
+    $form.find('.js-comment-cancel-textarea').val('').focus();
+  });
 });

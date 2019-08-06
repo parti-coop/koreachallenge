@@ -1,7 +1,9 @@
-.comment-wrap
-  = local_assigns[:desc]
-  - comment_list_dom_id = "rnd-#{SecureRandom.uuid}"
-  = render 'comments/form', commentable: commentable, comment: Comment.new, class_name: 'cmt-write', list_dom_id: comment_list_dom_id
-  - if commentable.comments_count > 0
-    - comments = commentable.comments.order_recent.page(1)
-    = render 'comments/list', commentable: commentable, comments: comments, dom_id: comment_list_dom_id
+-# LOCAL: commentable comments
+- list_dom_id = "uid-#{SecureRandom.uuid}"
+- form_dom_id = "uid-#{SecureRandom.uuid}"
+.site-comments
+  .comment-header
+    댓글
+  - form_id = "uid-#{SecureRandom.uuid}"
+  = render 'comments/form', commentable: commentable, comment: Comment.new, class_name: 'comment-form js-form-validation', form_dom_id: form_dom_id, list_dom_id: list_dom_id
+  = render 'comments/list', commentable: commentable, comments: comments, list_dom_id: list_dom_id

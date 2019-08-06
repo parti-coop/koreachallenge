@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     authorize @comment
     if @comment.save
-      redirect_to polymorphic_url(@commentable), notice: '댓글이 게시되었습니다.'
+      redirect_to polymorphic_url(@commentable, anchor: params[:comment_form_anchor]), notice: '댓글이 게시되었습니다.'
     else
       errors_to_flash(@comment)
       session[:error_comment_body] = @comment.body

@@ -4,6 +4,11 @@
     %span.date
       = static_day_f(notice.created_at)
     .counts
-      %span.count.like{ class: ('active' if notice.like_by?(current_user)) }
-        %i.fa{ class: (notice.like_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
-        = notice.likes_count
+      - if notice.likes_count != 0
+        %span.count.like{ class: ('active' if notice.like_by?(current_user)) }
+          %i.fa{ class: (notice.like_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
+          = notice.likes_count
+      - if notice.comments_count != 0
+        %span.count.comment
+          %i.fa.fa-comment-o
+          = notice.comments_count

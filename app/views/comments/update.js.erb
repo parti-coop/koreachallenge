@@ -1,1 +1,2 @@
-$('#<%= params[:dom_id] %>').replaceWith('<%= j(render 'comments/comment', comment: @comment, list_dom_id: params[:list_dom_id]) %>');
+$('#<%= params[:comment_dom_id] %>').replaceWith('<%= j(render 'comments/comment', comment: @comment, list_dom_id: params[:list_dom_id]) %>');
+UnobtrusiveFlash.showFlashFromCookies();

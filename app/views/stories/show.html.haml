@@ -5,9 +5,14 @@
       .info
         %span.date
           = static_day_f(@story.created_at)
-        %span.view
-          조회
-          = @story.reads_count
+        - if @story.reads_count != 0
+          %span.view
+            조회
+            = @story.reads_count
+        - if @story.comments_count != 0
+          %span.view
+            댓글
+            = @story.comments_count
       .body.js-fit-vids
         - if @story.image?
           .image-container
@@ -48,5 +53,5 @@
             목록
             %i.fa.fa-angle-right
 
-
+      = render 'comments/panel', commentable: @story, comments: @story.comments.order_recent
 = render 'layouts/story', content: content

@@ -21,12 +21,24 @@
 - button_dom_id = "rnd-#{SecureRandom.uuid}"
 - like_btn_path = likes_path(likable_type: likable.class.to_s, likable_id: likable.id, dom_id: button_dom_id, class_name: local_assigns[:class_name], counter_dom_id: local_assigns[:counter_dom_id])
 
+- on_class = case likable
+  - when Notice, Story
+    - 'btn-meta-detail btn btn-outline-primary'
+  - when Comment
+    - 'btn-meta-detail btn btn-sm btn-outline-primary'
+
+- off_class = case likable
+  - when Notice, Story
+    - 'btn-meta-detail btn btn-meta'
+  - when Comment
+    - 'btn-meta-detail btn btn-sm btn-meta'
+
 - if policy(likable).like? or !user_signed_in?
   - if user_signed_in?
     - if likable.like_by?(current_user)
-      = link_to like_btn_text, like_btn_path, method: :delete, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-outline-primary #{local_assigns[:class_name]}"
+      = link_to like_btn_text, like_btn_path, method: :delete, remote: true, id: button_dom_id, class: on_class
     - else
-      = link_to like_btn_text, like_btn_path, method: :post, remote: true, id: button_dom_id, class: "btn-meta-detail btn btn-meta #{local_assigns[:class_name]}"
+      = link_to like_btn_text, like_btn_path, method: :post, remote: true, id: button_dom_id, class: off_class
   - else
-    = link_to like_btn_text, new_user_session_path, id: button_dom_id, class: "btn-meta-detail btn btn-meta #{local_assigns[:class_name]}"
+    = link_to like_btn_text, new_user_session_path, id: button_dom_id, class: off_class
 

@@ -8,6 +8,7 @@
       %span.count.like{ class: ('active' if story.like_by?(current_user)) }
         %i.fa{ class: (story.like_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
         = story.likes_count
-      -# %span.count.comment
-      -#   %i.fa.fa-comment-o
-      -#   = story.comments_count
+      - if story.comments_count != 0
+        %span.count.comment
+          %i.fa.fa-comment-o
+          = story.comments_count

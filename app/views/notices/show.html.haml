@@ -5,9 +5,14 @@
       .info
         %span.date
           = static_day_f(@notice.created_at)
-        %span.view
-          조회
-          = @notice.reads_count
+        - if @notice.reads_count != 0
+          %span.view
+            조회
+            = @notice.reads_count
+        - if @notice.comments_count != 0
+          %span.view
+            댓글
+            = @notice.comments_count
       .body.js-fit-vids
         %p!= @notice.body
       .btns
@@ -35,28 +40,6 @@
           %a.list{href: notices_path(page: params[:page])}
             목록
             %i.fa.fa-angle-right
-      .comments
-        .comment-header
-          댓글
-        = form_with url: [@notice, @notice.comments.build], class: 'comment-form' do |f|
-          .form-group
-            = f.text_area :body
-          .form-group
-            = link_to '취소', '#'
-            = f.submit '등록'
-        .comments-list
-          .comment
-            .comment-meta
-              .user 레셈
-              .created-at 2019.04.20
-              .likes
-                %i.fa.fa-heart-o
-                30
-            .comment-body
-              xxx
-            .comment-control
-              = link_to '수정', '#', class: 'btn btn-outline-default'
-              = link_to '삭제', '#', class: 'btn btn-outline-default'
-
+      = render 'comments/panel', commentable: @notice, comments: @notice.comments.order_recent
 = render 'layouts/story', content: content
 

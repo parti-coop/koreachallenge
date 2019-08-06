@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   concern :commentable do
     resources :comments, shallow: true
   end
-  resources :stories do
+  resources :stories, concerns: :commentable do
     member do
       delete :remove_image
       delete :remove_attachment
