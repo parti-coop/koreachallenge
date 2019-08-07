@@ -10,7 +10,7 @@
     - session[:error_comment_body] = nil
   .form-group.form-group-submit
     - if comment.persisted?
-      = link_to '취소', comment_path(comment, form_dom_id: form_dom_id, list_dom_id: list_dom_id), remote: true, class: 'cancel', 'data-confirm': '작성하신 것을 모두 지우겠습니까?'
+      = link_to '취소', comment_path(comment, form_dom_id: form_dom_id, list_dom_id: local_assigns[:list_dom_id], comment_dom_id: local_assigns[:comment_dom_id]), remote: true, class: 'cancel', 'data-confirm': '작성하신 것을 모두 지우겠습니까?'
     - else
       = link_to '취소', '#', class: 'cancel js-comment-cancel'
     = f.submit '등록', class: 'btn btn-primary btn-sm btn-submit js-btn-submit'
