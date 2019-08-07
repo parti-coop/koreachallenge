@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :stories, concerns: :commentable do
     member do
+      get :download_attachment
       delete :remove_image
       delete :remove_attachment
     end

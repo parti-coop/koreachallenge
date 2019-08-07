@@ -19,8 +19,8 @@ class Story < ApplicationRecord
   scope :order_recent, -> { order(created_at: :desc) }
   before_save :update_type
 
-  def valid_attachment_name
-    self.attachment_name.gsub(/\\+/, "%20")
+  def valid_attachment_name(index)
+    self.send(:"attachment#{index}_name").gsub(/\\+/, "%20")
   end
 
   def attachment_of(index, postfix = nil)

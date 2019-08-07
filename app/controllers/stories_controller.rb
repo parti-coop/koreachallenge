@@ -97,6 +97,16 @@ class StoriesController < ApplicationController
     redirect_to edit_story_path(@story)
   end
 
+  def download_attachment
+    @story = Story.find(params[:id])
+    attachment = @story.send(:"attachment#{params[:index]}")
+    # local storage
+    send_file(attachment.path,
+      filename: encoded_attachment_name(@story, params[:index]),
+      type: @story.send(:"attachment#{params[:index]}_type"),
+      disposition: 'attachment')
+  end
+
   private
 
   def story_params
@@ -105,5 +115,15 @@ class StoriesController < ApplicationController
       attributes += [:"attachment#{i}", :"attachment#{i}_cache"]
     end
     params.require(:story).permit(*attributes)
+  end
+
+  def encoded_attachment_name story, index
+    filename = story.valid_attachment_name(index)
+    if browser.ie?
+      filename = URI::encode(filename)
+    elsif ENV['FILENAME_ENCODING'].present?
+      filename = filename.encode('UTF-8', ENV['FILENAME_ENCODING'], invalid: :replace, undef: :replace, replace: '?')
+    end
+    filename
   end
 end
