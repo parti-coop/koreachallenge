@@ -137,8 +137,17 @@ a.btn.btn-white:active, input.btn.btn-white:active {
 .btn.btn-meta, a.btn.btn-meta, input.btn.btn-meta,
 .btn.btn-meta:hover, a.btn.btn-meta:hover, input.btn.btn-meta:hover,
 .btn.btn-meta:focus, a.btn.btn-meta:focus, input.btn.btn-meta:focus,
-.btn.btn-meta:active, a.btn.btn-meta:active, input.btn.btn-meta:active {
-  color: $text-meta-color;
+.btn.btn-meta:active, a.btn.btn-meta:active, input.btn.btn-meta:active,
+.btn.btn-meta:not(:disabled):not(.disabled):active,
+.btn.btn-meta:not(:disabled):not(.disabled).active {
+  @include media-breakpoint-up(sm) {
+    color: $text-meta-color;
+  }
+  @include media-breakpoint-down(xs) {
+    color: #212529;
+    background-color: white;
+    border-color: #e0e0e0;
+  }
 }
 
 .container.container-xs-no-padding {
@@ -1463,6 +1472,10 @@ body.app-pages-home {
       margin-top: 8px;
       a.btn {
         margin-left: 8px;
+        @include media-breakpoint-down(xs) {
+          width: 90px;
+          flex: none;
+        }
       }
     }
   }

@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_155307) do
     t.boolean "confirmation_privacy", default: false
     t.boolean "confirmation_mailing", default: false
     t.boolean "confirmation_offer", default: false
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
