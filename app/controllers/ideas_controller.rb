@@ -90,6 +90,7 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:category, :title,
       :mode, :team_name, :motivation, :summary, :pt, :desc, :attachment, :attachment_cache,
+      :was_reused, :reuse_desc,
       members_attributes: [:id, :name, :age, :sex, :org, :address, :tel, :email, :_destroy])
   end
 

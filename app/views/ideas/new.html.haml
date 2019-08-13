@@ -39,6 +39,19 @@
               .form-gruop
                 = f.label attribute
                 = f.text_area attribute, class: 'form-control', rows: 8, data: { 'rule-required': 'true' }
+            .form-group
+              %label 타 공모전 및 기관 제출 여부
+              %br
+              .form-check.form-check-inline
+                = f.radio_button :was_reused, true, class: 'form-check-input js-idea-form-reuse'
+                %label.form-check-label 예
+              .form-check.form-check-inline
+                = f.radio_button :was_reused, false, class: 'form-check-input js-idea-form-reuse'
+                %label.form-check-label 아니오
+              .form-gruop.js-idea-form-reuse-control{ class: ('collapse' unless f.object.was_reused? ) }
+                = f.label :reuse_desc
+                = f.text_area :reuse_desc, class: 'form-control', rows: 8, data: { 'rule-required': 'true' }
+
             - unless controller.class.parents.include?(Admin)
               .form-group
                 %label 참가 신청서 작성 안내

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_155307) do
+ActiveRecord::Schema.define(version: 2019_08_13_060955) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2019_07_29_155307) do
     t.string "attachment_type"
     t.integer "attachment_size"
     t.datetime "submitted_at"
+    t.boolean "was_reused", default: false
+    t.text "reuse_desc"
     t.index ["user_id"], name: "index_ideas_on_user_id", unique: true
   end
 
@@ -159,7 +161,6 @@ ActiveRecord::Schema.define(version: 2019_07_29_155307) do
     t.boolean "confirmation_privacy", default: false
     t.boolean "confirmation_mailing", default: false
     t.boolean "confirmation_offer", default: false
-    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

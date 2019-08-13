@@ -314,6 +314,24 @@ $(document).ready(function(){
     });
   });
 
+  // 아이디어 폼 js-idea-form-mode-team-fieldset
+  $('.js-idea-form-reuse').on('change', function(e) {
+    var $elm = $(e.currentTarget);
+    var value = $elm.val();
+    if(value === 'true') {
+      $('.js-idea-form-reuse-control').show();
+      $('.js-idea-form-mode-team-fieldset input').attr('data-rule-required', 'true');
+      $elm.closest('form').trigger('parti-rebuild-validator');
+    } else {
+      $('.js-idea-form-reuse-control').hide();
+      $elm.closest('form').trigger('parti-rebuild-validator');
+    }
+    var instances = $.tooltipster.instances();
+    $.each(instances, function(i, instance){
+        instance.close();
+    });
+  });
+
   // 폼 검증
   $('.js-form-validation').each(function() {
     var $form = $(this);

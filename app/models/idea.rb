@@ -15,6 +15,8 @@ class Idea < ApplicationRecord
   validates :motivation, presence: true, if: :submitted?
   validates :summary, presence: true, if: :submitted?
   validates :desc, presence: true, if: :submitted?
+  validates :was_reused, inclusion: { in: [true, false] }, if: :submitted?
+  validates :reuse_desc, presence: true, if: :should_have_reuse_desc?
   # validates :planner_name, presence: true, if: :submitted?
   # validates :planner_age, presence: true, if: :submitted?
   # validates :planner_sex, presence: true, if: :submitted?
@@ -55,5 +57,9 @@ class Idea < ApplicationRecord
     if self.members.length <= 0
       errors.add(:members, I18n.t('errors.messages.idea.no_members'))
     end
+  end
+
+  def should_have_reuse_desc?
+    self.submitted? and self.was_reused?
   end
 end
