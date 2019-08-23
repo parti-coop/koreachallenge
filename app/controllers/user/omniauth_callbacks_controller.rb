@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token
   prepend_before_action :require_no_authentication, only: [:facebook, :kakao, :naver]
 
   def facebook
