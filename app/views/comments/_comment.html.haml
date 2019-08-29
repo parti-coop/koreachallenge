@@ -21,6 +21,10 @@
           %i.fa.fa-lock
           비밀 댓글입니다.
       - else
+        - if comment.private?
+          .text-muted 
+            %i.fa.fa-lock
+            비밀 댓글입니다.
         = render 'comments/body', comment: comment
   - unless local_assigns[:show_form]
     .comment-control
