@@ -2,21 +2,31 @@
 - counter_dom_id = "rnd-#{SecureRandom.uuid}"
 .comment{ id: comment_dom_id }
   .comment-meta
-    .user.comment-meta-item= comment.user.name
+    .user.comment-meta-item
+      - if comment.private_for? current_user
+        * * *
+      - else
+        = comment.user.name
     .created-at.comment-meta-item= static_day_f comment.created_at
     .likes.comment-meta-item
-      = render 'likes/counter', likable: comment, counter_dom_id: counter_dom_id
+      - unless comment.private_for? current_user
+        = render 'likes/counter', likable: comment, counter_dom_id: counter_dom_id
   .comment-body
     - if local_assigns[:show_form]
       - form_dom_id = "uid-#{SecureRandom.uuid}"
       = render 'comments/form', comment: comment, class_name: 'comment-form js-form-validation', form_dom_id: form_dom_id, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id
     - else
-      = render 'comments/body', comment: comment
+      - if comment.private_for? current_user
+        .text-muted 
+          %i.fa.fa-lock
+          비밀 댓글입니다.
+      - else
+        = render 'comments/body', comment: comment
   - unless local_assigns[:show_form]
     .comment-control
       - if policy(comment).edit?
         = link_to '수정', edit_comment_path(comment, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id), remote: true, class: 'btn btn-meta btn-meta-detail btn-sm'
       - if policy(comment).destroy?
         = link_to '삭제', comment_path(comment, list_dom_id: list_dom_id, page: params[:page]), method: :delete, remote: true, class: 'btn btn-meta btn-meta-detail btn-sm', 'data-confirm': '정말 삭제하시겠습니까?'
-      - if policy(comment).like? or !user_signed_in?
+      - if (policy(comment).like? or !user_signed_in?) and !comment.private_for?(current_user)
         = render 'likes/button', likable: comment, class_name: 'recomd', counter_dom_id: counter_dom_id

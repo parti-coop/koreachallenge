@@ -1407,6 +1407,7 @@ body.app-pages-home {
 }
 
 .site-comments {
+  position: relative; //private comment
   .btns + & {
     margin-top: 40px;
     padding-top: 16px;
@@ -1420,6 +1421,7 @@ body.app-pages-home {
 
   .comment-form {
     textarea {
+      padding: 10px;
       height: 80px;
       width: 100%;
       border-color: #c2c2c2;
@@ -1451,6 +1453,7 @@ body.app-pages-home {
     padding-top: 16px;
     padding-bottom: 8px;
     border-bottom: 1px solid $line-color;
+    position: relative; // private comments
 
     .comment-meta {
       display: flex;
