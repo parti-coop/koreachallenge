@@ -11,6 +11,6 @@ class Comment < ApplicationRecord
   def private_for? someone
     return false unless self.private? 
     return true if someone.blank?
-    self.user != someone and !someone.admin? 
+    self.user != someone and !someone.admin? and commentable.user != someone
   end
 end
