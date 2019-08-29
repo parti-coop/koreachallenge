@@ -1,7 +1,9 @@
 .site-line-list-item.cursor-pointer.js-link{ 'data-url': notice_path(notice, page: params[:page]) }
   .title= notice.title
   .info
-    %span.date
+    %span.meta
+      = notice.user.try(:name)
+      &nbsp;
       = static_day_f(notice.created_at)
     .counts
       - if notice.likes_count != 0

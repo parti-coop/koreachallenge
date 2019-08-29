@@ -3,7 +3,9 @@
     .site-detail
       %h2= @notice.title
       .info
-        %span.date
+        %span.user
+          = @notice.user.try(:name)
+        %span.view
           = static_day_f(@notice.created_at)
         - if @notice.reads_count != 0
           %span.view
