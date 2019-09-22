@@ -21,6 +21,17 @@ GIT
     tinymce-rails (5.0.12)
       railties (>= 3.1.1)
 
+GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: d41258edda220620226c20fb75ee25f36abe3636
+  ref: d41258e
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (~> 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -76,6 +87,9 @@ GEM
       activerecord (>= 4.0)
     autoprefixer-rails (9.6.1)
       execjs
+    axlsx_rails (0.5.2)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.4)
@@ -109,6 +123,7 @@ GEM
     cocoon (1.2.14)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
+    content_disposition (1.0.0)
     crass (1.0.4)
     d3-cloud-rails (0.0.2)
       d3-rails (~> 4.10)
@@ -158,6 +173,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -393,6 +409,8 @@ PLATFORMS
 
 DEPENDENCIES
   auto_strip_attributes (~> 2.5)
+  axlsx!
+  axlsx_rails (~> 0.5.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
   browser (~> 2.6, >= 2.6.1)
@@ -403,6 +421,7 @@ DEPENDENCIES
   carrierwave
   chromedriver-helper
   cocoon
+  content_disposition
   d3-cloud-rails
   d3-rails
   devise (~> 4.5)

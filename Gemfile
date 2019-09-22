@@ -59,6 +59,11 @@ gem 'browser', '~> 2.6', '>= 2.6.1'
 gem 'meta-tags', '~> 2.11', '>= 2.11.1'
 gem 'sitemap_generator'
 
+# xlsx
+gem 'axlsx', github: 'randym/axlsx', ref: 'd41258e'
+gem 'axlsx_rails', '~> 0.5.0'
+gem 'content_disposition'
+
 # scheduler
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'sidekiq-cron', '~> 1.1'
