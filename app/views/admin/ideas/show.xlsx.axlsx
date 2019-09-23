@@ -1,50 +1,67 @@
-row_definition = [
-  [:created_at, '일시'],
-  [:user_nickname, '닉네임'],
-  [:body, '내용']
-]
-
-row_titles = row_definition.map { |c| c[1] }
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "#{@idea.user.name}") do |sheet|
+width = [10, 10, 50]
 
-  sheet.add_row []
+wb.styles do |s|
+  wrap_text = s.add_style :border => { :style => :thin, :color => "00" },
+              :alignment => { :vertical => :center ,
+                              :wrap_text => true}
 
-  %i(category title mode).each_with_index do |attr_name, index|
-    lead = (index == 0 ? '기본 정보' : '')
-    value = if %i(category mode).include?(attr_name)
-      @idea.send("#{attr_name}_text".to_sym)
+  wb.add_worksheet(name: "#{@idea.user.name}") do |sheet|
+
+    sheet.add_row []
+
+    %i(category title mode).each_with_index do |attr_name, index|
+      lead = (index == 0 ? '기본 정보' : '')
+      value = if %i(category mode).include?(attr_name)
+        @idea.send("#{attr_name}_text".to_sym)
+      else
+        @idea.send(attr_name)
+      end
+      sheet.add_row [lead, Idea.human_attribute_name(attr_name), value], types: :string, style: wrap_text
+    end
+    if @idea.mode.team?
+      sheet.add_row ['', Idea.human_attribute_name(:team_name), @idea.team_name], types: :string, style: wrap_text
+    end
+
+    sheet.add_row []
+
+    @idea.members.each_with_index do |member, member_index|
+      if member_index == 0
+        sheet.add_row ['참가자 정보', '총 참여자 수', @idea.members.count].flatten, types: :string, style: wrap_text
+      end
+
+      %i(name age sex org address tel email).each_with_index do |attr_name, index|
+        lead = (index == 0 ? "참가자 #{member_index + 1}" : '')
+        value = if %i(sex).include?(attr_name)
+          member.send("#{attr_name}_text".to_sym)
+        else
+          member.send(attr_name)
+        end
+        sheet.add_row [lead, Member.human_attribute_name(attr_name), value].flatten, types: :string, style: wrap_text
+      end
+    end
+
+    sheet.add_row []
+
+    %i(motivation summary pt desc reuse_desc).each_with_index do |attr_name, index|
+      lead = (index == 0 ? '상세 정보' : '')
+      sheet.add_row [lead, Idea.human_attribute_name(attr_name), @idea.send(attr_name)], types: :string, style: wrap_text
+    end
+
+    sheet.add_row []
+
+    if @idea.attachment?
+      sheet.add_row ['파일 제출', '다운로드 주소', download_attachment_idea_url(@idea)], types: :string, style: wrap_text
     else
-      @idea.send(attr_name)
+      sheet.add_row ['파일 제출', '다운로드 주소', '파일없음'], types: :string, style: wrap_text
     end
-    sheet.add_row [lead, Idea.human_attribute_name(attr_name), value], types: :string
-  end
-  if @idea.mode.team?
-    sheet.add_row ['', Idea.human_attribute_name(:team_name), @idea.team_name], types: :string
-  end
 
-  sheet.add_row []
+    sheet.column_info.first.width = 15
+    sheet.column_info.second.width = 20
+    sheet.column_info.third.width = 43
 
-  %i(name age sex org address tel email).each_with_index do |attr_name, index|
-    if index == 0
-      sheet.add_row ['참가자 정보', '#', (1..@idea.members.count).to_a].flatten
-    end
-    value = if %i(sex).include?(attr_name)
-      @idea.members.map(&"#{attr_name}_text".to_sym)
-    else
-      @idea.members.map(&attr_name)
-    end
-    sheet.add_row ['', Member.human_attribute_name(attr_name), value].flatten, types: :string
+    sheet.add_page_break("A4")
+    sheet.sheet_view.view = :page_layout
   end
 
-  sheet.add_row []
-
-  %i(motivation summary pt desc reuse_desc).each_with_index do |attr_name, index|
-    lead = (index == 0 ? '상세 정보' : '')
-    sheet.add_row [lead, Idea.human_attribute_name(attr_name), @idea.send(attr_name)], types: :string
-  end
-
-  sheet.add_row []
-
-  sheet.add_row ['파일 제출', '다운로드 주소', download_attachment_idea_url(@idea)], types: :string
 end

@@ -8,6 +8,8 @@ class IdeasController < ApplicationController
   end
 
   def create
+    render_404 and return
+
     @idea = Idea.new(idea_params)
     authorize @idea
     @idea.user = current_user
@@ -74,6 +76,8 @@ class IdeasController < ApplicationController
   end
 
   def remove_attachment
+    render_404 and return
+
     @idea = Idea.find(params[:id])
     authorize @idea, :update?
     @idea.remove_attachment!
