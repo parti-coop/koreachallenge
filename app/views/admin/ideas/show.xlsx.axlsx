@@ -12,7 +12,12 @@ wb.add_worksheet(name: "#{@idea.user.name}") do |sheet|
 
   %i(category title mode).each_with_index do |attr_name, index|
     lead = (index == 0 ? '기본 정보' : '')
-    sheet.add_row [lead, Idea.human_attribute_name(attr_name), @idea.send(attr_name)], types: :string
+    value = if %i(category mode).include?(attr_name)
+      @idea.send("#{attr_name}_text".to_sym)
+    else
+      @idea.send(attr_name)
+    end
+    sheet.add_row [lead, Idea.human_attribute_name(attr_name), value], types: :string
   end
   if @idea.mode.team?
     sheet.add_row ['', Idea.human_attribute_name(:team_name), @idea.team_name], types: :string
@@ -24,7 +29,12 @@ wb.add_worksheet(name: "#{@idea.user.name}") do |sheet|
     if index == 0
       sheet.add_row ['참가자 정보', '#', (1..@idea.members.count).to_a].flatten
     end
-    sheet.add_row ['', Member.human_attribute_name(attr_name), @idea.members.map(&attr_name)].flatten, types: :string
+    value = if %i(sex).include?(attr_name)
+      @idea.members.map(&"#{attr_name}_text".to_sym)
+    else
+      @idea.members.map(&attr_name)
+    end
+    sheet.add_row ['', Member.human_attribute_name(attr_name), value].flatten, types: :string
   end
 
   sheet.add_row []
