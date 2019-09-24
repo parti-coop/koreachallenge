@@ -6,7 +6,7 @@ wb.styles do |s|
               :alignment => { :vertical => :center ,
                               :wrap_text => true}
 
-  wb.add_worksheet(name: "#{@idea.user.name}") do |sheet|
+  wb.add_worksheet(name: "data") do |sheet|
 
     sheet.add_row []
 
