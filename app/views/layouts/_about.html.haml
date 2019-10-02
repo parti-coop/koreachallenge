@@ -2,7 +2,7 @@
   .container
     .clearfix
       = image_tag 'pages/about.png', class: 'site-header-image'
-      .site-header-title 출전신청
+      .site-header-title 공모개요
 
 %section.site-tabs
   .container
@@ -10,7 +10,7 @@
       %ul.nav.js-tab-menu-list
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/intro')) }
           = link_to intro_path do
-            .link-text 출전 안내
+            .link-text 공모 안내
         %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_page?('/about')) }
           = link_to about_path do
             .link-text 이런 아이디어를 기다립니다

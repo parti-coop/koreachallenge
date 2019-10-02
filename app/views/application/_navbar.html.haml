@@ -11,10 +11,10 @@
 
         - active_intro = ( current_page?('/intro') or current_page?('/about') or current_page?('/schedule') or params[:controller] == 'ideas' )
         %li.nav-item
-          %a.nav-link.js-subnav-xs{ href: intro_path, class: ( active_intro ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-intro' } 출전신청
+          %a.nav-link.js-subnav-xs{ href: intro_path, class: ( active_intro ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-intro' } 공모개요
         %ul.navbar-nav.navbar-subnav#navsub-intro{ class: ('collapse' unless active_intro) }
           %li.nav-item
-            %a.nav-link{ href: intro_path, class: ('active' if current_page?('/intro') ) } 출전 안내
+            %a.nav-link{ href: intro_path, class: ('active' if current_page?('/intro') ) } 공모 안내
           %li.nav-item
             %a.nav-link{ href: about_path, class: ('active' if current_page?('/about') ) } 이런 아이디어를 기다립니다
           %li.nav-item
