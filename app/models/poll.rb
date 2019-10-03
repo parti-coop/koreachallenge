@@ -1,8 +1,7 @@
-class Story < ApplicationRecord
-  include Likable
-
+class Poll < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   validates :title, presence: true
   validates :body, presence: true
@@ -17,6 +16,11 @@ class Story < ApplicationRecord
 
   scope :order_recent, -> { order(created_at: :desc) }
   before_save :update_type
+
+  def voted_by? someone
+    false if someone.blank?
+    votes.exists?(user: someone)
+  end
 
   def valid_attachment_name(index)
     self.send(:"attachment#{index}_name").gsub(/\\+/, "%20")

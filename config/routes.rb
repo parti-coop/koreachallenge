@@ -27,6 +27,13 @@ Rails.application.routes.draw do
   concern :commentable do
     resources :comments, shallow: true
   end
+  resources :polls, concerns: :commentable do
+    member do
+      get :download_attachment
+      delete :remove_image
+      delete :remove_attachment
+    end
+  end
   resources :stories, concerns: :commentable do
     member do
       get :download_attachment
@@ -37,6 +44,8 @@ Rails.application.routes.draw do
   resources :notices, concerns: :commentable
   delete :likes, to: 'likes#destroy'
   resources :likes
+  delete :votes, to: 'votes#destroy'
+  resources :votes
 
   post '/tinymce_assets', to: 'tinymce_assets#create'
 

@@ -1,0 +1,57 @@
+- content = capture do
+  .site-content-container
+    .site-detail
+      %h2= @poll.title
+      .info
+        %span.date
+          = static_day_f(@poll.created_at)
+        - if @poll.reads_count != 0
+          %span.view
+            조회
+            = @poll.reads_count
+        - if @poll.comments_count != 0
+          %span.view
+            댓글
+            = @poll.comments_count
+      .body.js-fit-vids
+        -# - if @poll.image?
+        -#   .image-container
+        -#     = image_tag @poll.image.lg.url
+        %p!= @poll.body
+
+        %ul.list-unstyled.downloads
+          - (1..Poll::ATTACHMENT_MAX_INDEX).each do |index|
+            - if @poll.attachment_of(index, '?')
+              %li.download
+                = link_to download_attachment_poll_path(@poll, index: index) do
+                  %i.fa.fa-download
+                  #{@poll.attachment_of(index, :name)}
+                %span.text-muted #{number_to_human_size @poll.attachment_of(index, :size)}
+      .btns
+        .btns-left
+          = render 'votes/button', poll: @poll
+          %a.btn.btn-meta.btn-meta-detail.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{polymorphic_url(@poll)}", target: '_blank', title: '공유하기'}
+            %i.fa.fa-share-alt
+            %span.d-none.d-sm-inline 공유하기
+          %a.btn.btn-meta.btn-meta-detail.js-clipboard{'data-clipboard-text': polymorphic_url(@poll)}
+            %i.fa.fa-link
+            %span.d-none.d-sm-inline 주소복사
+          - manage_menus = capture do
+            - if policy(@poll).edit?
+              %li= link_to '수정', [:edit, @poll], class: 'dropdown-item'
+            - if policy(@poll).destroy?
+              %li= link_to '삭제', @poll, method: :delete, class: 'dropdown-item', 'data-confirm': '정말 삭제하시겠습니까?'
+          - if manage_menus.present?
+            .dropdown.btn.btn-meta.btn-meta-detail
+              %a(data-toggle="dropdown")
+                더 보기
+                %i.fa.fa-angle-down
+              %ul.dropdown-menu.dropdown-menu-right
+                = manage_menus
+        .btns-right
+          %a.list{href: polls_path(page: params[:page])}
+            목록
+            %i.fa.fa-angle-right
+
+      = render 'comments/panel', commentable: @poll, comments: @poll.comments.order_recent
+= render 'layouts/poll', content: content

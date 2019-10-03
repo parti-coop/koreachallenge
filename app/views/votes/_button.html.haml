@@ -1,0 +1,44 @@
+- vote_btn_label = case poll
+- when Comment
+  - '투표'
+- else
+  - '투표해요'
+
+- vote_btn_label_dom = capture do
+  - if poll.votes_count > 0 and !poll.is_a?(Comment)
+    = poll.votes_count
+  - else
+    %span.d-none.d-sm-inline
+      = vote_btn_label
+
+- vote_btn_text = capture do
+  - if poll.voted_by?(current_user)
+    %i.fa.fa-heart
+  - else
+    %i.fa.fa-heart-o
+  = vote_btn_label_dom
+
+- button_dom_id = "rnd-#{SecureRandom.uuid}"
+- vote_btn_path = votes_path(poll_type: poll.class.to_s, poll_id: poll.id, dom_id: button_dom_id, class_name: local_assigns[:class_name], counter_dom_id: local_assigns[:counter_dom_id])
+
+- on_class = case poll
+  - when Notice, Story
+    - 'btn-meta-detail btn btn-outline-primary'
+  - when Comment
+    - 'btn-meta-detail btn btn-sm btn-outline-primary'
+
+- off_class = case poll
+  - when Notice, Story
+    - 'btn-meta-detail btn btn-meta'
+  - when Comment
+    - 'btn-meta-detail btn btn-sm btn-meta'
+
+- if policy(poll).vote? or !user_signed_in?
+  - if user_signed_in?
+    - if poll.voted_by?(current_user)
+      = link_to vote_btn_text, vote_btn_path, method: :delete, remote: true, id: button_dom_id, class: on_class
+    - else
+      = link_to vote_btn_text, vote_btn_path, method: :post, remote: true, id: button_dom_id, class: off_class
+  - else
+    = link_to vote_btn_text, new_user_session_path, id: button_dom_id, class: off_class
+
