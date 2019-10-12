@@ -1,21 +1,28 @@
 -# LOCAL: commentable comment form_dom_id class_name list_dom_id
 - commentable = local_assigns[:commentable] || comment.commentable
-%a{ id: 'anchor-comment-form' }
-= form_with model: (comment.persisted? ? comment : [commentable, comment]), local: !comment.persisted?, id: form_dom_id, class: local_assigns[:class_name], 'data-form-validation-submit-control': "##{form_dom_id} .js-btn-submit" do |f|
+- anchro = 'anchor-comment-form'
+- anchro += "-#{form_dom_id}" unless comment.parent?
+= form_with model: (comment.persisted? ? comment : [commentable, comment]), local: (!comment.persisted? and comment.parent?), id: form_dom_id, class: local_assigns[:class_name], 'data-form-validation-submit-control': "##{form_dom_id} .js-btn-submit" do |f|
+  %a.comment-form-anchor{ id: anchro }
   = hidden_field_tag :comment_dom_id, local_assigns[:comment_dom_id]
+  = hidden_field_tag :parent_comment_dom_id, local_assigns[:parent_comment_dom_id]
   = hidden_field_tag :list_dom_id, local_assigns[:list_dom_id]
   = hidden_field_tag :comment_form_anchor, 'anchor-comment-form'
-  .form-group{ style: 'font-size: 14px; position: absolute; top: 18px; right: 0; color: #777;' }
-    %label{ }
-      = f.check_box :private
-      비밀댓글
+  = f.hidden_field :parent_id
+  - if !commentable.respond_to?(:private_comments?) or commentable.private_comments?
+    .form-group{ style: 'font-size: 14px; position: absolute; top: 18px; right: 0; color: #777;' }
+      %label{ }
+        = f.check_box :private
+        비밀댓글
 
   .form-group
-    = f.text_area :body, value: session[:error_comment_body] || comment.body, class: 'js-comment-cancel-textarea', data: { 'rule-required': 'true' }
+    = f.text_area :body, value: session[:error_comment_body] || comment.body, class: 'js-comment-cancel-textarea js-show-child-comment-form-focus', data: { 'rule-required': 'true' }
     - session[:error_comment_body] = nil
   .form-group.form-group-submit
     - if comment.persisted?
       = link_to '취소', comment_path(comment, form_dom_id: form_dom_id, list_dom_id: local_assigns[:list_dom_id], comment_dom_id: local_assigns[:comment_dom_id]), remote: true, class: 'cancel', 'data-confirm': '작성하신 것을 모두 지우겠습니까?'
-    - else
+    - elsif comment.parent?
       = link_to '취소', '#', class: 'cancel js-comment-cancel'
+    - else
+      = link_to '취소', '#', class: 'cancel js-child-comment-cancel'
     = f.submit '등록', class: 'btn btn-primary btn-sm btn-submit js-btn-submit'

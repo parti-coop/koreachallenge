@@ -42,6 +42,6 @@
           %a.list{href: notices_path(page: params[:page])}
             목록
             %i.fa.fa-angle-right
-      = render 'comments/panel', commentable: @notice, comments: @notice.comments.order_recent
+      = render 'comments/panel', commentable: @notice, parent_comments: @notice.comments.parents_for_panel
 = render 'layouts/story', content: content
 

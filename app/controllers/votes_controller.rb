@@ -16,7 +16,7 @@ class VotesController < ApplicationController
   def destroy
     render_403 and return unless user_signed_in?
 
-    @poll = params[:likable_type].try(:safe_constantize).try(:find, params[:likable_id])
+    @poll = Poll.find(params[:poll_id])
     render_404 and return if @poll.blank?
 
     @poll.votes.find_by(user: current_user).try(:destroy)

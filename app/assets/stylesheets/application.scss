@@ -1446,7 +1446,22 @@ body.app-pages-home {
   }
 
   .comments-list {
-    border-top: 1px solid #d8d8d8;
+    border-top: 1px solid $line-color;
+    .child-comments-list {
+      margin-left: 80px;
+      margin-top: 16px;
+      &.child-comments-list-empty {
+        display: none;
+      }
+      .comment {
+        border-bottom-width: 0;
+        border-top: 1px solid $line-color;
+      }
+      .comment-form.comment-form-child-new {
+        padding-top: 16px;
+        border-top: 1px solid $line-color;
+      }
+    }
   }
 
   .comment {
@@ -1473,11 +1488,29 @@ body.app-pages-home {
       display: flex;
       justify-content: flex-end;
       margin-top: 8px;
-      a.btn {
-        margin-left: 8px;
+      a.link {
+        //margin-left: 8px;
+        color: $text-meta-color;
+        font-size: 14px;
+        padding: 0 8px;
+        margin: 0 2px;
+        &:last-child {
+          margin-right: 0;
+          padding-right: 0;
+        }
+        &:hover {
+          color: $text-base-color;
+          text-decoration: none;
+        }
         @include media-breakpoint-down(xs) {
-          width: 90px;
+          //width: 90px;
           flex: none;
+        }
+      }
+      a.link-primary {
+        color: $brand-primary-color;
+        &:hover {
+          color: $brand-primary-important-color;
         }
       }
     }
@@ -1578,13 +1611,13 @@ body.app-admin--ideas {
         }
         .nested-fields + .nested-fields,
         .nested-fields + .add-member-link {
-          border-top: 1px solid #d8d8d8;
+          border-top: 1px solid $line-color;
         }
         .nested-fields:first-child {
-          border-top: 1px solid #d8d8d8;
+          border-top: 1px solid $line-color;
         }
         .nested-fields:last-child {
-          border-bottom: 1px solid #d8d8d8;
+          border-bottom: 1px solid $line-color;
         }
       }
       &.fieldset-confirm {

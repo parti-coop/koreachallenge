@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     load_commentable
-    @comments = @commentable.comments.order_recent.page(params[:page])
+    @parent_comments = @commentable.comments.parents_for_panel
   end
 
   def show
@@ -14,11 +14,17 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     authorize @comment
     if @comment.save
-      redirect_to polymorphic_url(@commentable, anchor: params[:comment_form_anchor]), notice: '댓글이 게시되었습니다.'
+      flash[:notice] = '댓글이 게시되었습니다.'
     else
       errors_to_flash(@comment)
       session[:error_comment_body] = @comment.body
-      redirect_to polymorphic_url(@commentable)
+    end
+
+    respond_to do |format|
+      format.html {
+        redirect_to polymorphic_url(@commentable, anchor: params[:comment_form_anchor])
+      }
+      format.js
     end
   end
 
@@ -43,14 +49,20 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize @comment
 
-    if @comment.destroy
+    result = if @comment.parent? and @comment.children.any?
+      @comment.touch(:deleted_at)
+    else
+      @comment.destroy
+    end
+
+    if result
       flash[:success] = '삭제되었습니다'
     else
       errors_to_flash(@comment)
     end
 
     @commentable = @comment.commentable
-    @comments = @commentable.comments.order_recent.page(params[:page])
+    @parent_comments = @commentable.comments.parents_for_panel
   end
 
   private
@@ -68,7 +80,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :private)
+    params.require(:comment).permit(:body, :private, :parent_id)
   end
 end
 

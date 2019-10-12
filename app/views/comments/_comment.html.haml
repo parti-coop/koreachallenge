@@ -1,36 +1,50 @@
 - comment_dom_id = "uid-#{SecureRandom.uuid}"
 - counter_dom_id = "rnd-#{SecureRandom.uuid}"
+- child_comment_form_id = local_assigns[:child_comment_form_id] || "uid-#{SecureRandom.uuid}" 
 .comment{ id: comment_dom_id }
   .comment-meta
     .user.comment-meta-item
-      - if comment.private_for? current_user
+      - if comment.deleted? or comment.private_for? current_user
         * * *
       - else
         = comment.user.name
     .created-at.comment-meta-item= static_day_f comment.created_at
     .likes.comment-meta-item
-      - unless comment.private_for? current_user
+      - unless comment.deleted? or comment.private_for? current_user
         = render 'likes/counter', likable: comment, counter_dom_id: counter_dom_id
   .comment-body
-    - if local_assigns[:show_form]
-      - form_dom_id = "uid-#{SecureRandom.uuid}"
-      = render 'comments/form', comment: comment, class_name: 'comment-form js-form-validation', form_dom_id: form_dom_id, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id
-    - else
-      - if comment.private_for? current_user
-        .text-muted 
-          %i.fa.fa-lock
-          비밀 댓글입니다.
+    - if comment.deleted?
+      .text-muted
+        %i.fa.fa-info-circle
+        삭제된 댓글입니다.
+    - else 
+      - if local_assigns[:show_form]
+        - form_dom_id = "uid-#{SecureRandom.uuid}"
+        = render 'comments/form', comment: comment, class_name: 'comment-form js-form-validation', form_dom_id: form_dom_id, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id
       - else
-        - if comment.private?
-          .text-muted 
+        - if comment.private_for? current_user
+          .text-muted
             %i.fa.fa-lock
             비밀 댓글입니다.
-        = render 'comments/body', comment: comment
-  - unless local_assigns[:show_form]
+        - else
+          - if comment.private?
+            .text-muted
+              %i.fa.fa-lock
+              비밀 댓글입니다.
+          = render 'comments/body', comment: comment
+  - unless comment.deleted? or local_assigns[:show_form]
     .comment-control
+      -# btn btn-meta btn-meta-detail btn-sm
+      - if user_signed_in? and comment.commentable.try(:threadable_comment?)
+        = link_to '답글달기', '#', class: 'link js-show-child-comment-form', data: { 'show-child-comment-form-id': child_comment_form_id }
       - if policy(comment).edit?
-        = link_to '수정', edit_comment_path(comment, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id), remote: true, class: 'btn btn-meta btn-meta-detail btn-sm'
+        = link_to '수정', edit_comment_path(comment, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id), remote: true, class: 'link'
       - if policy(comment).destroy?
-        = link_to '삭제', comment_path(comment, list_dom_id: list_dom_id, page: params[:page]), method: :delete, remote: true, class: 'btn btn-meta btn-meta-detail btn-sm', 'data-confirm': '정말 삭제하시겠습니까?'
+        = link_to '삭제', comment_path(comment, list_dom_id: list_dom_id, page: params[:page]), method: :delete, remote: true, class: 'link', 'data-confirm': '정말 삭제하시겠습니까?'
       - if (policy(comment).like? or !user_signed_in?) and !comment.private_for?(current_user)
         = render 'likes/button', likable: comment, class_name: 'recomd', counter_dom_id: counter_dom_id
+  - if comment.parent?
+    .child-comments-list.js-child-comments-list{ class: ('child-comments-list-empty' if comment.children.empty? ) }
+      - comment.children.order_past.each do |child_comment|
+        = render 'comments/comment', comment: child_comment, list_dom_id: list_dom_id, child_comment_form_id: child_comment_form_id
+      = render 'comments/form', commentable: comment.commentable, comment: Comment.new(parent: comment), parent_comment_dom_id: comment_dom_id, class_name: 'comment-form comment-form-child-new js-form-validation collapse', form_dom_id: child_comment_form_id, list_dom_id: list_dom_id

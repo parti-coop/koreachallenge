@@ -32,6 +32,14 @@ class Poll < ApplicationRecord
     self.send(:"attachment#{index}#{con}#{postfix}")
   end
 
+  def private_comments?
+    false
+  end
+
+  def threadable_comment?
+    true
+  end
+
   private
 
   def update_type

@@ -608,4 +608,23 @@ $(document).ready(function(){
     $form = $elm.closest('form');
     $form.find('.js-comment-cancel-textarea').val('').focus();
   });
+
+  // 댓글
+  $('.js-child-comment-cancel').on('click', function(e) {
+    e.preventDefault();
+    $elm = $(e.currentTarget);
+    $form = $elm.closest('form');
+    $form.hide();
+  });
+
+  $('.js-show-child-comment-form-delegater').on('click', '.js-show-child-comment-form', function(e) {
+    var form_id = $(e.currentTarget).data('show-child-comment-form-id');
+    var $form = $('#' + form_id);
+    if(form_id && $form.length > 0) {
+      $form.show();
+      $form.closest('.js-child-comments-list').show();
+      $form.find('.js-show-child-comment-form-focus').focus();
+      e.preventDefault();
+    }
+  });
 });

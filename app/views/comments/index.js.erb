@@ -1,2 +1,2 @@
-$('#<%= params['list_dom_id'] %>').replaceWith('<%= j(render 'comments/list', commentable: @commentable, comments: @comments, list_dom_id: params['list_dom_id']) %>');
+$('#<%= params['list_dom_id'] %>').replaceWith('<%= j(render 'comments/list', commentable: @commentable, parent_comments: @parent_comments, list_dom_id: params['list_dom_id']) %>');
 $.scrollTo($('#<%= params['list_dom_id'] %>'), { offset: { top: -100 } });

@@ -25,13 +25,13 @@
   - when Notice, Story
     - 'btn-meta-detail btn btn-outline-primary'
   - when Comment
-    - 'btn-meta-detail btn btn-sm btn-outline-primary'
+    - 'link link-primary'
 
 - off_class = case likable
   - when Notice, Story
     - 'btn-meta-detail btn btn-meta'
   - when Comment
-    - 'btn-meta-detail btn btn-sm btn-meta'
+    - 'link'
 
 - if policy(likable).like? or !user_signed_in?
   - if user_signed_in?

@@ -1,0 +1,4 @@
+UnobtrusiveFlash.showFlashFromCookies();
+<% if @comment.errors.empty? %>
+  $('#<%= params[:parent_comment_dom_id] %>').replaceWith('<%= j(render 'comments/comment', comment: (@comment.parent || @comment), list_dom_id: params[:list_dom_id]) %>');
+<% end %>

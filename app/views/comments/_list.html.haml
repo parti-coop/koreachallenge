@@ -1,3 +1,4 @@
 .comments-list{ id: list_dom_id }
-  - comments.each do |comment|
-    = render 'comments/comment', comment: comment, list_dom_id: list_dom_id
+  - parent_comments.each do |parent_comment|
+    = render 'comments/comment', comment: parent_comment, list_dom_id: list_dom_id
+
