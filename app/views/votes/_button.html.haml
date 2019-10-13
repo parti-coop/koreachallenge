@@ -1,7 +1,7 @@
 - button_dom_id = "rnd-#{SecureRandom.uuid}"
 - vote_btn_path = votes_path(poll_type: poll.class.to_s, poll_id: poll.id, dom_id: button_dom_id, class_name: local_assigns[:class_name], counter_dom_id: local_assigns[:counter_dom_id])
 
-- on_class = 'btn btn-vote btn-outline-primary js-vote-btn-on-hover'
+- on_class = 'btn btn-vote btn-outline-primary'
 - off_class = 'btn btn-vote btn-primary'
 
 %div{ id: button_dom_id }
@@ -15,7 +15,7 @@
   - if policy(poll).vote? or !user_signed_in?
     - if user_signed_in?
       - if poll.voted_by?(current_user)
-        = link_to '투표했습니다!', vote_btn_path, method: :delete, remote: true, class: on_class, data: { 'vote-btn-on-hover-mouseenter': '투표 취소하기' }
+        = link_to '투표 취소', vote_btn_path, method: :delete, remote: true, class: on_class, data: { 'vote-btn-on-hover-mouseenter': '투표 취소하기' }
       - else
         = link_to '투표하기', vote_btn_path, method: :post, remote: true, class: off_class
     - else

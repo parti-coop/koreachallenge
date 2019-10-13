@@ -1,5 +1,6 @@
 - content = capture do
   .site-content-container
+    = render 'polls/static_notice'
     .site-detail
       %h2= @poll.title
       .info
@@ -29,12 +30,12 @@
                 %span.text-muted #{number_to_human_size @poll.attachment_of(index, :size)}
       .vote-container.js-vote-container
         = render 'votes/button', poll: @poll
-      .btns
+      .btns.justify-content-between
         .btns-left
           .dropdown.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.dropdown-share
             %a(data-toggle="dropdown")
               %i.fa.fa-share-alt
-              %span.d-none.d-sm-inline 공유하기
+              %span 공유
               %i.fa.fa-angle-down
             %ul.dropdown-menu
               %li
@@ -49,14 +50,14 @@
                     카카오에 공유
           %a.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.js-clipboard{'data-clipboard-text': polymorphic_url(@poll)}
             %i.fa.fa-link
-            %span.d-none.d-sm-inline 주소복사
+            %span 주소복사
           - manage_menus = capture do
             - if policy(@poll).edit?
               %li= link_to '수정', [:edit, @poll], class: 'dropdown-item'
             - if policy(@poll).destroy?
               %li= link_to '삭제', @poll, method: :delete, class: 'dropdown-item', 'data-confirm': '정말 삭제하시겠습니까?'
           - if manage_menus.present?
-            .dropdown.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.dropdown-more
+            .dropdown.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.dropdown-more.d-none.d-sm-inline-block
               %a(data-toggle="dropdown")
                 더 보기
                 %i.fa.fa-angle-down

@@ -425,6 +425,31 @@ nav.navbar .nav-item > a.nav-link {
       padding-right: 40px;
     }
   }
+  &.site-card-list-poll {
+    .site-card-list-item {
+      width: 33%;
+      @include media-breakpoint-down(xs) {
+        width: 100%;
+      }
+      .img { 
+        height: 150px;
+      }
+    }
+    @include media-breakpoint-up(sm) {
+      .site-card-list-item:nth-child(3n+1) {
+        padding-right: 26px;
+        padding-left: 0;
+      }
+      .site-card-list-item:nth-child(3n+2) {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .site-card-list-item:nth-child(3n+3) {
+        padding-left: 26px;
+        padding-right: 0;
+      }
+    }
+  }
 }
 
 .site-line-list-faq {
@@ -502,17 +527,13 @@ nav.navbar .nav-item > a.nav-link {
   }
   .btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    @include media-breakpoint-down(xs) {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
   }
-  .btn-meta-detail, .btn-meta-detail-auto {
+  .btn.btn-meta-detail, .btn-meta-detail-auto {
     padding: 4px 8px;
   }
-  .btn-meta-detail {
+  .btn.btn-meta-detail {
     width: 94px;
     &.btn-sm {
       width: 70px;
@@ -520,6 +541,14 @@ nav.navbar .nav-item > a.nav-link {
     @include media-breakpoint-down(xs) {
       flex: 1;
       width: auto;
+      color: $text-meta-color;
+      i {
+        color: $text-meta-color;
+      }
+      font-size: 12px;
+      line-height: 24px;
+      padding: 0;
+      height: 24px;
     }
     a[data-toggle=dropdown] {
       width: 100%;
@@ -533,11 +562,21 @@ nav.navbar .nav-item > a.nav-link {
       width: 120px;
       @include media-breakpoint-down(xs) {
         width: auto;
+        font-size: 12px;
+        line-height: 24px;
+        padding: 0;
+        height: 24px;
+        flex: 1;
       }
       &.dropdown-more {
         a[data-toggle=dropdown] {
           width: 100%;
           display: inline-block;
+          @include media-breakpoint-down(xs) {
+            color: $text-meta-color;
+            font-size: 12px;
+            line-height: 22px;
+          }
         }
         .dropdown-menu {
           top: 4px !important;
@@ -548,6 +587,11 @@ nav.navbar .nav-item > a.nav-link {
         a[data-toggle=dropdown] {
           width: 100%;
           display: inline-block;
+          @include media-breakpoint-down(xs) {
+            color: $text-meta-color;
+            font-size: 12px;
+            line-height: 22px;
+          }
         }
         .dropdown-menu {
           top: 4px !important;
@@ -563,8 +607,8 @@ nav.navbar .nav-item > a.nav-link {
   }
   @include media-breakpoint-down(xs) {
     .btns-left {
-      flex-basis: 100%;
       display: flex;
+      flex: 1;
     }
     .btn-meta-detail + .btn-meta-detail {
       margin-left: 10px;
@@ -577,12 +621,13 @@ nav.navbar .nav-item > a.nav-link {
       }
     }
     .btns-right {
-      margin-top: 20px;
       padding-top: 20px;
       margin-bottom: 20px;
-      border-top: 1px solid $line-light-color;
       width: 100%;
       text-align: center;
+      font-size: 14px;
+      flex: 1;
+      text-align: right;
     }
   }
 }
@@ -890,14 +935,35 @@ nav.navbar .nav-item > a.nav-link {
     line-height: 25px;
     color: $brand-primary-color;
     margin-bottom: 13px;
+    @include media-breakpoint-down(xs) {
+      font-size: 16px;
+    }
+  }
+  .desc-text {
+    font-size: 14px;
   }
   ul {
-    padding-left: 1.3em;
+    padding-left: 20px;
     text-align: left;
+    @include media-breakpoint-down(xs) {
+      padding-left: 6px;
+    }
     li {
       font-size: 14px;
       line-height: 16px;
       color: $text-inactive-color;
+      list-style-type: none;
+      margin-top: 6px;
+      position: relative;
+      padding-left: 6px;
+      @include media-breakpoint-down(xs) {
+        font-size: 12px;
+      }
+      &:before {
+        content: "-";
+        position: absolute;
+        left: -6px;
+      }
     }
   }
   
@@ -1446,6 +1512,12 @@ body.app-pages-home {
         }
       }
     }
+  }
+}
+
+body.app-polls {
+  .site-btn-notice-container {
+    text-align: left;
   }
 }
 

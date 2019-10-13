@@ -1,6 +1,6 @@
 class PollsController < ApplicationController
   def index
-    @polls = Poll.order_recent.page(params[:page]).per(6)
+    @polls = Poll.order_recent
   end
 
   def show
@@ -68,10 +68,10 @@ class PollsController < ApplicationController
   end
 
   def remove_image
-    @stroy = Poll.find(params[:id])
-    authorize @stroy, :update?
-    @stroy.remove_image!
-    if @stroy.save
+    @poll = Poll.find(params[:id])
+    authorize @poll, :update?
+    @poll.remove_image!
+    if @poll.save
       flash[:success] = '첨부파일이 삭제되었습니다.'
     else
       flash[:error] = '앗! 뭔가 잘못되었습니다. 잠시 후에 다시 시도해 주세요.'

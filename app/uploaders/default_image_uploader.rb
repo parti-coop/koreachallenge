@@ -15,7 +15,7 @@ class DefaultImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    image_url("default-#{model.class.to_s.underscore}-#{mounted_as}.jpg")
+    ActionController::Base.helpers.asset_path("no-img.png")
   end
 
   # Process files as they are uploaded:

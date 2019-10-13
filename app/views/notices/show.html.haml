@@ -17,24 +17,24 @@
             = @notice.comments_count
       .body.js-fit-vids
         %p!= @notice.body
-      .btns
-        .btns-left
+      .btns.justify-content-between
+        .btns-left{ style: 'flex: 3' }
           = render 'likes/button', likable: @notice
           %a.btn.btn-meta.btn-meta-detail.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{polymorphic_url(@notice)}", target: '_blank', title: '공유하기'}
             %i.fa.fa-share-alt
-            %span.d-none.d-sm-inline 공유하기
+            %span 공유
           %a.btn.btn-meta.btn-meta-detail.js-clipboard{'data-clipboard-text': polymorphic_url(@notice)}
             %i.fa.fa-link
-            %span.d-none.d-sm-inline 주소복사
+            %span 주소복사
           - manage_menus = capture do
             - if policy(@notice).edit?
               %li= link_to '수정', [:edit, @notice], class: 'dropdown-item'
             - if policy(@notice).destroy?
               %li= link_to '삭제', @notice, method: :delete, class: 'dropdown-item', 'data-confirm': '정말 삭제하시겠습니까?'
           - if manage_menus.present?
-            .dropdown.btn.btn-meta.btn-meta-detail
+            .dropdown.btn.btn-meta.btn-meta-detail.d-none.d-sm-inline-block
               %a(data-toggle="dropdown")
-                %span.d-none.d-sm-inline 더 보기
+                더 보기
                 %i.fa.fa-angle-down
               %ul.dropdown-menu.dropdown-menu-right
                 = manage_menus
