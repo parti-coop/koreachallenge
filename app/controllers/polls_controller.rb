@@ -7,6 +7,8 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     @poll.reads_count += 1
     @poll.save
+    prepare_meta_tags description: HTMLEntities.new.decode(ActionView::Base.full_sanitizer.sanitize(@poll.body)),
+                      image: @poll.image.url(:md)
   end
 
   def new

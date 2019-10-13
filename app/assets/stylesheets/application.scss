@@ -529,6 +529,32 @@ nav.navbar .nav-item > a.nav-link {
       top: 4px !important;
       left: 8px !important;
     }
+    &.btn-meta-detail-poll {
+      width: 120px;
+      @include media-breakpoint-down(xs) {
+        width: auto;
+      }
+      &.dropdown-more {
+        a[data-toggle=dropdown] {
+          width: 100%;
+          display: inline-block;
+        }
+        .dropdown-menu {
+          top: 4px !important;
+          left: 8px !important;
+        }
+      }
+      &.dropdown-share {
+        a[data-toggle=dropdown] {
+          width: 100%;
+          display: inline-block;
+        }
+        .dropdown-menu {
+          top: 4px !important;
+          left: -9px !important;
+        }
+      }
+    }
   }
   .btns-right {
     .list {

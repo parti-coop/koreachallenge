@@ -17,6 +17,10 @@
 //= require cocoon
 //= require jquery.scrollTo
 //= require underscore
+//= require kakao
+
+// Kakao Key
+Kakao.init('0ee479d32e1654375ec8fc76819ca99c');
 
 // breakpoint
 $('body').append($('<span id="js-xs-breakpoint" class="d-block d-sm-none"></span>'));
@@ -642,5 +646,31 @@ $(document).ready(function(){
     var new_inner_text = $elm.data('vote-btn-on-hover-mouseleave');
     $elm.text(new_inner_text);
     $elm.data('vote-btn-on-hover-mouseleave', old_inner_text);
+  });
+
+  // share
+  $.each($('.js-share-kakao'), function(index, elm) {
+    var $elm = $(elm);
+
+    var url = $elm.data('share-url');
+    var image_url = $elm.data('share-image');
+    var image_width = $elm.data('share-image-width');
+    var image_height = $elm.data('share-image-height');
+
+    var title = $elm.data('share-title');
+    var description = $elm.data('share-description');
+    Kakao.Link.createDefaultButton({
+      container: elm,
+      objectType: 'feed',
+      content: {
+        title: title,
+        description: description,
+        imageUrl: image_url,
+        link: {
+          mobileWebUrl: url,
+          webUrl: url
+        }
+      }
+    });
   });
 });

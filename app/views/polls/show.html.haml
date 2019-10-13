@@ -31,10 +31,23 @@
         = render 'votes/button', poll: @poll
       .btns
         .btns-left
-          %a.btn.btn-meta.btn-meta-detail.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{polymorphic_url(@poll)}", target: '_blank', title: '공유하기'}
-            %i.fa.fa-share-alt
-            %span.d-none.d-sm-inline 공유하기
-          %a.btn.btn-meta.btn-meta-detail.js-clipboard{'data-clipboard-text': polymorphic_url(@poll)}
+          .dropdown.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.dropdown-share
+            %a(data-toggle="dropdown")
+              %i.fa.fa-share-alt
+              %span.d-none.d-sm-inline 공유하기
+              %i.fa.fa-angle-down
+            %ul.dropdown-menu
+              %li
+                %a.dropdown-item{ href: "https://www.facebook.com/sharer/sharer.php?u=#{poll_url(@poll)}", target: '_blank', title: '페이스북 공유' }
+                  페이스북에 공유
+              %li
+                %a.dropdown-item{ href: "https://twitter.com/share?url=#{poll_url(@poll)}&text=#{excerpt(@poll.body)}", target: '_blank', title: '트위터 공유' }
+                  트위터에 공유
+              - if is_kakao_talkable?
+                %li
+                  %a.dropdown-item.js-share-kakao{ href: '#', data: { url: poll_url(@poll), 'share-image': @poll.image.url(:md), 'share-image-width': '300', 'share-image-height': '158', 'share-title': @poll.title, 'share-description': excerpt(@poll.body) } }
+                    카카오에 공유
+          %a.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.js-clipboard{'data-clipboard-text': polymorphic_url(@poll)}
             %i.fa.fa-link
             %span.d-none.d-sm-inline 주소복사
           - manage_menus = capture do
@@ -43,7 +56,7 @@
             - if policy(@poll).destroy?
               %li= link_to '삭제', @poll, method: :delete, class: 'dropdown-item', 'data-confirm': '정말 삭제하시겠습니까?'
           - if manage_menus.present?
-            .dropdown.btn.btn-meta.btn-meta-detail
+            .dropdown.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.dropdown-more
               %a(data-toggle="dropdown")
                 더 보기
                 %i.fa.fa-angle-down
