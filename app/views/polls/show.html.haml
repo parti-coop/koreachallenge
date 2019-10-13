@@ -27,9 +27,10 @@
                   %i.fa.fa-download
                   #{@poll.attachment_of(index, :name)}
                 %span.text-muted #{number_to_human_size @poll.attachment_of(index, :size)}
+      .vote-container.js-vote-container
+        = render 'votes/button', poll: @poll
       .btns
         .btns-left
-          = render 'votes/button', poll: @poll
           %a.btn.btn-meta.btn-meta-detail.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{polymorphic_url(@poll)}", target: '_blank', title: '공유하기'}
             %i.fa.fa-share-alt
             %span.d-none.d-sm-inline 공유하기

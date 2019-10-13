@@ -858,6 +858,23 @@ nav.navbar .nav-item > a.nav-link {
   padding: 20px;
   background-color: $bg-light-color;
   color: $text-light-color;
+  .desc-lead {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    color: $brand-primary-color;
+    margin-bottom: 13px;
+  }
+  ul {
+    padding-left: 1.3em;
+    text-align: left;
+    li {
+      font-size: 14px;
+      line-height: 16px;
+      color: $text-inactive-color;
+    }
+  }
+  
   @include media-breakpoint-down(xs) {
     &.site-btn-notice-container-flux {
       margin-left: 15px;
@@ -1449,6 +1466,9 @@ body.app-pages-home {
     border-top: 1px solid $line-color;
     .child-comments-list {
       margin-left: 80px;
+      @include media-breakpoint-down(sm) {
+        margin-left: 30px;
+      }
       margin-top: 16px;
       &.child-comments-list-empty {
         display: none;
@@ -1733,6 +1753,37 @@ body.app-admin--ideas {
   }
   .desc {
     margin-top: 40px;
+  }
+}
+
+.vote-container {
+  text-align: center;
+  margin-bottom: 40px;
+  .vote-count-dashboard {
+    margin-bottom: 10px;
+    & > img {
+      width: 18px;
+      height: 20px;
+    }
+  }
+  span.vote-count {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 26px;
+      color: #9e9e9e;
+      &.vote-count-on {
+        color: $brand-primary-important-color;
+      }
+  }
+  a.btn.btn-vote {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 45px;
+    padding-right: 45px;
   }
 }
 

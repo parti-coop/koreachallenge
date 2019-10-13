@@ -6,7 +6,10 @@
       = static_day_f(poll.created_at)
     .counts
       %span.count.vote{ class: ('active' if poll.voted_by?(current_user)) }
-        %i.fa{ class: (poll.voted_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
+        - if poll.voted_by?(current_user)
+          = image_tag 'vote-btn-icon.png', style: 'height: 20px'
+        - else
+          = image_tag 'vote-btn-icon-off.png', style: 'height: 20px'
         = poll.votes_count
       - if poll.comments_count != 0
         %span.count.comment
