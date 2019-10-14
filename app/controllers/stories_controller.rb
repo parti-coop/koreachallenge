@@ -119,7 +119,9 @@ class StoriesController < ApplicationController
 
   def encoded_attachment_name story, index
     filename = story.valid_attachment_name(index)
-    if browser.ie?
+    if browser.edge?
+      filename = CGI::escape(filename)
+    elsif browser.ie?
       filename = URI::encode(filename)
     elsif ENV['FILENAME_ENCODING'].present?
       filename = filename.encode('UTF-8', ENV['FILENAME_ENCODING'], invalid: :replace, undef: :replace, replace: '?')

@@ -8,7 +8,9 @@ class Admin::IdeasController < AdminController
     respond_to do |format|
       format.xlsx {
         file_name = "#{@idea.user.name}.xlsx"
-        if browser.ie?
+        if browser.edge?
+          filename = CGI::escape(filename)
+        elsif browser.ie?
           file_name = URI::encode(file_name)
         end
         response.headers['Content-Disposition'] = "attachment; filename=\"#{file_name}\""

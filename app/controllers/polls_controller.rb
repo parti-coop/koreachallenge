@@ -93,6 +93,8 @@ class PollsController < ApplicationController
 
   def download_attachment
     @poll = Poll.find(params[:id])
+    render_404 and return if params[:index].blank?
+    
     attachment = @poll.send(:"attachment#{params[:index]}")
     # local storage
     send_file(attachment.path,
@@ -113,7 +115,9 @@ class PollsController < ApplicationController
 
   def encoded_attachment_name poll, index
     filename = poll.valid_attachment_name(index)
-    if browser.ie?
+    if browser.edge?
+      filename = CGI::escape(filename)
+    elsif browser.ie? 
       filename = URI::encode(filename)
     elsif ENV['FILENAME_ENCODING'].present?
       filename = filename.encode('UTF-8', ENV['FILENAME_ENCODING'], invalid: :replace, undef: :replace, replace: '?')

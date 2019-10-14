@@ -35,8 +35,8 @@
   - unless comment.deleted? or local_assigns[:show_form]
     .comment-control
       -# btn btn-meta btn-meta-detail btn-sm
-      - if user_signed_in? and comment.commentable.try(:threadable_comment?)
-        = link_to '답글달기', '#', class: 'link js-show-child-comment-form', data: { 'show-child-comment-form-id': child_comment_form_id }
+      - if user_signed_in? and comment.parent? and comment.commentable.try(:threadable_comment?)
+        = link_to '댓글쓰기', '#', class: 'link js-show-child-comment-form', data: { 'show-child-comment-form-id': child_comment_form_id }
       - if policy(comment).edit?
         = link_to '수정', edit_comment_path(comment, comment_dom_id: comment_dom_id, list_dom_id: list_dom_id), remote: true, class: 'link'
       - if policy(comment).destroy?
