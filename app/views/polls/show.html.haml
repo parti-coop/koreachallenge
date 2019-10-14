@@ -65,7 +65,7 @@
                 = manage_menus
         .btns-right
           %a.list{href: polls_path(page: params[:page])}
-            목록
+            전체 출품작 보기
             %i.fa.fa-angle-right
 
       = render 'comments/panel', commentable: @poll, parent_comments: @poll.comments.parents_for_panel

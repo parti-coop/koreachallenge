@@ -1,6 +1,6 @@
 .poll.site-card-list-item.cursor-pointer.js-link{ 'data-url': poll_path(poll, page: params[:page]) }
   .img{ class: ('img-default' unless poll.image?), style: "background-image: url(#{ poll.image? ? poll.image.lg.url : asset_url('no-img.png') });" }
-  .title= poll.title
+  .title.title-2= poll.title
   .info
     .counts
       %span.count.vote{ class: ('active' if poll.voted_by?(current_user)) }

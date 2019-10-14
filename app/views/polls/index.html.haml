@@ -5,7 +5,7 @@
       .site-line-list-container.mb-5
         .site-card-list.site-card-list-poll
           = render @polls.to_a.shuffle
-    - elsif @polls.total_count <= 0
+    - elsif @polls.empty?
       .site-basic-contents
         .text-center.text-muted.mb-5
           준비 중입니다.
