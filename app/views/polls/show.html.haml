@@ -46,8 +46,8 @@
                   트위터에 공유
               - if is_kakao_talkable?
                 %li
-                  %a.dropdown-item.js-share-kakao{ href: '#', data: { url: poll_url(@poll), 'share-image': @poll.image.url(:md), 'share-image-width': '300', 'share-image-height': '158', 'share-title': @poll.title, 'share-description': excerpt(@poll.body) } }
-                    카카오에 공유
+                  %a.dropdown-item.js-share-kakao{ href: '#', data: { 'share-url': poll_url(@poll), 'share-image': @poll.image.url(:md), 'share-image-width': '300', 'share-image-height': '158', 'share-title': @poll.title, 'share-description': excerpt(@poll.body) } }
+                    카카오톡에 공유
           %a.btn.btn-meta.btn-meta-detail.btn-meta-detail-poll.js-clipboard{'data-clipboard-text': polymorphic_url(@poll)}
             %i.fa.fa-link
             %span 주소복사

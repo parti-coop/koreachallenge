@@ -2,8 +2,6 @@
   .img{ class: ('img-default' unless poll.image?), style: "background-image: url(#{ poll.image? ? poll.image.lg.url : asset_url('no-img.png') });" }
   .title= poll.title
   .info
-    %span.date
-      = static_day_f(poll.created_at)
     .counts
       %span.count.vote{ class: ('active' if poll.voted_by?(current_user)) }
         - if poll.voted_by?(current_user)
@@ -13,5 +11,5 @@
         = poll.votes_count
       - if poll.comments_count != 0
         %span.count.comment
-          %i.fa.fa-comment-o
+          = image_tag 'comments-icon.png', style: 'height: 20px'
           = poll.comments_count

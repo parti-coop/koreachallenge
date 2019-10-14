@@ -19,10 +19,10 @@
             %a.nav-link{ href: about_path, class: ('active' if current_page?('/about') ) } 이런 아이디어를 기다립니다
           %li.nav-item
             %a.nav-link{ href: schedule_path, class: ('active' if current_page?('/schedule') ) } 대회 일정
-        -# %li.nav-item
-        -#   %a.nav-link{ href: polls_path, class: ('active' if controller_name == 'votes' ) } 국민투표
         %li.nav-item
-          %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단
+          %a.nav-link{ href: polls_path, class: ('active' if controller_name == 'votes' ) } 온라인 국민투표
+        %li.nav-item
+          %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단 신청
 
         - active_stories = (%w(stories notices).include?(params[:controller]) or current_page?('/faq'))
         %li.nav-item
