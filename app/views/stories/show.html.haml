@@ -14,9 +14,7 @@
             댓글
             = @story.comments_count
       .body.js-fit-vids
-        - if @story.image?
-          .image-container
-            = image_tag @story.image.lg.url
+
         %p!= @story.body
 
         %ul.list-unstyled.downloads
