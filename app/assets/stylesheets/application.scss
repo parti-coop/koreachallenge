@@ -1363,6 +1363,16 @@ body.app-pages-home {
       }
     }
   }
+  .galleries {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: $text-light-color;
+      text-align: center;
+    }
+  }
   .schedul {
     padding-top: 60px;
     padding-bottom: 60px;

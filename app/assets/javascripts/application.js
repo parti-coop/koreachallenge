@@ -18,6 +18,7 @@
 //= require jquery.scrollTo
 //= require underscore
 //= require kakao
+//= require jquery.mosaic
 
 // Kakao Key
 Kakao.init('0ee479d32e1654375ec8fc76819ca99c');
@@ -67,6 +68,8 @@ $.validator.addMethod('filetype', function (value, element, param) {
 });
 
 $(document).ready(function(){
+  $('.js-mosaic').Mosaic();
+
   // unobtrusive_flash
   (function() {
     window.UnobtrusiveFlash.flashOptions = {

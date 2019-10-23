@@ -72,6 +72,21 @@
         = image_tag 'home/key-visual-tables.png', class: 'key-image-tables'
 
 
+- galleries = Gallery.all.order_recent.limit(50).to_a.shuffle
+- if galleries.count >= 12
+  %section.galleries
+    .container
+      .title 경연 현장
+      .site-images.clearfix{ style: 'margin-top: 30px'}
+        .js-mosaic.mosaic{"data-max-row-height": "300", "data-max-rows": 3}
+          - galleries.each do |gallery|
+            %a.item.withImage{:href => gallery_path(gallery), data: { modal: true }, style: "background-position: center; background-color: #eee; background-image: url('#{gallery.image.md.url}');"}
+              .overlay.collapse
+                .texts
+                  %p{ style: 'text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; overflow: hidden;' }
+                    != strip_tags gallery.body
+
+
 - schedule_items_first = capture do
   .item
     .desc 출전 신청
@@ -123,9 +138,9 @@
         .logo
           = image_tag 'logo-modal.png', style: 'height: 56px;'
         .lead{ style: 'font-weight: 500; line-height: 25px; font-size: 20px; margin-top: 10px;' }
-          2019 코리아챌린지 
-          %br 
-          온라인 국민 투표가 시작되었습니다. 
+          2019 코리아챌린지
+          %br
+          온라인 국민 투표가 시작되었습니다.
           %br
           여러분의 미래에 투표하세요!
         %a.btn.btn-primary{ href: polls_path, style: 'margin-top: 20px;' }
