@@ -10,27 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_035456) do
+ActiveRecord::Schema.define(version: 2019_10_23_051344) do
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "commentable_type", null: false
+    t.string "commentable_type"
     t.bigint "commentable_id", null: false
     t.text "body"
     t.integer "likes_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false
-    t.bigint "parent_id"
     t.datetime "deleted_at"
+    t.bigint "parent_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "ideas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "category", null: false
+  create_table "galleries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "round_slug", null: false
     t.string "title", null: false
+    t.text "body"
+    t.string "image"
+    t.integer "reads_count", default: 0
+    t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_galleries_on_user_id"
+  end
+
+  create_table "ideas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "category"
+    t.string "title"
     t.string "mode"
     t.string "team_name"
     t.text "motivation"
@@ -50,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["user_id"], name: "index_ideas_on_user_id", unique: true
   end
 
-  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "alt"
     t.string "hint"
     t.string "file"
@@ -58,8 +72,8 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "likable_type", null: false
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "likable_type"
     t.bigint "likable_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -68,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "idea_id"
     t.string "name"
     t.string "age"
@@ -82,8 +96,8 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["idea_id"], name: "index_members_on_idea_id"
   end
 
-  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "title", null: false
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "title"
     t.text "body"
     t.integer "comments_count", default: 0
     t.integer "reads_count", default: 0
@@ -94,8 +108,8 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
-  create_table "polls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "title", null: false
+  create_table "polls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "title"
     t.text "body"
     t.string "image"
     t.integer "reads_count", default: 0
@@ -147,8 +161,8 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
 
-  create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "title", null: false
+  create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "title"
     t.text "body"
     t.string "image"
     t.integer "reads_count", default: 0
@@ -201,17 +215,17 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "email", default: ""
-    t.string "encrypted_password", default: "", null: false
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "email"
+    t.string "encrypted_password"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
-    t.string "provider", null: false
-    t.string "uid", null: false
+    t.string "provider"
+    t.string "uid"
     t.string "profile_image"
     t.string "name"
     t.boolean "confirmation_terms", default: false
@@ -222,7 +236,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_035456) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "poll_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

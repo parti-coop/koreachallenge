@@ -457,6 +457,7 @@ DEPENDENCIES
   rails (~> 5.2.2)
   redis (~> 3.2, >= 3.2.2)
   redis-namespace (~> 1.5, >= 1.5.2)
+  responders
   rjb (~> 1.5, >= 1.5.9)
   roo
   sass-rails (~> 5.0)

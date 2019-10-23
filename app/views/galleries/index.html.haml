@@ -1,0 +1,28 @@
+- round_slug = params[:round_slug] || Gallery::DEFALUT_ROUND_SLUG
+- content = capture do
+  .site-content-container
+    .site-btn-notice-container.d-flex.flex-sm-row.justify-content-sm-between.align-items-sm-center.flex-column.justify-content-between.align-items-center
+      - if round_slug == 'pre'
+        .desc
+          2019 코리아챌린지
+          %br.d-block.d-sm-none
+          예선 현장의 사진을 공유해 주세요.
+        - if policy(Gallery).new?
+          %a.btn.btn-white.btn-outline-primary{ href: new_gallery_path(round_slug: 'pre') } 글쓰기
+      - else
+        .desc
+          2019 코리아챌린지
+          %br.d-block.d-sm-none
+          본선 경연은 준비 중입니다.
+    - if @galleries.any?
+      .site-line-list-container.mb-5
+        .site-card-list
+          = render @galleries
+        = paginate @galleries
+    - elsif @galleries.total_count <= 0
+      .site-basic-contents
+        .text-center.text-muted.mb-5
+          - if round_slug == 'pre'
+            가장 먼저 현장의 사진을 공유해 주세요.
+
+= render 'layouts/gallery', content: content

@@ -54,6 +54,7 @@ gem 'unobtrusive_flash'
 gem 'tinymce-rails', github: 'parti-coop/tinymce-rails', tag: '5.0.12.0'
 gem 'video_info', '~> 2.7'
 gem 'browser', '~> 2.6', '>= 2.6.1'
+gem 'responders'
 
 # seo
 gem 'meta-tags', '~> 2.11', '>= 2.11.1'

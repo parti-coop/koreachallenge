@@ -1,0 +1,21 @@
+- round_slug = params[:round_slug] || Gallery::DEFALUT_ROUND_SLUG
+%section.site-header
+  .container
+    .clearfix
+      = image_tag 'pages/story.png', class: 'site-header-image'
+      .site-header-title 경연 현장
+
+%section.site-tabs
+  .container
+    .site-content-container
+      %ul.nav.js-tab-menu-list
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if round_slug == 'pre') }
+          = link_to galleries_path(round_slug: 'pre') do
+            %span.link-text 예선
+        %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if round_slug == 'final') }
+          = link_to galleries_path(round_slug: 'final') do
+            %span.link-text 본선
+
+%section
+  .container{ class: local_assigns[:container_calss] }
+    = content

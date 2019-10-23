@@ -126,6 +126,8 @@
         });
       });
 
+    #main-modal-holder
+
     = yield :script if content_for?(:script)
     - if Rails.env.production?
       %script{async: true, :src => "https://www.googletagmanager.com/gtag/js?id=UA-148475066-1"}

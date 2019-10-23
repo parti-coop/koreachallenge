@@ -22,14 +22,14 @@
 - like_btn_path = likes_path(likable_type: likable.class.to_s, likable_id: likable.id, dom_id: button_dom_id, class_name: local_assigns[:class_name], counter_dom_id: local_assigns[:counter_dom_id])
 
 - on_class = case likable
-  - when Notice, Story
-    - 'btn-meta-detail btn btn-outline-primary'
+  - when Notice, Story, Gallery
+    - 'btn-meta-detail btn btn-outline-primary btn-like'
   - when Comment
     - 'link link-primary'
 
 - off_class = case likable
-  - when Notice, Story
-    - 'btn-meta-detail btn btn-meta'
+  - when Notice, Story, Gallery
+    - 'btn-meta-detail btn btn-meta btn-like'
   - when Comment
     - 'link'
 

@@ -673,4 +673,21 @@ $(document).ready(function(){
       }
     });
   });
+
+  // 모달
+  (function() {
+    var modal_holder_selector = '#main-modal-holder';
+    var modal_selector = '.modal';
+
+    $(document).on('click', 'a[data-modal]', function() {
+      var location = $(this).attr('href');
+      $.get(
+        location,
+        function(data) { $(modal_holder_selector).html(data).find(modal_selector).modal() }
+      );
+      return false;
+
+    });
+  })();
+
 });

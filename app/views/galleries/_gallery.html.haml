@@ -1,0 +1,15 @@
+.gallery.site-card-list-item.cursor-pointer
+  = link_to gallery_path(gallery), data: { modal: true }, style: 'text-decoration: none' do
+    .img{ class: ('img-default' unless gallery.image?), style: "background-image: url(#{ gallery.image? ? gallery.image.lg.url : asset_url('no-img.png') });" }
+    .title= gallery.title
+    .info
+      %span.date
+        = static_day_f(gallery.created_at)
+      .counts
+        %span.count.like{ class: ('active' if gallery.like_by?(current_user)) }
+          %i.fa{ class: (gallery.like_by?(current_user) ? 'fa-heart' : 'fa-heart-o' ) }
+          = gallery.likes_count
+        - if gallery.comments_count != 0
+          %span.count.comment
+            %i.fa.fa-comment-o
+            = gallery.comments_count

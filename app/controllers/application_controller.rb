@@ -91,6 +91,12 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
+  def respond_modal_with(*args, &block)
+    options = args.extract_options!
+    options[:responder] = ModalResponder
+    respond_with *args, options, &block
+  end
+
   private
 
   def check_confirmed_user

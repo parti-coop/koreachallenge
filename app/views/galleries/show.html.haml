@@ -1,0 +1,37 @@
+.modal-header{ style: 'border-bottom: none; padding-top: 0.5rem; margin-bottom: 0.1rem; padding-bottom: 0.5rem;' }
+  %button.close{"data-dismiss" => "modal", type: "button"}<>
+    %span{"aria-hidden" => "true"}<> &#215;
+    %span.sr-only<> Close
+.modal-body{ style: 'padding-top: 0;' }
+  .site-content-container
+    .site-detail
+      %h2= @gallery.title
+      .info
+        %span.date
+          = static_day_f(@gallery.created_at)
+        - if @gallery.reads_count != 0
+          %span.view
+            조회
+            = @gallery.reads_count
+        - if @gallery.comments_count != 0
+          %span.view
+            댓글
+            = @gallery.comments_count
+      .body.js-fit-vids
+        - if @gallery.image?
+          .image-container
+            = image_tag @gallery.image.lg.url
+        %p!= @gallery.body
+
+      .btns.justify-content-center
+        = render 'likes/button', likable: @gallery
+
+      .btns.justify-content-center.mt-4
+        - if policy(@gallery).edit?
+          = link_to [:edit, @gallery], class: 'btn btn-sm btn-default mr-2 text-muted' do
+            %i.fa.fa-edit
+            수정
+        - if policy(@gallery).destroy?
+          = link_to @gallery, method: :delete, class: 'btn btn-sm btn-default text-muted', 'data-confirm': '정말 삭제하시겠습니까?' do
+            %i.fa.fa-trash
+            삭제

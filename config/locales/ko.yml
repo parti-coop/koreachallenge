@@ -79,6 +79,10 @@ ko:
         attachment8: "첨부 파일 #8"
         attachment9: "첨부 파일 #9"
         attachment10: "첨부 파일 #10"
+      gallery:
+        title: 제목
+        body: 내용
+        image: 사진/이미지
       notice:
         title: 제목
         body: 내용
