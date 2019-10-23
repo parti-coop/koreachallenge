@@ -263,11 +263,11 @@ $(document).ready(function(){
   // navbar collapse
   $('#js-main-navbar-nav').on('show.bs.collapse', function(e) {
     $('#js-main-navbar').addClass('navbar-collapse');
-    $('.js-main-navbar-nav-exclude').addClass('d-sm-none').addClass('d-md-block');
+    $('.js-main-navbar-nav-exclude').addClass('d-none').addClass('d-lg-block');
   });
   $('#js-main-navbar-nav').on('hidden.bs.collapse', function(e) {
     $('#js-main-navbar').removeClass('navbar-collapse');
-    $('.js-main-navbar-nav-exclude').removeClass('d-sm-none').removeClass('d-md-block');
+    $('.js-main-navbar-nav-exclude').removeClass('d-none').removeClass('d-lg-block');
   });
 
   // 탭 메뉴 클릭

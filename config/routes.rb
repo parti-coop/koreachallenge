@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       delete :remove_attachment
     end
   end
+  resources :galleries, concerns: :commentable
   resources :notices, concerns: :commentable
   delete :likes, to: 'likes#destroy'
   resources :likes

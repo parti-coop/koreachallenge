@@ -57,8 +57,8 @@ a {
 @include media-breakpoint-up(lg) {
   nav.navbar.navbar-kc {
     .navbar-nav.navbar-nav-contents .nav-item > a.nav-link {
-      margin-right: 30px;
-      margin-left: 30px;
+      margin-right: 8px;
+      margin-left: 8px;
     }
   }
 }
@@ -68,12 +68,12 @@ a {
 }
 
 nav.navbar > .container .navbar-nav.navbar-nav-contents {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     .navbar-subnav {
       display: none !important;
     }
   }
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     a.nav-arrow-down:after {
       content: ' ';
       display: inline-block;
@@ -191,13 +191,14 @@ nav.navbar .nav-item > a.nav-link {
   color: $text-inactive-color;
   &.active, &:hover, &:focus, &:active {
     color: $text-base-color;
-    @include media-breakpoint-up(md) {
+    // TODO
+    @include media-breakpoint-up(lg) {
       font-weight: 600;
     }
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
   nav.navbar.navbar-collapse {
     > .container {
       align-items: flex-start;
@@ -440,7 +441,7 @@ nav.navbar .nav-item > a.nav-link {
       @include media-breakpoint-down(xs) {
         width: 100%;
       }
-      .img { 
+      .img {
         height: 150px;
       }
     }
@@ -975,7 +976,7 @@ nav.navbar .nav-item > a.nav-link {
       }
     }
   }
-  
+
   @include media-breakpoint-down(xs) {
     &.site-btn-notice-container-flux {
       margin-left: 15px;
