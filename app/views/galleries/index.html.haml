@@ -9,6 +9,8 @@
           예선 현장의 사진을 공유해 주세요.
         - if policy(Gallery).new?
           %a.btn.btn-white.btn-outline-primary{ href: new_gallery_path(round_slug: 'pre') } 글쓰기
+        - elsif !user_signed_in?
+          %a.btn.btn-white.btn-outline-primary{ href: new_user_session_path } 글쓰기
       - else
         .desc
           2019 코리아챌린지
