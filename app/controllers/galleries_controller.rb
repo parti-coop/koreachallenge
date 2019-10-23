@@ -30,7 +30,7 @@ class GalleriesController < ApplicationController
     @gallery.user = current_user
     if @gallery.save
       flash[:success] = '게시되었습니다'
-      redirect_to galleries_path(round_slug: @gallery.round_slug, gallery_id: @gallery.id)
+      redirect_to galleries_path(round_slug: @gallery.round_slug)
     else
       errors_to_flash(@gallery)
       render :new
@@ -62,7 +62,7 @@ class GalleriesController < ApplicationController
 
     if @gallery.destroy
       flash[:success] = '삭제되었습니다'
-      redirect_to galleries_path(round_slug: @gallery.round_slug, gallery_id: @gallery.id)
+      redirect_to galleries_path(round_slug: @gallery.round_slug)
     else
       errors_to_flash(@gallery)
       redirect_to @gallery

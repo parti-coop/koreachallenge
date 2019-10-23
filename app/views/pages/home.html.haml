@@ -84,7 +84,7 @@
               .overlay.collapse
                 .texts
                   %p{ style: 'text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; overflow: hidden;' }
-                    != strip_tags gallery.body
+                    = gallery.title
 
 
 - schedule_items_first = capture do

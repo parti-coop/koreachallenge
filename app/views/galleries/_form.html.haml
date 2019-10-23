@@ -27,4 +27,4 @@
 
       .form-group.form-group-submit
         = f.submit (f.object.persisted? ? "수정" : "등록"), class: 'btn btn-primary js-confirm-btn'
-        %a{href: stories_path, class: 'btn btn-outline-secondary'} 취소
+        %a{href: galleries_path(round_slug: gallery.round_slug), class: 'btn btn-outline-secondary'} 취소

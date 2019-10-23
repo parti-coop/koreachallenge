@@ -28,3 +28,16 @@
             가장 먼저 현장의 사진을 공유해 주세요.
 
 = render 'layouts/gallery', content: content
+
+- if @gallery.present?
+  - content_for :script do
+    :javascript
+      $(function() {
+        var modal_holder_selector = '#main-modal-holder';
+        var modal_selector = '.modal';
+
+        $.get(
+          "#{gallery_path(@gallery)}",
+          function(data) { $(modal_holder_selector).html(data).find(modal_selector).modal() }
+        );
+      })();
