@@ -17,11 +17,11 @@
           %span.view
             댓글
             = @gallery.comments_count
-      .body.js-fit-vids
+      .body{ style: 'margin-bottom: 20px' }
         - if @gallery.image?
           .image-container
             = image_tag @gallery.image.lg.url
-        %p!= @gallery.body
+        -# %p!= @gallery.body
 
       .btns.justify-content-center
         = render 'likes/button', likable: @gallery

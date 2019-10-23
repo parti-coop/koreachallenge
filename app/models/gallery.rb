@@ -9,7 +9,7 @@ class Gallery < ApplicationRecord
 
   validates :round_slug, presence: true
   validates :title, presence: true
-  validates :body, presence: true
+  # validates :body, presence: true
   validates :image, presence: true
   mount_uploader :image, DefaultImageUploader
 

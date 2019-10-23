@@ -6,10 +6,10 @@
       = f.hidden_field :round_slug
       .form-group
         = f.label :title
-        = f.text_field :title, class: 'form-control'
-      .form-group
-        = f.label :body
-        = f.text_area :body, class: 'tinymce js-tinymce', 'data-toolbar': 'styleselect | bold italic | undo redo | image | link media', 'data-content-css': asset_url('tinymce_content.css')
+        = f.text_field :title, class: 'form-control', maxlength: 100
+      -# .form-group
+      -#   = f.label :body
+      -#   = f.text_area :body, class: 'tinymce js-tinymce', 'data-toolbar': 'styleselect | bold italic | undo redo | image | link media', 'data-content-css': asset_url('tinymce_content.css')
       .form-group
         = f.label :image
         - if f.object.image? and (f.object.persisted? or f.object.image_cache.present?)
