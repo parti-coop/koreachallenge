@@ -36,9 +36,6 @@ a {
     margin-bottom: 10px;
   }
   nav.navbar.navbar-kc {
-    .nav-item > a.nav-link {
-      color: $brand-primary-color;
-    }
     .nav-item > a.btn.nav-link.active,
     .nav-item > a.btn.nav-link:hover,
     .nav-item > a.btn.nav-link:focus,
@@ -49,7 +46,7 @@ a {
     .nav-item > a.nav-link:hover,
     .nav-item > a.nav-link:focus,
     .nav-item > a.nav-link:active {
-      color: $brand-primary-color;
+      color: $text-base-color;
     }
   }
 }
