@@ -80,7 +80,7 @@
       .site-images.clearfix{ style: 'margin-top: 30px'}
         .js-mosaic.mosaic{"data-max-row-height": "300", "data-max-rows": 3, "data-inner-gap": 10 }
           - galleries.each do |gallery|
-            %a.item.withImage{:href => gallery_path(gallery), data: { modal: true }, style: "background-position: center; background-color: #eee; background-image: url('#{gallery.image.md.url}');"}
+            %a.item.withImage{href: galleries_path(round_slug: gallery.round_slug, gallery_id: gallery.id), style: "background-position: center; background-color: #eee; background-image: url('#{gallery.image.md.url}');"}
               .overlay.collapse
                 .texts
                   %p{ style: 'text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; overflow: hidden;' }
