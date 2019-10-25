@@ -24,7 +24,7 @@
         %li.nav-item
           %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단 신청
         %li.nav-item
-          %a.nav-link{ href: galleries_path, class: ('active' if controller_name == 'galleries' ) } 경연 현장
+          %a.nav-link{ href: galleries_path, class: ('active' if controller_name == 'galleries' ) } 경연현장
         - active_stories = (%w(stories notices).include?(params[:controller]) or current_page?('/faq'))
         %li.nav-item
           %a.nav-link.js-subnav-xs{ href: stories_path, class: ( active_stories ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-stories' } 소통광장
