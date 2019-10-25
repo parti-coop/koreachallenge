@@ -3,6 +3,7 @@
   .site-form
     %h2 경연 현장 #{ gallery.persisted? ? '수정' : '글쓰기' }
     = form_with model: gallery do |f|
+      = hidden_field_tag :page, params[:page]
       = f.hidden_field :round_slug
       .form-group
         = f.label :title

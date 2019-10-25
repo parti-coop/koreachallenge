@@ -20,7 +20,7 @@
       .site-line-list-container.mb-5
         .site-card-list
           = render @galleries
-        = paginate @galleries
+        = paginate @galleries, params: { gallery_id: nil }
     - elsif @galleries.total_count <= 0
       .site-basic-contents
         .text-center.text-muted.mb-5

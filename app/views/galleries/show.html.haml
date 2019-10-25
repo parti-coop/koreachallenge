@@ -28,7 +28,7 @@
 
       .btns.justify-content-center.mt-4
         - if policy(@gallery).edit?
-          = link_to [:edit, @gallery], class: 'btn btn-sm btn-default mr-2 text-muted' do
+          = link_to edit_gallery_path(@gallery, page: params[:page]), class: 'btn btn-sm btn-default mr-2 text-muted' do
             %i.fa.fa-edit
             수정
         - if policy(@gallery).destroy?

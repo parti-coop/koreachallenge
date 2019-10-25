@@ -1,5 +1,5 @@
 .gallery.site-card-list-item.cursor-pointer
-  = link_to gallery_path(gallery), data: { modal: true }, style: 'text-decoration: none' do
+  = link_to gallery_path(gallery, page: params[:page]), data: { modal: true }, style: 'text-decoration: none' do
     .img{ class: ('img-default' unless gallery.image?), style: "background-image: url(#{ gallery.image? ? gallery.image.lg.url : asset_url('no-img.png') });" }
     .title= gallery.title
     .info

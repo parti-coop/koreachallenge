@@ -49,7 +49,7 @@ class GalleriesController < ApplicationController
     @gallery.assign_attributes(gallery_params)
     if @gallery.save
       flash[:success] = '저장되었습니다'
-      redirect_to galleries_path(round_slug: @gallery.round_slug, gallery_id: @gallery.id)
+      redirect_to galleries_path(round_slug: @gallery.round_slug, gallery_id: @gallery.id, page: params[:page])
     else
       errors_to_flash(@gallery)
       render :new
