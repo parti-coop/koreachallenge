@@ -7,7 +7,9 @@
     .site-detail
       %h2= @gallery.title
       .info
-        %span.date
+        %span.user
+          = @gallery.user.try(:name)
+        %span.view
           = static_day_f(@gallery.created_at)
         - if @gallery.reads_count != 0
           %span.view
