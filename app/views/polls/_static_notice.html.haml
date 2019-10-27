@@ -7,14 +7,19 @@
       %li 투표 점수는 예선 점수에 10% 반영됩니다. (최대 득표수 대비 비율 적용)
       %li 투표를 위해서는 로그인을 해야 하며, '투표하기' 버튼을 눌러야 완료됩니다.
       %li 투표가 완료된 버튼을 다시 누르면 투표가 취소됩니다.
-    .desc-text 
-      %span.text-nowrap 
-        예선 온라인 투표 기간 
-        %span.d-sm-none.d-md-inline :
-      %br.d-sm-block.d-md-none
-      %span.text-nowrap 2019. 10. 14.(월) ~ 
-      %span.text-nowrap 2019. 10. 27.(일) 오후 5시
-    - if policy(Poll).new?
-      .btn-container
-        %hr
-        %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록
+    %hr
+      .desc-text
+        %strong.text-primary
+          %i.fa.fa-info-circle
+          예선 온라인 투표가 종료되었습니다.
+    -# .desc-text
+    -#   %span.text-nowrap
+    -#     예선 온라인 투표 기간
+    -#     %span.d-sm-none.d-md-inline :
+    -#   %br.d-sm-block.d-md-none
+    -#   %span.text-nowrap 2019. 10. 14.(월) ~
+    -#   %span.text-nowrap 2019. 10. 27.(일) 오후 5시
+    -# - if policy(Poll).new?
+    -#   .btn-container
+    -#     %hr
+    -#     %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록

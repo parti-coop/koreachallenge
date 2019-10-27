@@ -1,29 +1,31 @@
 class VotesController < ApplicationController
   def create
-    render_403 and return unless user_signed_in?
+    render_403 and return
+    # render_403 and return unless user_signed_in?
 
-    @poll = Poll.find(params[:poll_id])
-    render_404 and return if @poll.blank?
+    # @poll = Poll.find(params[:poll_id])
+    # render_404 and return if @poll.blank?
 
-    @poll.votes.create(user: current_user)
+    # @poll.votes.create(user: current_user)
 
-    respond_to do |format|
-      format.html { redirect_to @poll }
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to @poll }
+    #   format.js
+    # end
   end
 
   def destroy
-    render_403 and return unless user_signed_in?
+    render_403 and return
+    # render_403 and return unless user_signed_in?
 
-    @poll = Poll.find(params[:poll_id])
-    render_404 and return if @poll.blank?
+    # @poll = Poll.find(params[:poll_id])
+    # render_404 and return if @poll.blank?
 
-    @poll.votes.find_by(user: current_user).try(:destroy)
+    # @poll.votes.find_by(user: current_user).try(:destroy)
 
-    respond_to do |format|
-      format.html { redirect_to @poll }
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to @poll }
+    #   format.js
+    # end
   end
 end
