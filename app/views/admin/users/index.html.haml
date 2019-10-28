@@ -53,5 +53,16 @@
                   - else
                     .text-muted
                       임시저장
+          %tr
+            %td.text-primary.text-nowrap 예선투표
+            %td{ colspan: 6 }
+              - any_voted = false
+              - Poll.order(title: :asc).each do |poll|
+                - if poll.voted_by?(user)
+                  - any_voted = true
+                  %span.voted-poll.text-nowrap{ style: 'background-color: #eee; margin-right: 10px; padding: 2px 10px' }
+                    = poll.title
+              - unless any_voted
+                %span.voted-poll.text-muted .
 
     = paginate @users
