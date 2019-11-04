@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :stories, dependent: :restrict_with_error
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   validates_format_of       :email, with: Devise.email_regexp, allow_blank: true, if: :will_save_change_to_email?
   validates_presence_of     :password, if: :password_required?
