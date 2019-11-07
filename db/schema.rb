@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_051344) do
+ActiveRecord::Schema.define(version: 2019_11_07_141129) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_051344) do
     t.string "attachment10_name"
     t.string "attachment10_type"
     t.integer "attachment10_size"
+    t.string "round_slug", default: "final", null: false
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
 

@@ -1,11 +1,16 @@
 class Poll < ApplicationRecord
+  DEFALUT_ROUND_SLUG = 'pre'
+
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :votes, dependent: :destroy
 
   validates :title, presence: true
   validates :body, presence: true
+  validates :round_slug, presence: true
   mount_uploader :image, DefaultImageUploader
+
+  scope :for_round_slug, -> (round_slug) { where(round_slug: round_slug) }
 
   ATTACHMENT_MAX_INDEX = 10
 

@@ -1,13 +1,21 @@
 .site-btn-notice-container.site-btn-notice-container.d-flex.flex-sm-row.justify-content-sm-between.align-items-sm-center.flex-column.justify-content-between.align-items-center
   .desc
-    .desc-lead
-      우리의 미래에 투표하세요!
-    %ul
-      %li 마음에 드는 아이디어에 모두 투표하실 수 있으며, 노출 순서는 접속 시마다 무작위로 배치됩니다.
-      %li 투표 점수는 예선 점수에 10% 반영됩니다. (최대 득표수 대비 비율 적용)
-      %li 투표를 위해서는 로그인을 해야 하며, '투표하기' 버튼을 눌러야 완료됩니다.
-      %li 투표가 완료된 버튼을 다시 누르면 투표가 취소됩니다.
-    %hr
+    - current_round_slug = @poll.round_slug if @poll.present?
+    - current_round_slug ||= params[:round_slug] if params[:round_slug].present?
+    - current_round_slug ||= Poll::DEFALUT_ROUND_SLUG
+    - if current_round_slug == 'final'
+      .desc-lead
+        우리의 미래에 투표하세요!
+      %ul.mb-0
+        %li 마음에 드는 아이디어에 모두 투표하실 수 있으며, 노출 순서는 접속 시마다 무작위로 배치됩니다.
+        %li 투표 점수는 예선 점수에 10% 반영됩니다. (최대 득표수 대비 비율 적용)
+        %li 투표를 위해서는 로그인을 해야 하며, '투표하기' 버튼을 눌러야 완료됩니다.
+        %li 투표가 완료된 버튼을 다시 누르면 투표가 취소됩니다.
+      - if policy(Poll).new?
+        .btn-container
+          %hr
+          %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록
+    - else
       .desc-text
         %strong.text-primary
           %i.fa.fa-info-circle
@@ -19,7 +27,3 @@
     -#   %br.d-sm-block.d-md-none
     -#   %span.text-nowrap 2019. 10. 14.(월) ~
     -#   %span.text-nowrap 2019. 10. 27.(일) 오후 5시
-    -# - if policy(Poll).new?
-    -#   .btn-container
-    -#     %hr
-    -#     %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록

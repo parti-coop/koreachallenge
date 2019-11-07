@@ -1415,18 +1415,18 @@ body.app-pages-home {
     }
     .items-single-row {
       display: none;
-      @include media-breakpoint-up(xl) {
-        display: block;
-      }
+      // @include media-breakpoint-up(xl) {
+      //   display: block;
+      // }
       @include media-breakpoint-down(sm) {
         display: block;
       }
     }
     .items-multiple-rows {
-      display: none;
-      @include media-breakpoint-down(lg) {
-        display: block;
-      }
+      display: block;
+      // @include media-breakpoint-down(lg) {
+      //   display: block;
+      // }
       @include media-breakpoint-down(sm) {
         display: none;
       }

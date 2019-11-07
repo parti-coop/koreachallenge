@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   def index
-    @polls = Poll.order_recent
+    round_slug = params[:round_slug] || Poll::DEFALUT_ROUND_SLUG
+    @polls = Poll.order_recent.for_round_slug(round_slug)
   end
 
   def show
@@ -94,7 +95,7 @@ class PollsController < ApplicationController
   def download_attachment
     @poll = Poll.find(params[:id])
     render_404 and return if params[:index].blank?
-    
+
     attachment = @poll.send(:"attachment#{params[:index]}")
     # local storage
     send_file(attachment.path,
@@ -106,7 +107,7 @@ class PollsController < ApplicationController
   private
 
   def poll_params
-    attributes = %i(title body image image_cache)
+    attributes = %i(title body image image_cache round_slug)
     (1..Story::ATTACHMENT_MAX_INDEX).each do |i|
       attributes += [:"attachment#{i}", :"attachment#{i}_cache"]
     end
@@ -117,7 +118,7 @@ class PollsController < ApplicationController
     filename = poll.valid_attachment_name(index)
     if browser.edge?
       filename = CGI::escape(filename)
-    elsif browser.ie? 
+    elsif browser.ie?
       filename = URI::encode(filename)
     elsif ENV['FILENAME_ENCODING'].present?
       filename = filename.encode('UTF-8', ENV['FILENAME_ENCODING'], invalid: :replace, undef: :replace, replace: '?')
