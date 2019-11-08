@@ -23,13 +23,19 @@
         - current_poll_round_slug = @poll.round_slug if @poll.present?
         - current_poll_round_slug ||= params[:round_slug] if params[:round_slug].present?
         - current_poll_round_slug ||= Poll::DEFALUT_ROUND_SLUG
-        %li.nav-item
-          %a.nav-link.js-subnav-xs{ href: polls_path, class: ( active_polls ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-polls' } 온라인 국민투표
-        %ul.navbar-nav.navbar-subnav#navsub-polls{ class: ('collapse' unless active_polls) }
+
+        - if user_signed_in? and current_user.admin?
           %li.nav-item
-            %a.nav-link{ href: polls_path(round_slug: 'final'), class: ('active' if active_polls and current_poll_round_slug == 'final' ) } 본선
+            %a.nav-link.js-subnav-xs{ href: polls_path, class: ( active_polls ? 'active nav-arrow-up' : 'nav-arrow-down' ), 'data-subnav': '#navsub-polls' } 온라인 국민투표
+          %ul.navbar-nav.navbar-subnav#navsub-polls{ class: ('collapse' unless active_polls) }
+            %li.nav-item
+              %a.nav-link{ href: polls_path(round_slug: 'final'), class: ('active' if active_polls and current_poll_round_slug == 'final' ) } 본선
+            %li.nav-item
+              %a.nav-link{ href: polls_path(round_slug: 'pre'), class: ('active' if active_polls and current_poll_round_slug == 'pre' ) } 예선
+        - else
           %li.nav-item
-            %a.nav-link{ href: polls_path(round_slug: 'pre'), class: ('active' if active_polls and current_poll_round_slug == 'pre' ) } 예선
+            %a.nav-link{ href: polls_path, class: ('active' if controller_name == 'polls' ) } 온라인 국민투표
+
         %li.nav-item
           %a.nav-link{ href: judge_path, class: ('active' if current_page?('/judge') ) } 국민판정단 신청
         %li.nav-item
