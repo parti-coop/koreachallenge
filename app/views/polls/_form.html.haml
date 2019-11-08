@@ -3,7 +3,7 @@
   .site-form
     %h2 투표 아이디어 #{ poll.persisted? ? '수정' : '글쓰기' }
     = form_with model: poll do |f|
-      = f.hidden_field :round_slug, value: Poll::DEFALUT_ROUND_SLUG
+      = f.hidden_field :round_slug, value: 'final'
       .form-group
         = f.label :title
         = f.text_field :title, class: 'form-control'
@@ -51,4 +51,4 @@
 
       .form-group.form-group-submit
         = f.submit (f.object.persisted? ? "수정" : "등록"), class: 'btn btn-primary js-confirm-btn'
-        %a{href: polls_path, class: 'btn btn-outline-secondary'} 취소
+        %a{href: polls_path(round_slug: 'final'), class: 'btn btn-outline-secondary'} 취소

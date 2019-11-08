@@ -1365,8 +1365,8 @@ body.app-pages-home {
           line-height: 36px;
           font-weight: bold;
           @include media-breakpoint-down(xs) {
-            padding-left: 30px;
-            padding-right: 30px;
+            padding-left: 14px;
+            padding-right: 14px;
           }
         }
         .button-help {
@@ -1378,7 +1378,6 @@ body.app-pages-home {
         margin-left: 20px;
         @include media-breakpoint-down(xs) {
           margin-left: 0;
-          margin-top: 10px;
         }
       }
       .key-image-tables {

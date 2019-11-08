@@ -64,7 +64,7 @@
               %ul.dropdown-menu.dropdown-menu-right
                 = manage_menus
         .btns-right
-          %a.list{href: polls_path(page: params[:page])}
+          %a.list{href: polls_path(page: params[:page], round_slug: @poll.round_slug)}
             전체 출품작 보기
             %i.fa.fa-angle-right
 
