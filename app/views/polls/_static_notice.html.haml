@@ -1,9 +1,9 @@
 .site-btn-notice-container.site-btn-notice-container.d-flex.flex-sm-row.justify-content-sm-between.align-items-sm-center.flex-column.justify-content-between.align-items-center
   .desc
-    - current_round_slug = @poll.round_slug if @poll.present?
-    - current_round_slug ||= params[:round_slug] if params[:round_slug].present?
-    - current_round_slug ||= Poll::DEFALUT_ROUND_SLUG
-    - if current_round_slug == 'final'
+    - current_poll_round_slug = @poll.round_slug if @poll.present?
+    - current_poll_round_slug ||= params[:round_slug] if params[:round_slug].present?
+    - current_poll_round_slug ||= Poll::DEFALUT_ROUND_SLUG
+    - if current_poll_round_slug == 'final'
       .desc-lead
         우리의 미래에 투표하세요!
       %ul

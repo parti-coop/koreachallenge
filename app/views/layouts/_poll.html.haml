@@ -5,17 +5,17 @@
       .site-header-title 국민투표
 
 - if user_signed_in? and current_user.admin?
-  - current_round_slug = @poll.round_slug if @poll.present?
-  - current_round_slug ||= params[:round_slug] if params[:round_slug].present?
-  - current_round_slug ||= Poll::DEFALUT_ROUND_SLUG
+  - current_poll_round_slug = @poll.round_slug if @poll.present?
+  - current_poll_round_slug ||= params[:round_slug] if params[:round_slug].present?
+  - current_poll_round_slug ||= Poll::DEFALUT_ROUND_SLUG
   %section.site-tabs
     .container
       .site-content-container
         %ul.nav.js-tab-menu-list
-          %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_round_slug == 'final') }
+          %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_poll_round_slug == 'final') }
             = link_to polls_path(round_slug: 'final') do
               %span.link-text 본선
-          %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_round_slug == 'pre') }
+          %li.nav-item.js-tab-menu{ class: ('active js-tab-menu-active' if current_poll_round_slug == 'pre') }
             = link_to polls_path(round_slug: 'pre') do
               %span.link-text 예선
 
