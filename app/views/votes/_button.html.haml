@@ -6,20 +6,24 @@
 
 %div{ id: button_dom_id }
   .vote-count-dashboard
-    -# - if poll.voted_by?(current_user)
-    -#   = image_tag 'vote-btn-icon.png'
-    -# - else
-    -#   = image_tag 'vote-btn-icon-off.png'
-    -# %span.vote-count{ class: ('vote-count-on' if poll.voted_by?(current_user)) }
-    = image_tag 'vote-btn-icon.png'
+    - if poll.round_slug == 'final'
+      - if poll.voted_by?(current_user)
+        = image_tag 'vote-btn-icon.png'
+      - else
+        = image_tag 'vote-btn-icon-off.png'
+      %span.vote-count{ class: ('vote-count-on' if poll.voted_by?(current_user)) }
+    - else
+      = image_tag 'vote-btn-icon.png'
     %span.vote-count.vote-count-on
       #{number_with_delimiter poll.votes_count}표
-  -# - if policy(poll).vote? or !user_signed_in?
-  -#   - if user_signed_in?
-  -#     - if poll.voted_by?(current_user)
-  -#       = link_to '투표 취소', vote_btn_path, method: :delete, remote: true, class: on_class, data: { 'vote-btn-on-hover-mouseenter': '투표 취소하기' }
-  -#     - else
-  -#       = link_to '투표하기', vote_btn_path, method: :post, remote: true, class: off_class
-  -#   - else
-  -#     = link_to '투표하기', new_user_session_path, class: off_class
+
+  - if poll.round_slug == 'final'
+    - if policy(poll).vote? or !user_signed_in?
+      - if user_signed_in?
+        - if poll.voted_by?(current_user)
+          = link_to '투표 취소', vote_btn_path, method: :delete, remote: true, class: on_class, data: { 'vote-btn-on-hover-mouseenter': '투표 취소하기' }
+        - else
+          = link_to '투표하기', vote_btn_path, method: :post, remote: true, class: off_class
+      - else
+        = link_to '투표하기', new_user_session_path, class: off_class
 
