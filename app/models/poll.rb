@@ -1,5 +1,5 @@
 class Poll < ApplicationRecord
-  DEFALUT_ROUND_SLUG = 'pre'
+  DEFALUT_ROUND_SLUG = 'final'
 
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy

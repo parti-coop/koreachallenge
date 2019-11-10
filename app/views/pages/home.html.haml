@@ -159,15 +159,15 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} &#215;
 
-- content_for :scriptx do
+- content_for :script do
   :javascript
     $(function() {
-      if(Cookies.get('base_modal') != 'ok') {
+      if(Cookies.get('base_modalx') != 'ok') {
         $('#base-modal').modal('show');
       }
 
       $('.js-base-modal-today').on('click', function(e) {
-        Cookies.set('base_modal', 'ok', { expires: 1 });
+        Cookies.set('base_modalx', 'ok', { expires: 1 });
         $('#base-modal').modal('hide');
       });
     })
