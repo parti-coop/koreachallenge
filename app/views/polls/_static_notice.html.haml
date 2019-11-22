@@ -12,16 +12,20 @@
         %li 투표를 위해서는 로그인을 해야 하며, '투표하기' 버튼을 눌러야 완료됩니다.
         %li 투표가 완료된 버튼을 다시 누르면 투표가 취소됩니다.
       .desc-text
-        %span.text-nowrap
-          본선 온라인 투표 기간
-          %span.d-sm-none.d-md-inline :
-        %br.d-sm-block.d-md-none
-        %span.text-nowrap 2019. 11. 11.(월) ~
-        %span.text-nowrap 2019. 11. 22.(금) 오후 3시
-      - if policy(Poll).new?
-        .btn-container
-          %hr
-          %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록
+        %strong.text-primary
+          %i.fa.fa-info-circle
+          본선 온라인 투표가 종료되었습니다.
+      -# .desc-text
+      -#   %span.text-nowrap
+      -#     본선 온라인 투표 기간
+      -#     %span.d-sm-none.d-md-inline :
+      -#   %br.d-sm-block.d-md-none
+      -#   %span.text-nowrap 2019. 11. 11.(월) ~
+      -#   %span.text-nowrap 2019. 11. 22.(금) 오후 3시
+      -# - if policy(Poll).new?
+      -#   .btn-container
+      -#     %hr
+      -#     %a.btn.btn-white.btn-outline-primary{ href: new_poll_path } 신규 등록
     - else
       .desc-text
         %strong.text-primary
