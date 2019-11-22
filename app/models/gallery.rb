@@ -1,5 +1,5 @@
 class Gallery < ApplicationRecord
-  DEFALUT_ROUND_SLUG = 'pre'
+  DEFALUT_ROUND_SLUG = 'final'
 
   include Likable
   paginates_per 10
