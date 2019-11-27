@@ -64,8 +64,8 @@
               %span 동영상 레이어 닫기
         .buttons
           -# %a.btn.btn-outline-primary.btn-white.btn-subkey{ href: judge_path } 출전 안내
-          %a.btn.btn-primary.btn-mainkey{ href: polls_path } 온라인 국민투표
-          %a.btn.btn-outline-primary.btn-white.btn-subkey{ href: judge_path } 국민판정단 신청
+          %div.btn.btn-default.btn-mainkey{ style: 'border-color: gray; border-width: 2px; color: gray; background-color: #f5f5f5; font-size: 18px; font-weight: 600;' } 모든 행사가 종료되었습니다
+          -# %a.btn.btn-outline-primary.btn-white.btn-subkey{ href: judge_path } 국민판정단 신청
           -# %a.btn.btn-primary.btn-white.btn-subkey.js-alert.disabled{ href: "#", 'data-message': '출전 신청이 마감되었습니다.', 'aria-disabled': 'true' } 출전 신청이 마감되었습니다
           -# .button-help
           -#   국민판정단은 9월 중 모집 예정입니다
@@ -117,7 +117,7 @@
     .desc 온라인 국민 투표(본선)
     .at 11. 11.(월) ~ 11. 22.(금)
     .dot
-  .item.active
+  .item
     .desc 본선 및 시상식
     .at 11. 23.(토)
     .dot
